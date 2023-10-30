@@ -6,7 +6,7 @@ import "../../styles/home.css";
 export const Home = () => {
 	const { store, actions } = useContext(Context);
 
-	/*const [info, setInfo ] = useState();*/
+	const [info, setInfo ] = useState([]);
 	
 	const getInfo = () => 
 	{
@@ -20,17 +20,16 @@ export const Home = () => {
 		  
 		  fetch('https://api.themoviedb.org/3/movie/299054?language=en-US', options)
 			.then(response => response.json())
-			.then(response => {console.log(response); /*setInfo(response)*/})
+			.then(response => {console.log(response); setInfo(response)})
 			.catch(err => console.error(err));
 	}
 
 	return (
 		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
+			<h1>{info.title}</h1>
 			<button className="btn btn-primary" onClick={getInfo}> Get Info</button>
-			Info : {info}
 			<p>
-				<img src={rigoImageUrl} />
+			{info.overview}
 			</p>
 			<div className="alert alert-info">
 				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
