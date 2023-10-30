@@ -24,8 +24,8 @@ export const Details = () => {
 
 	return (
 		<div className="text-center mt-5">
-			<h1>{info.title}</h1>
 			<button className="btn btn-primary" onClick={getInfo}> Get Info</button>
+			<h1>{info.title}</h1>
 			<p>
 			{info.overview}
 			</p>
