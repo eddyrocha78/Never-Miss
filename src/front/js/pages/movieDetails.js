@@ -9,14 +9,13 @@ export const Details = props => {
 
 	const [info, setInfo ] = useState([]);
 
+
 	useEffect(() => {
 		getInfo();
-
 	}, []);
-	
+
 	const getInfo = () => 
 	{
-		console.log(params.type)
 		const options = {
 			method: 'GET',
 			headers: {
@@ -50,6 +49,38 @@ export const Details = props => {
 						Duration : {info.runtime} minutes
 					</p>
 				</div>
+			</div>
+			<div className="mt-5 ms-4 text-warning row">
+				{ 
+				(info.vote_average/2) <= 0.5 || info.vote_average/2 == NaN || info.vote_average/2 == undefined?
+				<div className="col-3 offset-md-1">
+					<i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				</div>
+				:
+				(info.vote_average/2) <= 1.5 && (info.vote_average/2) > 0.5?
+				<div className="col-3 offset-md-1">
+					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				</div>
+				:
+				(info.vote_average/2) <= 2.5 && (info.vote_average/2) > 1.5?
+				<div className="col-3 offset-md-1">
+					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				</div>
+				:
+				(info.vote_average/2) <= 3.5 && (info.vote_average/2) > 2.5?
+				<div className="col-3 offset-md-1">
+					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				</div>
+				:
+				(info.vote_average/2) <= 4.5 && (info.vote_average/2) > 3.5?
+				<div className="col-3 offset-md-1">
+					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				</div>
+				:
+				<div className="col-3 offset-md-1">
+					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i>
+				</div>
+				}
 			</div>
 			<div className="row justify-content-start mt-5">
 				<div className="col-1 bg-success bg-opacity-50 rounded offset-md-2">
@@ -90,6 +121,38 @@ export const Details = props => {
 						Seasons : {info.number_of_seasons}
 					</p>
 				</div>
+			</div>
+			<div className="mt-5 ms-4 text-warning row">
+				{ 
+				(info.vote_average/2) <= 0.5 || info.vote_average/2 == NaN || info.vote_average/2 == undefined?
+				<div className="col-3 offset-md-1">
+					<i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				</div>
+				:
+				(info.vote_average/2) <= 1.5 && (info.vote_average/2) > 0.5?
+				<div className="col-3 offset-md-1">
+					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				</div>
+				:
+				(info.vote_average/2) <= 2.5 && (info.vote_average/2) > 1.5?
+				<div className="col-3 offset-md-1">
+					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				</div>
+				:
+				(info.vote_average/2) <= 3.5 && (info.vote_average/2) > 2.5?
+				<div className="col-3 offset-md-1">
+					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				</div>
+				:
+				(info.vote_average/2) <= 4.5 && (info.vote_average/2) > 3.5?
+				<div className="col-3 offset-md-1">
+					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				</div>
+				:
+				<div className="col-3 offset-md-1">
+					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i>
+				</div>
+				}
 			</div>
 			<div className="row justify-content-start mt-5">
 				<div className="col-1 bg-success bg-opacity-50 rounded offset-md-2">
