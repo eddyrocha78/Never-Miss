@@ -47,7 +47,7 @@ export const Details = props => {
 		  
 		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/images`, options)
 			.then(response => response.json())
-			.then(response => {console.log(response.backdrops["0"]); setImages(response); setImLoaded(true)})
+			.then(response => {console.log(response); setImages(response); setImLoaded(true)})
 			.catch(err => console.error(err));
 	}
 
@@ -71,13 +71,18 @@ export const Details = props => {
 					</p>
 				</div>
 			</div>
-			<div>
-			<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w" + images.backdrops["0"].width +"_and_h" + images.backdrops["0"].height + "_bestv2/"+ images.backdrops["0"].file_path : ""}/>
+			<div className="ms-3 my-5 row">
+				<div className="col-4 offset-md-1">
+					<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ images.posters["0"].file_path : ""}/>
+				</div>
+				<div className="col-4 align-self-center">
+					<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/"+ images.backdrops["0"].file_path : ""}/>
+				</div>
 			</div>
 			<div className="mt-5 ms-4 text-warning row">
 				{ 
 				(info.vote_average/2) <= 0.5 || info.vote_average/2 == NaN || info.vote_average/2 == undefined?
-				<div className="col-3 offset-md-1">
+				<div className="col-3 offset-md-1 fs-1">
 					<i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
 				</div>
 				:
