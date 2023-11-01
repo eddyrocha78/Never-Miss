@@ -9,9 +9,14 @@ export const Details = props => {
 
 	const [info, setInfo ] = useState([]);
 
+	const [images, setImages ] = useState([]);
+
+	const [imLoaded, setImLoaded ] = useState(false);
+
 
 	useEffect(() => {
 		getInfo();
+		getImages();
 	}, []);
 
 	const getInfo = () => 
@@ -30,25 +35,44 @@ export const Details = props => {
 			.catch(err => console.error(err));
 	}
 
+	const getImages = () => 
+	{
+		const options = {
+			method: 'GET',
+			headers: {
+			  accept: 'application/json',
+			  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NjJjYjAxZWFiNThjNGRlNzdjOWNhMmY0ZGM4ODQ0NyIsInN1YiI6IjY1Mzk1YmFhZWM0NTUyMDBlYTRkNDMxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cz3I9EbEUfEny1vJHlbpG7zW_2dSZRBsGCrx6Xy3768'
+			}
+		  };
+		  
+		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/images`, options)
+			.then(response => response.json())
+			.then(response => {console.log(response.backdrops["0"]); setImages(response); setImLoaded(true)})
+			.catch(err => console.error(err));
+	}
+
 	return (params.type == "movie" ?
 		<div className="text-center mt-5 text-light">
 			<h1 className="text-white-50 fw-bold">{info.original_title}</h1>
 			<div className="row justify-content-start mt-5">
-				<div className="col-2 bg-success rounded offset-2">
+				<div style={{ backgroundColor: "rgba(55, 184, 23, 1)" }} className="col-2 offset-2">
 					<p className="text-start text-light text-center h5">
 						Release : {info.release_date}
 					</p>
 				</div>
-				<div className="col-2 bg-warning ms-2 rounded">
+				<div  style={{ backgroundColor: "rgba(40, 201, 153, 1)" }} className="col-2 ms-2">
 					<p className="text-start text-light text-center h5">
 					Rating : {info.adult ? "R" : "PG"}
 					</p>
 				</div>
-				<div className="col-2 bg-info mx-2 rounded">
+				<div  style={{ backgroundColor: "rgba(56, 216, 91, 1)" }}className="col-2 mx-2">
 					<p className="text-start text-light text-center h5">
 						Duration : {info.runtime} minutes
 					</p>
 				</div>
+			</div>
+			<div>
+			<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w" + images.backdrops["0"].width +"_and_h" + images.backdrops["0"].height + "_bestv2/"+ images.backdrops["0"].file_path : ""}/>
 			</div>
 			<div className="mt-5 ms-4 text-warning row">
 				{ 
@@ -83,14 +107,14 @@ export const Details = props => {
 				}
 			</div>
 			<div className="row justify-content-start mt-5">
-				<div className="col-1 bg-success bg-opacity-50 rounded offset-md-2">
+				<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-1 rounded offset-md-2">
 					<p className="text-start text-light text-center h4">
 						Synopsis
 					</p>
 				</div>
 			</div>
 			<div className="row justify-content-center">
-				<div className="col-8 bg-success rounded p-2">
+				<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="col-8 rounded p-2">
 					<p className="text-start">
 					{info.overview}
 					</p>
