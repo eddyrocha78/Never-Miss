@@ -11,12 +11,17 @@ export const Details = props => {
 
 	const [images, setImages ] = useState([]);
 
+	const [videos, setVideos ] = useState([]);
+
 	const [imLoaded, setImLoaded ] = useState(false);
+
+	const [backLink, setBackLink ] = useState("https://i.ytimg.com/vi/0bIAZz-xCGo/hqdefault.jpg");
 
 
 	useEffect(() => {
 		getInfo();
 		getImages();
+		getVideos()
 	}, []);
 
 	const getInfo = () => 
@@ -47,14 +52,30 @@ export const Details = props => {
 		  
 		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/images`, options)
 			.then(response => response.json())
-			.then(response => {console.log(response); setImages(response); setImLoaded(true)})
+			.then(response => {setImages(response); setImLoaded(true); setBackLink("https://image.tmdb.org/t/p/w1280_and_h720_bestv2/"+ response.backdrops["1"].file_path); console.log(backLink)})
+			.catch(err => console.error(err));
+	}
+
+	const getVideos = () => 
+	{
+		const options = {
+			method: 'GET',
+			headers: {
+			  accept: 'application/json',
+			  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NjJjYjAxZWFiNThjNGRlNzdjOWNhMmY0ZGM4ODQ0NyIsInN1YiI6IjY1Mzk1YmFhZWM0NTUyMDBlYTRkNDMxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cz3I9EbEUfEny1vJHlbpG7zW_2dSZRBsGCrx6Xy3768'
+			}
+		  };
+		  
+		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/videos?language=en-US`, options)
+			.then(response => response.json())
+			.then(response => {console.log(response); setVideos(response);})
 			.catch(err => console.error(err));
 	}
 
 	return (params.type == "movie" ?
-		<div className="text-center mt-5 text-light container">
+		<div  className="text-center mt-5 text-light container-fluid">
 			<h1 className="text-white-50 display-1 fw-bold">{info.original_title}</h1>
-			<div className="row justify-content-start mt-5">
+			<div className=" row justify-content-start mt-5">
 				<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="col-2 offset-2">
 					<p className="text-center text-light h5 p-1">
 					Release : {info.release_date}
@@ -71,12 +92,12 @@ export const Details = props => {
 					</p>
 				</div>
 			</div>
-			<div className="ms-3 my-5 row">
+			<div className="my-5 row">
 				<div className="col-4 offset-md-1">
-					<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ images.posters["0"].file_path : ""}/>
+					<img className="img-fluid poster" src={imLoaded ? "https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ images.posters["0"].file_path : ""}/>
 				</div>
-				<div className="col-4 align-self-center">
-					<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/"+ images.backdrops["0"].file_path : ""}/>
+				<div className="col-4 video align-self-center">
+					
 				</div>
 			</div>
 			<div className="mt-5 text-warning row justify-content-evenly">
@@ -131,7 +152,7 @@ export const Details = props => {
 			</div>
 		:
 
-		<div className="container text-center mt-5 text-light">
+		<div className="container-fluid text-center mt-5 text-light">
 			<h1 className="text-white-50 display-1 fw-bold">{info.name}</h1>
 			<div className="row justify-content-center mt-5">
 			<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="col-2">
@@ -159,8 +180,8 @@ export const Details = props => {
 				<div className="col-4 offset-md-1">
 					<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ images.posters["0"].file_path : ""}/>
 				</div>
-				<div className="col-4 align-self-center">
-					<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/"+ images.backdrops["0"].file_path : ""}/>
+				<div className="col-4 video align-self-center">
+
 				</div>
 			</div>
 			<div className="mt-5 text-warning row justify-content-evenly">
