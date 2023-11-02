@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import ReactPlayer from 'react-player';
 import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
@@ -15,7 +16,7 @@ export const Details = props => {
 
 	const [imLoaded, setImLoaded ] = useState(false);
 
-	const [backLink, setBackLink ] = useState("https://i.ytimg.com/vi/0bIAZz-xCGo/hqdefault.jpg");
+	const [vdLoaded, setVdLoaded ] = useState(false);
 
 
 	useEffect(() => {
@@ -23,6 +24,9 @@ export const Details = props => {
 		getImages();
 		getVideos()
 	}, []);
+
+	//style={{backgroundImage: "url('"+ backLink +"')",height: "100%" ,backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center", filter : "blur(2px)"}}
+	//
 
 	const getInfo = () => 
 	{
@@ -52,7 +56,7 @@ export const Details = props => {
 		  
 		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/images`, options)
 			.then(response => response.json())
-			.then(response => {setImages(response); setImLoaded(true); setBackLink("https://image.tmdb.org/t/p/w1280_and_h720_bestv2/"+ response.backdrops["1"].file_path); console.log(backLink)})
+			.then(response => {setImages(response); setImLoaded(true)})
 			.catch(err => console.error(err));
 	}
 
@@ -68,15 +72,15 @@ export const Details = props => {
 		  
 		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/videos?language=en-US`, options)
 			.then(response => response.json())
-			.then(response => {console.log(response); setVideos(response);})
+			.then(response => {console.log(response); setVideos(response);setVdLoaded(true)})
 			.catch(err => console.error(err));
 	}
 
 	return (params.type == "movie" ?
 		<div  className="text-center mt-5 text-light container-fluid">
 			<h1 className="text-white-50 display-1 fw-bold">{info.original_title}</h1>
-			<div className=" row justify-content-start mt-5">
-				<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="col-2 offset-2">
+			<div className=" row justify-content-center mt-5">
+				<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="col-2">
 					<p className="text-center text-light h5 p-1">
 					Release : {info.release_date}
 					</p>
@@ -93,11 +97,16 @@ export const Details = props => {
 				</div>
 			</div>
 			<div className="my-5 row">
-				<div className="col-4 offset-md-1">
+				<div className="col-3 mt-4 offset-md-2">
 					<img className="img-fluid poster" src={imLoaded ? "https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ images.posters["0"].file_path : ""}/>
 				</div>
-				<div className="col-4 video align-self-center">
-					
+				<div className="col-4 video align-self-center ">
+				<ReactPlayer
+          			url={vdLoaded ? "https://www.youtube.com/watch?v="+ videos.results["0"].key : ""}
+          			controls={true}
+          			width="650px"
+          			height="400px"
+        			/>
 				</div>
 			</div>
 			<div className="mt-5 text-warning row justify-content-evenly">
@@ -181,7 +190,12 @@ export const Details = props => {
 					<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ images.posters["0"].file_path : ""}/>
 				</div>
 				<div className="col-4 video align-self-center">
-
+				<ReactPlayer
+          			url={vdLoaded ? "https://www.youtube.com/watch?v="+ videos.results["1"].key : ""}
+          			controls={true}
+          			width="650px"
+          			height="400px"
+        			/>
 				</div>
 			</div>
 			<div className="mt-5 text-warning row justify-content-evenly">
