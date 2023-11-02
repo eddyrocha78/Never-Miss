@@ -52,21 +52,21 @@ export const Details = props => {
 	}
 
 	return (params.type == "movie" ?
-		<div className="text-center mt-5 text-light">
-			<h1 className="text-white-50 fw-bold">{info.original_title}</h1>
+		<div className="text-center mt-5 text-light container">
+			<h1 className="text-white-50 display-1 fw-bold">{info.original_title}</h1>
 			<div className="row justify-content-start mt-5">
-				<div style={{ backgroundColor: "rgba(55, 184, 23, 1)" }} className="col-2 offset-2">
-					<p className="text-start text-light text-center h5">
-						Release : {info.release_date}
+				<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="col-2 offset-2">
+					<p className="text-center text-light h5 p-1">
+					Release : {info.release_date}
 					</p>
 				</div>
-				<div  style={{ backgroundColor: "rgba(40, 201, 153, 1)" }} className="col-2 ms-2">
-					<p className="text-start text-light text-center h5">
+				<div  style={{ backgroundColor: "rgba(47, 165, 130, 1)" }} className="col-2 ms-2">
+					<p className="text-light text-center h5 p-1">
 					Rating : {info.adult ? "R" : "PG"}
 					</p>
 				</div>
-				<div  style={{ backgroundColor: "rgba(56, 216, 91, 1)" }}className="col-2 mx-2">
-					<p className="text-start text-light text-center h5">
+				<div  style={{ backgroundColor: "rgba(120, 160, 55, 1)" }}className="col-2 mx-2">
+					<p className="text-light text-center h5 p-1">
 						Duration : {info.runtime} minutes
 					</p>
 				</div>
@@ -79,125 +79,140 @@ export const Details = props => {
 					<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/"+ images.backdrops["0"].file_path : ""}/>
 				</div>
 			</div>
-			<div className="mt-5 ms-4 text-warning row">
+			<div className="mt-5 text-warning row justify-content-evenly">
 				{ 
 				(info.vote_average/2) <= 0.5 || info.vote_average/2 == NaN || info.vote_average/2 == undefined?
-				<div className="col-3 offset-md-1 fs-1">
-					<i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				<div className="col-4">
+					<i className="fa-regular fa-star fa-5xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
 				</div>
 				:
 				(info.vote_average/2) <= 1.5 && (info.vote_average/2) > 0.5?
-				<div className="col-3 offset-md-1">
-					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				<div className="col-4">
+					<i className="fa-solid fa-star fa-5x"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
 				</div>
 				:
 				(info.vote_average/2) <= 2.5 && (info.vote_average/2) > 1.5?
-				<div className="col-3 offset-md-1">
-					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				<div className="col-4">
+					<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 				</div>
 				:
 				(info.vote_average/2) <= 3.5 && (info.vote_average/2) > 2.5?
-				<div className="col-3 offset-md-1">
-					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				<div className="col-4">
+					<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 				</div>
 				:
 				(info.vote_average/2) <= 4.5 && (info.vote_average/2) > 3.5?
-				<div className="col-3 offset-md-1">
-					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				<div className="col-4">
+					<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 				</div>
 				:
-				<div className="col-3 offset-md-1">
-					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i>
+				<div className="col-4">
+					<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i>
 				</div>
 				}
+				<div className="col-3 d-grid gap-2">
+					<button className="btn btn-success py-3"><p className="h3"><i class="fa-solid fa-square-plus fa-2xl me-5"></i>Add to a List</p></button>
+				</div>
 			</div>
 			<div className="row justify-content-start mt-5">
-				<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-1 rounded offset-md-2">
-					<p className="text-start text-light text-center h4">
+				<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-2 rounded offset-md-1">
+					<p className="text-start text-light text-center h3">
 						Synopsis
 					</p>
 				</div>
 			</div>
 			<div className="row justify-content-center">
-				<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="col-8 rounded p-2">
-					<p className="text-start">
+				<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="col-10 rounded p-4">
+					<p className="h5 text-start">
 					{info.overview}
 					</p>
 				</div>
 			</div>
-		</div>
+			</div>
 		:
-		<div className="text-center mt-5 text-light">
-			<h1 className="text-white-50 fw-bold">{info.name}</h1>
+
+		<div className="container text-center mt-5 text-light">
+			<h1 className="text-white-50 display-1 fw-bold">{info.name}</h1>
 			<div className="row justify-content-center mt-5">
-				<div className="col-2 bg-success rounded">
-					<p className="text-start text-light text-center h5">
-						Release : {info.first_air_date}
+			<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="col-2">
+					<p className="text-center text-light h5 p-1">
+					Release : {info.first_air_date}
 					</p>
 				</div>
-				<div className="col-2 bg-warning ms-2 rounded">
-					<p className="text-start text-light text-center h5">
+				<div  style={{ backgroundColor: "rgba(47, 165, 130, 1)" }} className="col-2 ms-2">
+					<p className="text-light text-center h5 p-1">
 					Rating : {info.adult ? "R" : "PG"}
 					</p>
 				</div>
-				<div className="col-2 bg-primary bg-opacity-50 ms-2 rounded">
-					<p className="text-start text-light text-center h5">
+				<div className="col-2 bg-primary bg-opacity-50 ms-2">
+					<p className="text-light text-center h5 p-1">
 						Episodes : {info.number_of_episodes}
 					</p>
 				</div>
-				<div className="col-2 bg-info bg-opacity-50 ms-2 rounded">
-					<p className="text-start text-light text-center h5">
+				<div className="col-2 bg-info bg-opacity-50 ms-2">
+					<p className="text-light text-center h5 p-1">
 						Seasons : {info.number_of_seasons}
 					</p>
 				</div>
 			</div>
-			<div className="mt-5 ms-4 text-warning row">
+			<div className="ms-3 my-5 row">
+				<div className="col-4 offset-md-1">
+					<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ images.posters["0"].file_path : ""}/>
+				</div>
+				<div className="col-4 align-self-center">
+					<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/"+ images.backdrops["0"].file_path : ""}/>
+				</div>
+			</div>
+			<div className="mt-5 text-warning row justify-content-evenly">
 				{ 
 				(info.vote_average/2) <= 0.5 || info.vote_average/2 == NaN || info.vote_average/2 == undefined?
-				<div className="col-3 offset-md-1">
-					<i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				<div className="col-4">
+					<i className="fa-regular fa-star fa-5xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
 				</div>
 				:
 				(info.vote_average/2) <= 1.5 && (info.vote_average/2) > 0.5?
-				<div className="col-3 offset-md-1">
-					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				<div className="col-4">
+					<i className="fa-solid fa-star fa-5x"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
 				</div>
 				:
 				(info.vote_average/2) <= 2.5 && (info.vote_average/2) > 1.5?
-				<div className="col-3 offset-md-1">
-					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				<div className="col-4">
+					<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 				</div>
 				:
 				(info.vote_average/2) <= 3.5 && (info.vote_average/2) > 2.5?
-				<div className="col-3 offset-md-1">
-					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				<div className="col-4">
+					<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 				</div>
 				:
 				(info.vote_average/2) <= 4.5 && (info.vote_average/2) > 3.5?
-				<div className="col-3 offset-md-1">
-					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+				<div className="col-4">
+					<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 				</div>
 				:
-				<div className="col-3 offset-md-1">
-					<i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i><i className="fa-solid fa-star fa-2xl"></i>
+				<div className="col-4">
+					<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i>
 				</div>
 				}
+				<div className="col-3 d-grid gap-2">
+					<button className="btn btn-success py-3"><p className="h3"><i class="fa-solid fa-square-plus fa-2xl me-5"></i>Add to a List</p></button>
+				</div>
 			</div>
 			<div className="row justify-content-start mt-5">
-				<div className="col-1 bg-success bg-opacity-50 rounded offset-md-2">
-					<p className="text-start text-light text-center h4">
+				<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-2 rounded offset-md-1">
+					<p className="text-start text-light text-center h3">
 						Synopsis
 					</p>
 				</div>
-				<div className="col-1 bg-success bg-opacity-50 mx-2 rounded">
-					<p className="text-start text-light text-center h4">
+				<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-2 rounded ms-2">
+					<p className="text-start text-light text-center h3">
 						Episodes
 					</p>
 				</div>
 			</div>
 			<div className="row justify-content-center">
-				<div className="col-8 bg-success rounded p-2">
-					<p className="text-start">
+				<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="col-10 rounded p-4">
+					<p className="h5 text-start">
 					{info.overview}
 					</p>
 				</div>
