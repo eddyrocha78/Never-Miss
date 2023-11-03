@@ -179,12 +179,12 @@ export const Details = props => {
 				{ 
 				(info.vote_average/2) <= 0.5 || info.vote_average/2 == NaN || info.vote_average/2 == undefined?
 				<div className="col-4">
-					<i className="fa-regular fa-star fa-5xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+					<i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 				</div>
 				:
 				(info.vote_average/2) <= 1.5 && (info.vote_average/2) > 0.5?
 				<div className="col-4">
-					<i className="fa-solid fa-star fa-5x"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+					<i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 				</div>
 				:
 				(info.vote_average/2) <= 2.5 && (info.vote_average/2) > 1.5?
@@ -328,12 +328,12 @@ export const Details = props => {
 				{ 
 				(info.vote_average/2) <= 0.5 || info.vote_average/2 == NaN || info.vote_average/2 == undefined?
 				<div className="col-4">
-					<i className="fa-regular fa-star fa-5xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+					<i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 				</div>
 				:
 				(info.vote_average/2) <= 1.5 && (info.vote_average/2) > 0.5?
 				<div className="col-4">
-					<i className="fa-solid fa-star fa-5x"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i><i className="fa-regular fa-star fa-2xl"></i>
+					<i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 				</div>
 				:
 				(info.vote_average/2) <= 2.5 && (info.vote_average/2) > 1.5?
