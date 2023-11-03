@@ -32,7 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try{
-				const resp = await fetch("https://special-giggle-7g4qxww55qjhrx94-3001.app.github.dev/api/token", opts)
+				const resp = await fetch(process.env.BACKEND_URL + "api/token", opts)
 				if (resp.status !== 200){
 					alert("Error detected");
 					return false;
@@ -49,20 +49,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			signup: async (email, password) => {
+			signup: async (first_name, last_name, email, password) => {
 				const opts = {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
 					body: JSON.stringify({
+						first_name: first_name,
+						last_name: last_name,
 						email: email,
 						password: password,
 					})
 				};
 
 				try{
-				const resp = await fetch("https://special-giggle-7g4qxww55qjhrx94-3001.app.github.dev/api/user", opts)
+				const resp = await fetch(process.env.BACKEND_URL + "api/signup", opts)
 				if (resp.status !== 200){
 					alert("Error detected");
 					return false;
@@ -70,7 +72,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const data = await resp.json();
 				console.log("Backend data", data);
-				setStore({user: email, password});	
+				setStore({user: first_name, last_name, email, password});	
 				return true;
 				}
 				catch(error){
@@ -88,7 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				try{
 					// fetching data from the backend
-					const resp = await fetch("https://special-giggle-7g4qxww55qjhrx94-3001.app.github.dev/api/hello", opts)
+					const resp = await fetch(process.env.BACKEND_URL + "api/hello", opts)
 					const data = await resp.json()
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves

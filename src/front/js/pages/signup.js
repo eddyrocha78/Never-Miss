@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import "../../styles/signup.css";
+import { Context } from "../store/appContext";
 
 export const SignupForm = () => {
+	const { store, actions } = useContext(Context);
 	const [formData, setFormData] = useState({
 		first_name: '',
 		last_name: '',
@@ -15,36 +17,11 @@ export const SignupForm = () => {
 		setFormData({...formData, [name]: value});
 	  };
 	
-	  const handleSubmit = (e) => {
-		e.preventDefault();
-	
-		try {
-			const response = await fetch('https://special-giggle-7g4qxww55qjhrx94-3001.app.github.dev/signup', {
-			  method: 'POST',
-			  headers: {
-				'Content-Type': 'application/json',
-			  },
-			  body: JSON.stringify(formData),
-			});
-	  
-			if (formData.password !== formData.confirmPassword && response.status === 201) {
-			  alert('Signup successful!');
-			} else {
-			  alert('Signup failed. Please try again.')
-			  console.log(formData);
-			}
-		  } catch (error) {
-			console.error(error);
-			alert('An error occurred. Please try again later.');
-		  }
-		  
-		}
-	  };
 	
 	  return (
 		<div className="signup-wrapper">
 			<div className="signup-form col-md-6 offset-md-3">
-			<form onSubmit={handleSubmit} className="row">
+			<form className="row">
 				<h1>Never Miss</h1>
 				<p>another movie or episode ever again!</p>
 				<div className="row justify-content-evenly mb-3">
@@ -76,7 +53,10 @@ export const SignupForm = () => {
 				</div>
 
 				<div className="row justify-content-center">
-					<button className="col-auto mb-3" type="submit">Sign Up</button>
+					<button className="col-auto mb-3" type="submit" onClick={ (e) => 
+						{e.preventDefault() 
+						actions.signup(first_name, last_name, email, password)
+						}}>Sign Up</button>
 				</div>
 			</form>
 			</div>

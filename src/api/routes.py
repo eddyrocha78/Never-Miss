@@ -21,12 +21,15 @@ def handle_hello():
 
 
 @api.route('/signup', methods=['POST'])
-def sign_up():
+def signup():
     # Process the information coming from the client
     user_data = request.get_json()
+    print(user_data)
 
     # We create an instance without being recorded in the database
     user = User()
+    user.first_name = user_data.get("first_name")
+    user.last_name = user_data.get("last_name")
     user.email = user_data.get("email")
     user.password = user_data.get("password")
     user.is_active = True
@@ -56,7 +59,7 @@ def login():
 
 
 @api.route('/get', methods=['GET'])
-def get_info():
+def getInfo():
     res = requests.get('https://api.themoviedb.org/3/movie/299054?language=en-US', headers={
     "accept": "application/json",
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NjJjYjAxZWFiNThjNGRlNzdjOWNhMmY0ZGM4ODQ0NyIsInN1YiI6IjY1Mzk1YmFhZWM0NTUyMDBlYTRkNDMxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cz3I9EbEUfEny1vJHlbpG7zW_2dSZRBsGCrx6Xy3768"
