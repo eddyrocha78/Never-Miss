@@ -32,7 +32,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try{
-				const resp = await fetch("https://stunning-couscous-6j76pww5wppc47j5-3001.app.github.dev/api/token", opts)
+				const resp = await fetch("https://special-giggle-7g4qxww55qjhrx94-3001.app.github.dev/api/token", opts)
 				if (resp.status !== 200){
 					alert("Error detected");
 					return false;
@@ -62,7 +62,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try{
-				const resp = await fetch("https://stunning-couscous-6j76pww5wppc47j5-3001.app.github.dev/api/user", opts)
+				const resp = await fetch("https://special-giggle-7g4qxww55qjhrx94-3001.app.github.dev/api/user", opts)
 				if (resp.status !== 200){
 					alert("Error detected");
 					return false;
@@ -80,9 +80,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 
 			getMessage: async () => {
+				const store = getStore();
+				const opts = {
+					headers: {
+						"Authorization": "Bearer " + store.token
+					}
+				}
 				try{
 					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
+					const resp = await fetch("https://special-giggle-7g4qxww55qjhrx94-3001.app.github.dev/api/hello", opts)
 					const data = await resp.json()
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves

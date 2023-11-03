@@ -12,22 +12,32 @@ export const SignupForm = () => {
 	
 	  const handleChange = (e) => {
 		const { name, value } = e.target;
-		setFormData({
-		  ...formData,
-		  [name]: value,
-		});
+		setFormData({...formData, [name]: value});
 	  };
 	
 	  const handleSubmit = (e) => {
 		e.preventDefault();
 	
-		// Check if the password and confirmPassword match
-		if (formData.password !== formData.confirmPassword) {
-		  alert('Passwords do not match');
-		} else {
-		  // Passwords match, you can proceed with signup logic here
-		  // For simplicity, we'll just log the form data
-		  console.log(formData);
+		try {
+			const response = await fetch('https://special-giggle-7g4qxww55qjhrx94-3001.app.github.dev/signup', {
+			  method: 'POST',
+			  headers: {
+				'Content-Type': 'application/json',
+			  },
+			  body: JSON.stringify(formData),
+			});
+	  
+			if (formData.password !== formData.confirmPassword && response.status === 201) {
+			  alert('Signup successful!');
+			} else {
+			  alert('Signup failed. Please try again.')
+			  console.log(formData);
+			}
+		  } catch (error) {
+			console.error(error);
+			alert('An error occurred. Please try again later.');
+		  }
+		  
 		}
 	  };
 	

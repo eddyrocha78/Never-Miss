@@ -4,9 +4,8 @@ import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home";
-import { Details } from "./pages/movieDetails";
 import { SignupForm } from "./pages/signup";
-import { Single } from "./pages/single";
+import { Login } from "./pages/login";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -27,9 +26,8 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<Home />} path="/details" />
+                        <Route exact element={<Login />} path="/login" />
                         <Route exact element={<SignupForm />} path="/signup" />
-                        <Route element={<Single />} path="/single/:theid" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
