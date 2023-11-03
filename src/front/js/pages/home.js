@@ -11,40 +11,19 @@ export const Home = () => {
   const [movietrending, setmovietrending] = useState({ results: [] });
 
   useEffect(() => {
-    const MovieTrending = async () => {
-      try {
-        const response = await fetch(
-          "https://api.themoviedb.org/3/trending/movie/week?language=en-US",
-          {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzljNWIzNDBiM2I5OGE3ZGZiMzlkYTJlOTc3YzE2MyIsInN1YiI6IjY1Mzk1YjgzZWM0NTUyMDEyYzE5YjFiNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.G6LQ-ee_CUMn2WrqGLxrFZ_mjfkw2opm3iX8NIMm_ww'
-            }
-          }
-        )
-        const data = await response.json();
-        setmovietrending(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-
-
-
     const fetchmovieData = async () => {
       try {
         const response = await fetch(
           "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
           {
-            method: 'GET',
+            method: "GET",
             headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzljNWIzNDBiM2I5OGE3ZGZiMzlkYTJlOTc3YzE2MyIsInN1YiI6IjY1Mzk1YjgzZWM0NTUyMDEyYzE5YjFiNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.G6LQ-ee_CUMn2WrqGLxrFZ_mjfkw2opm3iX8NIMm_ww'
-            }
+              accept: "application/json",
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzljNWIzNDBiM2I5OGE3ZGZiMzlkYTJlOTc3YzE2MyIsInN1YiI6IjY1Mzk1YjgzZWM0NTUyMDEyYzE5YjFiNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.G6LQ-ee_CUMn2WrqGLxrFZ_mjfkw2opm3iX8NIMm_ww",
+            },
           }
-        )
+        );
         const data = await response.json();
         setmovieInfo(data);
       } catch (error) {
@@ -72,15 +51,35 @@ export const Home = () => {
       }
     };
 
-    MovieTrending()
     fetchseriesData();
     fetchmovieData();
   }, []);
-  console.log(seriesinfo);
+
   return (
     <div className="container-fluid">
+      <div className="row text-center mt-5">
+        <h1 className="text-white display-1 fw-bold">Never Miss</h1>
+      </div>
+      <div className="row text-center mt-5">
+        <h1 className="text-white-50 display-4">
+          Look up your favorite movie or series now!
+        </h1>
+      </div>
+      <div className="row text-center mt-5 mx-5">
+        <input
+         style={{ borderColor: "rgba(37, 53, 37, 1)" }}
+          className="form-control text-center border-5"
+          type="text"
+          placeholder="Look Me Up"
+        />
+      </div>
+      <div className="row text-center my-5">
+        <h1 className="text-white-50 display-4">
+          Subscribe to never miss a thing
+        </h1>
+      </div>
       <div className="row my-5">
-        <div className="col-8">
+        <div className="col">
           <div
             style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}
             className="row mx-5 rounded"
@@ -125,22 +124,6 @@ export const Home = () => {
                     />
                   ))}
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-4">
-          <div
-            style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}
-            className="h-100 rounded me-5"
-          >
-            <h1 className="py-3 mx-5 text-decoration-underline text-white">
-              Trending
-            </h1>
-            <div>
-              <ul>
-         
-                  </ul>
             </div>
           </div>
         </div>

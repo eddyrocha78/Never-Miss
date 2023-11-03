@@ -6,12 +6,12 @@ export const List = ({ imgpath, title, description }) => {
 
   return (
     <li>
-      <div className="">
-        <img src={url} alt={title} />
-        <div className="descriptions">
-          <h1>{title}</h1>
-          <p>{description ? description : "There is no Summary available"}</p>
-        </div>
+      <div className="list-group-item d-flex mx-4 bg-black text-white">
+        <img style={{width:"100px"}}src={url} alt={title} />
+        
+          <p className="text-midlle-center">{title}</p>
+          
+        
       </div>
     </li>
   );
