@@ -49,31 +49,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			signup: async (first_name, last_name, email, password, confirm_password) => {
+			signup: async (formData) => {
 				const opts = {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					},
-					body: JSON.stringify({
-						first_name: first_name,
-						last_name: last_name,
-						email: email,
-						password: password,
-						confirm_password: confirm_password,
-					})
+					body: JSON.stringify(formData)
 				};
 
 				try{
-				const resp = await fetch(process.env.BACKEND_URL + "api/signup", opts)
-				if (resp.status !== 200){
+				const response = await fetch(process.env.BACKEND_URL + "api/signup", opts)
+				if (response.status !== 200){
 					alert("Error detected");
 					return false;
 				} 
 
 				const data = await resp.json();
 				console.log("Backend data", data);
-				setStore({user: first_name, last_name, email, password});	
+				setStore({user: formData});	
 				return true;
 				}
 				catch(error){

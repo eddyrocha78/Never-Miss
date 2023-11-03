@@ -25,28 +25,28 @@ users = []
 @api.route('/signup', methods=['POST'])
 def signup():
     # Process the information coming from the client
-    data = request.get_json()
-    print(data)
+    user_data = request.get_json()
+    print(user_data)
 
     # We create an instance without being recorded in the database
     user = User()
-    first_name = data.get("first_name")
-    last_name = data.get("last_name")
-    email = data.get("email")
-    password = data.get("password")
-    confirm_password = data.get("confirm_password")
-    is_active = True
+    user.firstName = user_data["firstName"]
+    user.lastName = user_data["lastName"]
+    user.email = user_data["email"]
+    user.password = user_data["password"]
+    user.confirmPassword = user_data["confirmPassword"]
+    user.is_active = True
 
     # Check if passwords match
-    if password != '' & confirm_password !='' & password != confirm_password :
+    if user.password != '' & user.confirmPassword !='' & user.password != user.confirmPassword :
         return jsonify({'error': 'Password and Confirm Password do not match'}), 400
 
     # Check if the username is already taken
-    if any(user['email'] == email for user in users):
+    if any(user['email'] == user.email for user in users):
         return jsonify({'error': 'Username already taken'}), 400
 
     # Store user data (in-memory storage, replace with a database in production)
-    users.append({'first_name':first_name, 'last_name':last_name,'email': email, 'password': password})
+    users.append({'firstName':user.firstName, 'lastName':user.lastName,'email': user.email, 'password': user.password})
 
     # We tell the database we want to record this user
     db.session.add(user)
