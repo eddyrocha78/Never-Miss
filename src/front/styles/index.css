@@ -1,3 +1,19 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+*{
+    scrollbar-width: auto;
+    scrollbar-color: #101112 #253525;
+}
+
+/* Other browsers */
+*::-webkit-scrollbar{
+    width: 16px;
+}
+
+*::-webkit-scrollbar-track{
+    background: #253525;
+}
+
+*::-webkit-scrollbar-thumb{
+    background-color: #101112;
+    border-radius: 0px;
+    border: 6px solid #253a25;
+}
