@@ -21,8 +21,9 @@ export const Details = props => {
 
 
 
-	const [imLoaded, setImLoaded ] = useState(false);
-	const [vdLoaded, setVdLoaded ] = useState(false);
+	const [posterLink, setPosterLink ] = useState("");
+	const [backLink, setBackLink ] = useState("");
+	const [videoKey, setVideoKey ] = useState("");
 
 
 	useEffect(() => {
@@ -47,7 +48,7 @@ export const Details = props => {
 
 		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}?language=en-US`, options)
 			.then(response => response.json())
-			.then(response => {console.log(response); setInfo(response)})
+			.then(response => {/*console.log(response); */setInfo(response)})
 			.catch(err => console.error(err));
 	}
 
@@ -63,7 +64,7 @@ export const Details = props => {
 		  
 		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/images`, options)
 			.then(response => response.json())
-			.then(response => {setImages(response); setImLoaded(true)})
+			.then(response => {setImages(response); setPosterLink(response.posters["0"].file_path)/*;console.log(response)*/ ;setBackLink(response.backdrops["0"].file_path)})
 			.catch(err => console.error(err));
 	}
 
@@ -79,7 +80,7 @@ export const Details = props => {
 		  
 		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/videos?language=en-US`, options)
 			.then(response => response.json())
-			.then(response => {/*console.log(response);*/ setVideos(response);setVdLoaded(true)})
+			.then(response => {/*console.log(response); */setVideos(response);setVideoKey(response.results["0"].key)})
 			.catch(err => console.error(err));
 	}
 
@@ -95,7 +96,7 @@ export const Details = props => {
 		  
 		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/credits?language=en-US`, options)
 			.then(response => response.json())
-			.then(response => {console.log(response); getDirector(response); getWriters(response); getCast(response)})
+			.then(response => {/*console.log(response); */getDirector(response); getWriters(response); getCast(response)})
 			.catch(err => console.error(err));
 	}
 
@@ -157,17 +158,21 @@ export const Details = props => {
 					</div>
 				</div>
 			</div>
-			<div className="ms-4 my-5 row">
+			<div style={{backgroundImage: "url('"+ "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/" + backLink +"')", height: "100%" , backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center"}} className="py-5 Background m-2 my-5 row">
 				<div className="col-4 offset-md-1">
-					<img className="img-fluid poster" src={imLoaded ? "https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ images.posters["0"].file_path : ""}/>
+					<img className="img-fluid border border-black border-5" src={"https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ posterLink}/>
 				</div>
 				<div className="col-4 video align-self-center ">
-				<ReactPlayer
-          			url={vdLoaded ? "https://www.youtube.com/watch?v="+ videos.results["0"].key : ""}
+					{videoKey !== "" ?<ReactPlayer
+          			url={"https://www.youtube.com/watch?v="+ videoKey}
           			controls={true}
           			width="650px"
           			height="400px"
+					className="border border-black border-5"
         			/>
+					:
+					<div></div>
+					}
 				</div>
 			</div>
 			<div className="my-5 text-warning row justify-content-evenly">
@@ -259,9 +264,9 @@ export const Details = props => {
 						</div>
 						<div className="row d-flex flex-nowrap overflow-auto">
         						{cast.map((_, index) => (
-									<div className=" bg-success rounded col-5 text-light m-1" key={index}>
-          							<p >{"Name :"+ cast[index]}</p>
-									<p>{"Character :"+ castChar[index]}</p>
+									<div className=" bg-success text-start py-1 rounded col-5 text-light m-1" key={index}>
+									<p className="mt-4">{"Name : "+ cast[index]}</p>
+									<p>{"Character : "+ castChar[index]}</p>
 									</div>
         						))}
 						</div>
@@ -302,17 +307,21 @@ export const Details = props => {
 					</p>
 				</div>
 			</div>
-			<div className="ms-3 my-5 row">
+			<div style={{backgroundImage: "url('"+ "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/" + backLink +"')", height: "100%" ,backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center"}} className="py-5 Background m-2 my-5 row">
 				<div className="col-4 offset-md-1">
-					<img className="img-fluid" src={imLoaded ? "https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ images.posters["0"].file_path : ""}/>
+					<img className="img-fluid border border-black border-5" src={"https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ posterLink}/>
 				</div>
-				<div className="col-4 video align-self-center">
-				<ReactPlayer
-          			url={vdLoaded ? "https://www.youtube.com/watch?v="+ videos.results["1"].key : ""}
+				<div className="col-4 video align-self-center ">
+					{videoKey !== "" ?<ReactPlayer
+          			url={"https://www.youtube.com/watch?v="+ videoKey}
           			controls={true}
           			width="650px"
           			height="400px"
+					className="border border-black border-5"
         			/>
+					:
+					<div></div>
+					}
 				</div>
 			</div>
 			<div className="my-5 text-warning row justify-content-evenly">
@@ -404,9 +413,9 @@ export const Details = props => {
 						</div>
 						<div className="row d-flex flex-nowrap overflow-auto">
         						{cast.map((_, index) => (
-									<div className=" bg-success rounded col-5 text-light m-1" key={index}>
-          							<p >{"Name :"+ cast[index]}</p>
-									<p>{"Character :"+ castChar[index]}</p>
+									<div className=" bg-success text-start py-1 rounded col-5 text-light m-1" key={index}>
+									<p className="mt-4">{"Name : "+ cast[index]}</p>
+									<p>{"Character : "+ castChar[index]}</p>
 									</div>
         						))}
 						</div>
