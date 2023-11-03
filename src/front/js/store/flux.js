@@ -49,7 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			signup: async (first_name, last_name, email, password) => {
+			signup: async (first_name, last_name, email, password, confirm_password) => {
 				const opts = {
 					method: "POST",
 					headers: {
@@ -60,6 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						last_name: last_name,
 						email: email,
 						password: password,
+						confirm_password: confirm_password,
 					})
 				};
 

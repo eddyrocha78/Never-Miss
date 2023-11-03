@@ -9,7 +9,7 @@ export const SignupForm = () => {
 		last_name: '',
 		email: '',
 		password: '',
-		confirmPassword: '',
+		confirm_password: '',
 	  });
 	
 	  const handleChange = (e) => {
@@ -40,7 +40,7 @@ export const SignupForm = () => {
 					<input type="password" placeholder="Password" name="password" value={formData.password} onChange={handleChange} required/>
 				</div>
 				<div className="col-12 mb-3">
-					<input type="password" placeholder="Confirm Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required/>
+					<input type="password" placeholder="Confirm Password" name="confirmPassword" value={formData.confirm_password} onChange={handleChange} required/>
 				</div>
 
 				<div className="row justify-content-center">
@@ -53,7 +53,7 @@ export const SignupForm = () => {
 				</div>
 
 				<div className="row justify-content-center">
-					<button className="col-auto mb-3" type="submit" onClick={ (e) => 
+					<button className="col-auto mb-3" type="submit" onClick={ (e) =>
 						{e.preventDefault() 
 						actions.signup(first_name, last_name, email, password)
 						}}>Sign Up</button>

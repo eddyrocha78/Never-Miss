@@ -19,33 +19,47 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
+# Simple in-memory storage for user data (replace with a database in production)
+users = []
 
 @api.route('/signup', methods=['POST'])
 def signup():
     # Process the information coming from the client
-    user_data = request.get_json()
-    print(user_data)
+    data = request.get_json()
+    print(data)
 
     # We create an instance without being recorded in the database
     user = User()
-    user.first_name = user_data.get("first_name")
-    user.last_name = user_data.get("last_name")
-    user.email = user_data.get("email")
-    user.password = user_data.get("password")
-    user.is_active = True
+    first_name = data.get("first_name")
+    last_name = data.get("last_name")
+    email = data.get("email")
+    password = data.get("password")
+    confirm_password = data.get("confirm_password")
+    is_active = True
+
+    # Check if passwords match
+    if password != '' & confirm_password !='' & password != confirm_password :
+        return jsonify({'error': 'Password and Confirm Password do not match'}), 400
+
+    # Check if the username is already taken
+    if any(user['email'] == email for user in users):
+        return jsonify({'error': 'Username already taken'}), 400
+
+    # Store user data (in-memory storage, replace with a database in production)
+    users.append({'first_name':first_name, 'last_name':last_name,'email': email, 'password': password})
 
     # We tell the database we want to record this user
     db.session.add(user)
     db.session.commit()
 
-    response = ({"message": "The user has been created successfully"})
-    return jsonify(response), 201
+    return jsonify({'message': 'User registered successfully'}), 201
 
 
 @api.route('/login', methods=['POST'])
 def login():
     # Process the information coming from the client
     user_data = request.get_json()
+    print(user_data)
 
     # We create an instance without being recorded in the database
     user = User.query.filter_by(email=user_data["email"]).first()
