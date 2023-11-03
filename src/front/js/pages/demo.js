@@ -33,29 +33,6 @@ export const Demo = () => {
 				})}
 			</ul>
 			<br />
-			<div className="row">
-				<div className="col">
-					<Link to="/movie/details/299054">
-						<span className="btn btn-primary btn-lg" href="#" role="button">
-							The Expandables
-						</span>
-					</Link>
-				</div>
-				<div className="col">
-					<Link to="/tv/details/221802">
-						<span className="btn btn-primary btn-lg" href="#" role="button">
-							the Nurse (series)
-						</span>
-					</Link>
-				</div>
-				<div className="col">
-					<Link to="/movie/details/507089">
-						<span className="btn btn-primary btn-lg" href="#" role="button">
-							Five nights at freddy's
-						</span>
-					</Link>
-				</div>
-			</div>
 			<br />
 			<Link to="/">
 				<button className="btn btn-primary">Back home</button>
