@@ -1,9 +1,11 @@
+import { Navigate } from "react-router-dom";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			token: null,
 			message: null,
-			user: {}
+			user: []
 			
 		},
 		actions: {
@@ -49,19 +51,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			signup: async (firstName, lastName, email, password) => {
+			signup: async (firstName, lastName, email, password, confirmPassword) => {
 				try{
-					let opts = {
+					// fetching data from the backend
+					const opts = {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json"
 						},
-						body: JSON.stringify({firstName: firstName, lastName: lastName, email: email, password: password, confirmPassword: confirmPassword})
+						body: JSON.stringify({
+							firstName: firstName, 
+							lastName: lastName, 
+							email: email, 
+							password: password, 
+							confirmPassword: confirmPassword
+						})
 					};
+					
+				
 				const resp = await fetch(process.env.BACKEND_URL + "api/signup", opts)
 				const data = await resp.json()
+				if (resp.status !== 200){
+					alert("Error detected");
+					return false;
+				} 
+
+				
 				console.log("Backend data", data);
-				setStore({user: data});	
+				setStore({user: firstName, lastName, email, password, confirmPassword});	
 				return true;
 				}
 				catch(error){

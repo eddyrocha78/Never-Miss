@@ -7,9 +7,7 @@ from api.utils import generate_sitemap, APIException
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
-from flask_jwt_extended import create_access_token
-from flask_jwt_extended import current_user
-from flask_jwt_extended import jwt_required
+#from flask_jwt_extended import create_access_token, jwt_required, current_user
 
 
 api = Blueprint('api', __name__)
@@ -57,7 +55,7 @@ def signup():
 
 
     # We tell the database we want to record this user
-    db.session.add(new_user)
+    db.session.add(user)
     db.session.commit()
 
     return jsonify({'message': 'User registered successfully'}), 201
