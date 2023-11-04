@@ -1,15 +1,15 @@
 from flask_sqlalchemy import SQLAlchemy
-from hmac import compare_digest
+
 
 db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    firstName = db.Column(db.String(80), unique=True, nullable=False)
-    lastName = db.Column(db.String(80), unique=True, nullable=False)
+    firstName = db.Column(db.String(80), nullable=False)
+    lastName = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(120), unique=False, nullable=False)
-    confirmPassword = db.Column(db.String(120), unique=False, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+    confirmPassword = db.Column(db.String(120), nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
     def __repr__(self):
@@ -23,6 +23,3 @@ class User(db.Model):
             "email": self.email
             # do not serialize the password, its a security breach
         }
-    
-    def check_password(self, password):
-        return compare_digest(password, self.password)

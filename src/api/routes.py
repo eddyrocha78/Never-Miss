@@ -4,10 +4,19 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
-import requests
-import json
+from flask import Flask, request, jsonify, url_for, Blueprint
+from api.models import db, User
+from api.utils import generate_sitemap, APIException
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import current_user
+from flask_jwt_extended import jwt_required
+
 
 api = Blueprint('api', __name__)
+
+
+# Simple in-memory storage for user data (replace with a database in production)
+users = []
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -18,9 +27,6 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-
-# Simple in-memory storage for user data (replace with a database in production)
-users = []
 
 @api.route('/signup', methods=['POST'])
 def signup():
@@ -37,19 +43,21 @@ def signup():
     user.confirmPassword = user_data["confirmPassword"]
     user.is_active = True
 
+    if not (user.firstName and user.lastName and user.email and user.password and user.confirmPassword):
+        return jsonify({'message': 'All fields are required'}), 400
+    
     # Check if passwords match
-    if user.password != '' & user.confirmPassword !='' & user.password != user.confirmPassword :
+    if (user.password != user.confirmPassword):
         return jsonify({'error': 'Password and Confirm Password do not match'}), 400
 
-    # Check if the username is already taken
-    if any(user['email'] == user.email for user in users):
-        return jsonify({'error': 'Username already taken'}), 400
+    # Check if the user with the same email already exists (you should use a database)
+    existing_user = next((user for user in users if user['email'] == user.email), None)
+    if existing_user:
+        return jsonify({'message': 'User with this email already exists'}), 400
 
-    # Store user data (in-memory storage, replace with a database in production)
-    users.append({'firstName':user.firstName, 'lastName':user.lastName,'email': user.email, 'password': user.password})
 
     # We tell the database we want to record this user
-    db.session.add(user)
+    db.session.add(new_user)
     db.session.commit()
 
     return jsonify({'message': 'User registered successfully'}), 201
