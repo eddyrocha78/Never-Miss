@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
 import "../../styles/signup.css";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const SignupForm = () => {
 	const { store, actions } = useContext(Context);
+	const navigate = useNavigate();
 	const [error, setError] = useState(null);
 	const [formData, setFormData] = useState({
 		firstName: '',
@@ -18,14 +20,18 @@ export const SignupForm = () => {
 		setFormData({...formData, [name]: value});
 	  };
 
-	  const handleSubmit = (e) => {
+	  const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (formData.password !== formData.confirmPassword) {
 			setError("Passwords don't match");
 		  return;
 		}
-	
+		
 		setError(null);
+		let isSignedUp = await actions.signup(formData);
+		if(isSignedUp) {
+			navigate("/login");
+		}
 	  };
 	
 	
@@ -57,18 +63,15 @@ export const SignupForm = () => {
 
 				<div className="row justify-content-center">
 					<div className="form-check col-auto mb-3">
-						<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-						<label class="form-check-label" for="flexCheckDefault">
+						<input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
+						<label className="form-check-label" htmlFor="flexCheckDefault">
 						I've read and agree with the <a>Terms and Conditions</a>
 						</label>
 					</div>
 				</div>
 
 				<div className="row justify-content-center">
-					<button className="col-auto mb-3" type="submit" onClick={ (e) =>
-						{e.preventDefault() 
-						actions.signup(formData)
-						}}>Sign Up</button>
+					<button className="col-auto mb-3" type="submit">Sign Up</button>
 				</div>
 			</form>
 			</div>

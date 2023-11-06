@@ -51,39 +51,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			signup: async (firstName, lastName, email, password, confirmPassword) => {
-				try{
-					// fetching data from the backend
-					const opts = {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify({
-							firstName: firstName, 
-							lastName: lastName, 
-							email: email, 
-							password: password, 
-							confirmPassword: confirmPassword
-						})
-					};
+			signup: async (signUpData) => {
+				console.log("DATA!!!!");
+				console.log(signUpData);
+				
+				// Creating opts for the fetch
+				const opts = {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify(signUpData)
+				};
+				
+				try{	
+					const resp = await fetch(process.env.BACKEND_URL + "api/signup", opts);
 					
-				
-				const resp = await fetch(process.env.BACKEND_URL + "api/signup", opts)
-				const data = await resp.json()
-				if (resp.status !== 200){
-					alert("Error detected");
-					return false;
-				} 
+					console.log(resp)
+					if(!resp.ok){
+						alert("Error detected");
+						return false;
+					}
 
-				
-				console.log("Backend data", data);
-				setStore({user: firstName, lastName, email, password, confirmPassword});	
-				return true;
+					const data = await resp.json();
+					console.log(data)
+
+					return true;
 				}
 				catch(error){
 					console.error("Error detected on login")
 				}
+
 			},
 			
 

@@ -12,7 +12,7 @@ export const Home = () => {
 
 	let sessiontoken = sessionStorage.getItem("token")
 
-	/*const [info, setInfo ] = useState();*/
+	const [info, setInfo ] = useState();
 	
 	const getInfo = () => 
 	{
@@ -35,6 +35,7 @@ export const Home = () => {
 			<h1>Hello Rigo!!</h1>
 			<button className="btn btn-primary" onClick={getInfo}> Get Info</button>
 			Info : {info}
+
 			<p>
 				<img src={rigoImageUrl} />
 			</p>

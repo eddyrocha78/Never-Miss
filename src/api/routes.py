@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 from flask import Flask, request, jsonify, url_for, Blueprint
+from flask_cors import CORS
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 #from flask_jwt_extended import create_access_token, jwt_required, current_user
@@ -12,6 +13,8 @@ from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
 
+# Allow CORS requests to this API
+CORS(api, supports_credentials=True)
 
 # Simple in-memory storage for user data (replace with a database in production)
 users = []
