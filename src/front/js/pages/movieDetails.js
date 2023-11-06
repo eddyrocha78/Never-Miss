@@ -33,8 +33,7 @@ export const Details = props => {
 		getPeople()
 	}, []);
 
-	//style={{backgroundImage: "url('"+ backLink +"')",height: "100%" ,backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center", filter : "blur(2px)"}}
-	//
+	//https://placehold.co/1280x720/527552/527552/png?text=   <= Placeholder Image
 
 	const getInfo = () => 
 	{
@@ -64,7 +63,7 @@ export const Details = props => {
 		  
 		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/images`, options)
 			.then(response => response.json())
-			.then(response => {setImages(response); setPosterLink(response.posters["0"].file_path)/*;console.log(response)*/ ;setBackLink(response.backdrops["0"].file_path)})
+			.then(response => {setImages(response); setPosterLink(response.posters["0"].file_path); console.log(response) ;setBackLink(response.backdrops !== null ? "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/" + response.backdrops["0"].file_path : "https://placehold.co/1280x720/527552/527552/png?text=")})
 			.catch(err => console.error(err));
 	}
 
@@ -158,7 +157,7 @@ export const Details = props => {
 					</div>
 				</div>
 			</div>
-			<div style={{backgroundImage: "url('"+ "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/" + backLink +"')", height: "100%" , backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center"}} className="py-5 Background m-2 my-5 row">
+			<div style={{backgroundImage: "url('"+ backLink +"')", height: "100%" , backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center"}} className="py-5 Background m-2 my-5 row">
 				<div className="col-4 offset-md-1">
 					<img className="img-fluid border border-black border-5" src={"https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ posterLink}/>
 				</div>
@@ -307,7 +306,7 @@ export const Details = props => {
 					</p>
 				</div>
 			</div>
-			<div style={{backgroundImage: "url('"+ "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/" + backLink +"')", height: "100%" ,backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center"}} className="py-5 Background m-2 my-5 row">
+			<div style={{backgroundImage: "url('"+ backLink +"')", height: "100%" ,backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center"}} className="py-5 Background m-2 my-5 row">
 				<div className="col-4 offset-md-1">
 					<img className="img-fluid border border-black border-5" src={"https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ posterLink}/>
 				</div>
