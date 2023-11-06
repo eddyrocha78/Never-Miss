@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
+import { Link, useParams } from "react-router-dom";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
@@ -35,6 +36,18 @@ export const Home = () => {
 			<h1>Hello Rigo!!</h1>
 			<button className="btn btn-primary" onClick={getInfo}> Get Info</button>
 			Info : {info}
+
+			<Link to="/signup">
+				<button className="btn btn-primary btn-lg mx-3" href="#" role="button">
+					Signup
+				</button>
+			</Link>
+
+			<Link to="/login">
+				<button className="btn btn-primary btn-lg mx-3" href="#" role="button">
+					Login
+				</button>
+			</Link>
 
 			<p>
 				<img src={rigoImageUrl} />

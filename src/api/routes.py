@@ -8,7 +8,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from flask_cors import CORS
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
-#from flask_jwt_extended import create_access_token, jwt_required, current_user
+from flask_jwt_extended import create_access_token, jwt_required, current_user
 
 
 api = Blueprint('api', __name__)
@@ -64,21 +64,27 @@ def signup():
     return jsonify({'message': 'User registered successfully'}), 201
 
 
-@api.route('/login', methods=['POST'])
+@api.route("/login", methods=["POST"])
 def login():
-    # Process the information coming from the client
-    user_data = request.get_json()
-    print(user_data)
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
 
-    # We create an instance without being recorded in the database
-    user = User.query.filter_by(email=user_data["email"]).first()
+    if email != email or password != password:
+        return jsonify({"msg": "Bad username or password"}), 401
 
-    if not user or not user.check_password(user_data["password"]):
-        return jsonify({"message": "Wrong username or password"}), 401
-
-    # Notice that we are passing in the actual sqlalchemy user object here
-    access_token = create_access_token(identity=user.serialize())
+    access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
+
+
+@api.route("/hello", methods=["GET"])
+@jwt_required()
+def get_hello():
+    
+    email = get_jwt_identity()
+    dictionary = {
+        "message": "welcome " + email
+    }
+    return jsonify(dictionary)
 
 
 @api.route('/get', methods=['GET'])

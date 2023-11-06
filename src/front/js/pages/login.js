@@ -10,6 +10,7 @@ export const Login = () => {
 	const navigate = useNavigate();
 
 	console.log("This is your token", store.token);
+	
 	const handleClick = () => {
 		actions.login(email, password);
 		/*if(email!=store.user.email && password!=store.user.password) navigate("/signup");*/
