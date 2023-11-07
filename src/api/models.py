@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from hmac import compare_digest
 
 
 db = SQLAlchemy()
@@ -14,6 +15,9 @@ class User(db.Model):
 
     def __repr__(self):
         return f'<User {self.email}>'
+
+    def check_password(self, password):
+        return compare_digest(password, self.password)
 
     def serialize(self):
         return {

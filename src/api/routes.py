@@ -4,11 +4,15 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
+
 from flask import Flask, request, jsonify, url_for, Blueprint
+from flask_sqlalchemy import SQLAlchemy
+
+from flask_jwt_extended import create_access_token, jwt_required, current_user, JWTManager
+
 from flask_cors import CORS
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
-from flask_jwt_extended import create_access_token, jwt_required, current_user
 
 
 api = Blueprint('api', __name__)
@@ -57,7 +61,7 @@ def signup():
         return jsonify({'message': 'User with this email already exists'}), 400
 
 
-    # We tell the database we want to record this user
+    # We tell the database we want to record this user and execute the command provided
     db.session.add(user)
     db.session.commit()
 
@@ -65,15 +69,24 @@ def signup():
 
 
 @api.route("/login", methods=["POST"])
-def login():
-    email = request.json.get("email", None)
-    password = request.json.get("password", None)
+def create_token():
+    user_data = request.get_json()
 
-    if email != email or password != password:
-        return jsonify({"msg": "Bad username or password"}), 401
+    email = user_data.get("email", None)
+    password = user_data.get("password", None)
 
-    access_token = create_access_token(identity=email)
+    user = User.query.filter_by(email=email).one_or_none()
+    if not user or not user.check_password(password):
+        return jsonify("Bad username or password"), 401
+
+    # Notice that we are passing in the actual sqlalchemy user object here
+    access_token = create_access_token(identity=user.serialize())
     return jsonify(access_token=access_token)
+
+    response_body = {
+        "message": "The user has been created without a problem"
+    }
+    return jsonify(response_body), 200
 
 
 @api.route("/hello", methods=["GET"])
