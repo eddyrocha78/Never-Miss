@@ -25,8 +25,13 @@ export const Results = props => {
   }, []);
 
   const newSearch = (newS) => {
-    navigate("/search/"+ newS);
-    window.location.reload();
+    if (newS.trim() === "") {
+			alert("Search cannot be empty");
+    }
+    else{
+      navigate("/search/" + newS);
+      window.location.reload();
+    }
   }
 
   const getInfo = newSearch => {
@@ -40,7 +45,7 @@ export const Results = props => {
 
     fetch(`https://api.themoviedb.org/3/search/multi?query=${newSearch}&include_adult=false&language=en-US&page=${page}`, options)
       .then(response => response.json())
-      .then(response => { console.log(response), setResult(response.results)})
+      .then(response => { console.log(response), setResult(response.results) })
       .catch(err => console.error(err));
   }
 
@@ -53,42 +58,44 @@ export const Results = props => {
       <div className="row justify-content-center text-center mt-5 mx-5">
         <div className="col-6 p-0">
           <input style={{ borderColor: "rgba(37, 53, 37, 1)" }}
-            className="form-control form-control-lg text-start border-5" dir="auto" id="inner_search_v4"
+            className="form-control form-control-lg text-start border-5" onKeyDown={(e)=>{e.key == "Enter" ? newSearch(search) : null}} dir="auto" id="inner_search_v4"
             name="query" type="text" tabIndex="1" autoCorrect="off" autofill="off" autoComplete="off" placeholder="Search for a movie or tv show "
             value={search}
             onChange={(e) => { setSearch(e.target.value) }} />
         </div>
         <div className="col-2 d-grid gap-2 p-0">
-            <button className="btn btn-success fs-4 p-0" onClick={() => {newSearch(search)}} >Search <i class="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
+          <button className="btn btn-success fs-4 p-0" onClick={() => { newSearch(search) }} >Search <i class="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
         </div>
       </div>
-      <div className="row justify-content-center">
+      <div className="row mt-3 justify-content-center">
         {result.map((_, index) => (
-          result[index].media_type !== "person"?
-          <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} key={index} className="btn btn-lg py-3 rounded col-8 mt-2">
-            <Link className="text-start text-decoration-none text-light" to={"/" + result[index].media_type + "/details/" + result[index].id}>
-                <div class="row"> 
-                  <div style={{ height: "150px" }} class="col-2">
+          result[index].media_type !== "person" ?
+            <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} key={index} className="btn btn-lg py-3 rounded col-8 mt-2">
+              <Link className="text-start text-decoration-none text-light" to={"/" + result[index].media_type + "/details/" + result[index].id}>
+                <div class="row">
+                  <div class="col-md-2 col-sm-4 text-center">
                     {result[index].poster_path != null ?
-                    <img style={{ height: "100%" }} className="img-fluid p-0 rounded" src={"https://www.themoviedb.org/t/p/w220_and_h330_face" + result[index].poster_path} />
-                    :
-                    <img style={{ height: "100%" }} className="img-fluid p-0 rounded" src={"https://placehold.co/220x330/png?text=No \nImage"}  />
-                  }
+                      <img style={{ height: "150px" }} className="rounded" src={"https://www.themoviedb.org/t/p/w220_and_h330_face" + result[index].poster_path} />
+                      :
+                      <img style={{ height: "150px" }} className="rounded" src={"https://placehold.co/220x330/png?text=No \nImage"} />
+                    }
                   </div>
-                  <div style={{ height: "150px" }} className="overflow-y-auto col text-start mt-3">
+                  <div className="col">
                     {
                       result[index].media_type == "movie" ?
-                        <p className="ms-3 fs-4">{result[index].title}</p>
+                        <p className="fw-bold fs-3">{result[index].title}</p>
                         :
-                        <p className="ms-3 fs-4">{result[index].name}</p>
+                        <p className="fw-bold fs-3">{result[index].name}</p>
                     }
-                    <p className="">{result[index].overview}</p>
+                    <div style={{ height: "100px" }} className="overflow-y-auto row text-start">
+                      <p className="fs-5 text-white-50">{result[index].overview}</p>
+                    </div>
                   </div>
                 </div>
-            </Link>
-          </div>
-        :
-        <div></div>
+              </Link>
+            </div>
+            :
+            <div></div>
         ))}
       </div>
       <div className="row text-center my-5">
