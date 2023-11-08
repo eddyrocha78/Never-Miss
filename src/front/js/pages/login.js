@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import "../../styles/login.css";
-//import { ForgotPasswordModal } from "../component/modal";
+import { ForgotPasswordModal } from "../component/modal";
 
 
 export const Login = () => {
@@ -45,10 +45,7 @@ export const Login = () => {
 						</div>
 						<div className="my-3">
 							<p>No account? <a href="/signup" id="signuplink">Sign Up</a></p>
-							<a href="#" id="ForgotPasswordModal">Forgot Password?</a>
-							<div id="ForgotPasswordModal" className="modal">
-								
-							</div>
+							<ForgotPasswordModal/>
 						</div>
 						</>
 					} 
