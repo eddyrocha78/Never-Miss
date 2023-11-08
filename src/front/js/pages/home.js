@@ -74,7 +74,7 @@ export const Home = () => {
 			alert("Search cannot be empty");
     }
     else{
-      navigate("/search/" + newS);
+      navigate("/search/" + newS + "/1");
       window.location.reload();
     }
   }
@@ -98,7 +98,7 @@ export const Home = () => {
           onChange={(e) => {setSearch(e.target.value) }} />
           </div>
         <div className="col-2 d-grid gap-2 p-0">
-          <button className="btn btn-success fs-4 p-0" onClick={() => { newSearch(search) }} >Search <i class="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
+          <button className="btn btn-success fs-4 p-0" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
         </div>
       </div>
       <div className="row text-center my-5">
