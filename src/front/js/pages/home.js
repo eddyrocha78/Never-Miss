@@ -1,6 +1,5 @@
 
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Card } from "../component/Card";
 import { List } from "../component/List";
