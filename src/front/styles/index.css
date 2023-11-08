@@ -1,6 +1,15 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+/* hide in small screens */
+
+@media screen and (max-width: 600px) {
+    .small {
+        display: none !important;
+    }
+}
+
+
 
 /* scrollbar */
 

@@ -15,8 +15,10 @@ export const Navbar = () => {
               height="50"
             />
           </Link>
+          <div className="d-flex small">
           <h1 className="ms-4 text-white">Never</h1>
           <h1 className=" text-white tittle">Miss</h1>
+          </div>
         </div>
 
         <div className="me-5">

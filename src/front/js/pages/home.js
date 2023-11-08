@@ -82,6 +82,11 @@ export const Home = () => {
         />
       </div>
       <div className="row text-center my-5">
+      <h1 className="text-white-50 display-4">
+          Welcome back First Name, Last Name 
+        </h1>
+        </div>
+      <div className="row text-center my-5">
         <h1 className="text-white-50 display-4">
           Subscribe to never miss a thing
         </h1>
