@@ -22,23 +22,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			login: async (email, password) => {
-				console.log("DATA!!!!");
 				console.log(email, password);
-
+				try{
 				// Creating opts for the fetch
 				const opts = {
 					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
+					headers: {"Content-Type": "application/json"},
 					body: JSON.stringify({
 						email: email,
 						password: password
 					})
 				};
 
-				try{
-				const resp = await fetch(process.env.BACKEND_URL + "api/token", opts)
+				
+				const resp = await fetch(process.env.BACKEND_URL + "api/login", opts)
 
 				console.log(resp)
 					if(!resp.ok){
@@ -50,7 +47,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log("Backend data", data);
 
 				sessionStorage.setItem("token", data.access_token);
-				setStore({token: data.acces_token});	
+				setStore({token: data.access_token});	
 				return true;
 
 				}

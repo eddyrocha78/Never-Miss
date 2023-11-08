@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
-import "../../styles/home.css";
+import "../../styles/login.css";
+//import { ForgotPasswordModal } from "../component/modal";
+
 
 export const Login = () => {
 	const { store, actions } = useContext(Context);
 	const [ email, setEmail ] = useState("");
-	const [ password, setPassword ] = useState("");
+	const [ password, setPassword ] = useState("");	
 	const navigate = useNavigate();
 
 	console.log("This is your token", store.token);
@@ -19,18 +21,40 @@ export const Login = () => {
 	
 	
 	return (
-		<div className="text-center mt-5">
-			{(store.token && store.token!="" && store.token!=undefined) ? 
-			<h1>{"User logged in with"}
-			<h6>{"Token: " + store.token}</h6></h1>
-			:
-			<div>
-				<h1>Login</h1>
-					<input type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-					<input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-					<button onClick={handleClick}>Login</button>
+		<div className="login-wrapper">
+			<div className="login-form col-md-6 offset-md-3">
+				<div className="avatar">
+					{store.user.avatar}
+					<img src="" alt="User Avatar" />
+				</div>
+				<div className="row m-3">
+					{(store.token && store.token!="" && store.token!=undefined) ? 
+						<h5>{"User logged in with"}<p className="token text-justify col-md-6">{"Token: " + store.token}</p></h5>
+						: 
+						<>
+						<h1>Login</h1>
+						<div className="col-md-6 mb-3 mt">
+							<input type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+						</div>
+						<div className="col-md-6 mb-3">
+							<input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+						</div>
+				
+						<div className="login-button">
+							<button onClick={handleClick}>Login</button>
+						</div>
+						<div className="my-3">
+							<p>No account? <a href="/signup" id="signuplink">Sign Up</a></p>
+							<a href="#" id="ForgotPasswordModal">Forgot Password?</a>
+							<div id="ForgotPasswordModal" className="modal">
+								
+							</div>
+						</div>
+						</>
+					} 
+				</div>
+				<button onClick={actions.logout}>Logout</button>
 			</div>
-			}
 		</div>
 	);
 };

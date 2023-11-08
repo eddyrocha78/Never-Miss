@@ -1,19 +1,20 @@
-.signup-wrapper {
+.login-wrapper {
     background-color:black;
 }
 
-.signup-form {
+.login-form {
     background-color: rgba(37, 53, 37, 1);
     color: rgba(255, 255, 255, 1);
     text-align: center;
     height: 360px;
 }
 
-.form-check-label {
-    font-size: 10px;
+.wrong_user {
+    color: red;
 }
 
-.termsandconditions {
-    text-decoration: underline;
-    color:aqua;
+.token {
+    text-align: center;
+    font-size: 8px;
+    width: auto;
 }
