@@ -32,7 +32,6 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-
 @api.route('/signup', methods=['POST'])
 def signup():
     # Process the information coming from the client
