@@ -15,10 +15,8 @@ export const Navbar = () => {
               height="50"
             />
           </Link>
-          <div className="d-flex small">
           <h1 className="ms-4 text-white">Never</h1>
           <h1 className=" text-white tittle">Miss</h1>
-          </div>
         </div>
 
         <div className="me-5">
@@ -30,6 +28,46 @@ export const Navbar = () => {
               <i className="fa-solid fa-circle-user fa-xl me-2"></i>Sign In
             </button>
           </Link>
+
+          <div className="dropdown-center text-center">
+            <button
+            style={{ backgroundColor: "rgba(217, 217, 217, 1)" }}
+              className="btn rounded-circle py-3 "
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i className="fa-solid fa-circle-user fa-2xl"></i>
+            </button>
+            <ul style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="dropdown-menu border-white">
+              <li>
+                <a className="dropdown-item text-white">
+                  Movies
+                </a>
+              </li>
+              <li>
+                <a className="dropdown-item text-white" >
+                  Series
+                </a>
+              </li>
+              <li className="dropdown-divider bg-white"></li>
+              <li>
+                <a className="dropdown-item text-white">
+                  Profile Info
+                </a>
+              </li>
+              <li>
+                <a className="dropdown-item text-white">
+                  User Space
+                </a>
+              </li>
+              <li>
+                <a className="dropdown-item text-danger">
+                  Log Out
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
