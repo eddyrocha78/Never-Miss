@@ -33,8 +33,7 @@ export const Details = props => {
 		getPeople()
 	}, []);
 
-	//style={{backgroundImage: "url('"+ backLink +"')",height: "100%" ,backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center", filter : "blur(2px)"}}
-	//
+	//https://placehold.co/1280x720/527552/527552/png?text=   <= Placeholder Image
 
 	const getInfo = () => 
 	{
@@ -48,7 +47,7 @@ export const Details = props => {
 
 		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}?language=en-US`, options)
 			.then(response => response.json())
-			.then(response => {/*console.log(response); */setInfo(response)})
+			.then(response => {console.log(response); setInfo(response)})
 			.catch(err => console.error(err));
 	}
 
@@ -64,7 +63,7 @@ export const Details = props => {
 		  
 		  fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/images`, options)
 			.then(response => response.json())
-			.then(response => {setImages(response); setPosterLink(response.posters["0"].file_path)/*;console.log(response)*/ ;setBackLink(response.backdrops["0"].file_path)})
+			.then(response => {setImages(response); setPosterLink(response.posters["0"].file_path); /*console.log(response)*/ ;setBackLink(response.backdrops !== null ? "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/" + response.backdrops["0"].file_path : "https://placehold.co/1280x720/527552/527552/png?text=")})
 			.catch(err => console.error(err));
 	}
 
@@ -74,7 +73,7 @@ export const Details = props => {
 			method: 'GET',
 			headers: {
 			  accept: 'application/json',
-			  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NjJjYjAxZWFiNThjNGRlNzdjOWNhMmY0ZGM4ODQ0NyIsInN1YiI6IjY1Mzk1YmFhZWM0NTUyMDBlYTRkNDMxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cz3I9EbEUfEny1vJHlbpG7zW_2dSZRBsGCrx6Xy3768'
+			  Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YzljNWIzNDBiM2I5OGE3ZGZiMzlkYTJlOTc3YzE2MyIsInN1YiI6IjY1Mzk1YjgzZWM0NTUyMDEyYzE5YjFiNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.G6LQ-ee_CUMn2WrqGLxrFZ_mjfkw2opm3iX8NIMm_ww'
 			}
 		  };
 		  
@@ -133,7 +132,7 @@ export const Details = props => {
 
 	return (params.type == "movie" ?
 		<div  className="text-center mt-5 text-light container-fluid">
-			<h1 className="text-white-50 display-1 fw-bold">{info.original_title}</h1>
+			<h1 className="text-white-50 display-1 fw-bold">{info.title}</h1>
 			<p className="text-secondary h2 my-5 fw-bold">{info.tagline}</p>
 			<div className=" row justify-content-center mt-5">
 				<div className="col-3">
@@ -158,7 +157,7 @@ export const Details = props => {
 					</div>
 				</div>
 			</div>
-			<div style={{backgroundImage: "url('"+ "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/" + backLink +"')", height: "100%" , backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center"}} className="py-5 Background m-2 my-5 row">
+			<div style={{backgroundImage: "url('"+ backLink +"')", height: "100%" , backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center"}} className="py-5 Background m-2 my-5 row">
 				<div className="col-4 offset-md-1">
 					<img className="img-fluid border border-black border-5" src={"https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ posterLink}/>
 				</div>
@@ -209,12 +208,12 @@ export const Details = props => {
 				<div className="col-4 me-2">
 					<div className="d-grid gap-2">
   						<button className="btn btn-success btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="fa-solid fa-square-plus fa-2xl me-5"></i>Add to a List
+							<i className="fa-solid fa-square-plus fa-2xl me-5"></i>Add to a List
   						</button>
   						<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-							<li><button className="dropdown-item px-4 fs-3" type="button"><i class="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
-    						<li><button className="dropdown-item px-4 fs-3" type="button"><i class="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
-    						<li><button className="dropdown-item px-4 fs-3" type="button"><i class="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
+							<li><button className="dropdown-item px-4 fs-3" type="button"><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
+    						<li><button className="dropdown-item px-4 fs-3" type="button"><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
+    						<li><button className="dropdown-item px-4 fs-3" type="button"><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
   						</ul>
 					</div>
 				</div>
@@ -237,7 +236,7 @@ export const Details = props => {
 			<div className="row mt-5 justify-content-center">
 				<div className="col-5 me-3">
 					<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="rounded px-5 py-4 text-start">
-						<div class="row">
+						<div className="row">
 							<div className="col-12">
 								<p className="text-white h2 fw-bold">Directors</p>
 							</div>
@@ -247,7 +246,7 @@ export const Details = props => {
           							<p className="bg-success rounded py-2 text-center m-1 col-4 text-light mt-2" key={index}>{directors[index]}</p>
         						))}
 						</div>
-						<div class="row mt-5">
+						<div className="row mt-5">
 							<div className="col-12 mt-2">
 								<p className="text-white h2 fw-bold">Writers</p>
 							</div>
@@ -257,7 +256,7 @@ export const Details = props => {
           							<p className="bg-success py-2 text-center m-1 rounded col-4 text-light" key={index}>{writers[index]}</p>
         						))}
 						</div>
-						<div class="row mt-5">
+						<div className="row mt-5">
 							<div className="col-12 mt-2">
 								<p className="text-white h2 fw-bold">Cast</p>
 							</div>
@@ -307,7 +306,7 @@ export const Details = props => {
 					</p>
 				</div>
 			</div>
-			<div style={{backgroundImage: "url('"+ "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/" + backLink +"')", height: "100%" ,backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center"}} className="py-5 Background m-2 my-5 row">
+			<div style={{backgroundImage: "url('"+ backLink +"')", height: "100%" ,backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center"}} className="py-5 Background m-2 my-5 row">
 				<div className="col-4 offset-md-1">
 					<img className="img-fluid border border-black border-5" src={"https://image.tmdb.org/t/p/w300_and_h450_bestv2/"+ posterLink}/>
 				</div>
@@ -358,12 +357,12 @@ export const Details = props => {
 				<div className="col-4 me-2">
 					<div className="d-grid gap-2">
   						<button className="btn btn-success btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="fa-solid fa-square-plus fa-2xl me-5"></i>Add to a List
+							<i className="fa-solid fa-square-plus fa-2xl me-5"></i>Add to a List
   						</button>
   						<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-							<li><button className="dropdown-item px-4 fs-3" type="button"><i class="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
-    						<li><button className="dropdown-item px-4 fs-3" type="button"><i class="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
-    						<li><button className="dropdown-item px-4 fs-3" type="button"><i class="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
+							<li><button className="dropdown-item px-4 fs-3" type="button"><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
+    						<li><button className="dropdown-item px-4 fs-3" type="button"><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
+    						<li><button className="dropdown-item px-4 fs-3" type="button"><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
   						</ul>
 					</div>
 				</div>
@@ -386,7 +385,7 @@ export const Details = props => {
 			<div className="row mt-5 justify-content-center">
 				<div className="col-5 me-3">
 					<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="rounded px-5 py-4 text-start">
-						<div class="row">
+						<div className="row">
 							<div className="col-12">
 								<p className="text-white h2 fw-bold">Directors</p>
 							</div>
@@ -396,7 +395,7 @@ export const Details = props => {
           							<p className="bg-success rounded py-2 text-center  m-1 col-4 text-light mt-2" key={index}>{directors[index]}</p>
         						))}
 						</div>
-						<div class="row mt-5">
+						<div className="row mt-5">
 							<div className="col-12 mt-2">
 								<p className="text-white h2 fw-bold">Writers</p>
 							</div>
@@ -406,7 +405,7 @@ export const Details = props => {
           							<p className="bg-success py-2 text-center  m-1 rounded col-4 text-light" key={index}>{writers[index]}</p>
         						))}
 						</div>
-						<div class="row mt-5">
+						<div className="row mt-5">
 							<div className="col-12 mt-2">
 								<p className="text-white h2 fw-bold">Cast</p>
 							</div>
