@@ -1,4 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Card } from "../component/Card";
 import { List } from "../component/List";
@@ -6,6 +8,12 @@ import { List } from "../component/List";
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
+	useEffect(() => {
+		if(store.token && store.token !="" && store.token !=null) actions.getMessage();
+	}, [store.token])
+
+	let sessiontoken = sessionStorage.getItem("token")
+  
   const [movieinfo, setmovieInfo] = useState({ results: [] });
   const [seriesinfo, setseriesInfo] = useState({ results: [] });
   const [movietrending, setmovietrending] = useState({ results: [] });
