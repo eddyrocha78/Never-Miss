@@ -37,14 +37,14 @@ export const Signup = () => {
 	
 	
 	  return (
-		<div className="signup-wrapper">
+		<div className="signup-wrapper py-5">
 			<div className="signup-form col-md-6 offset-md-3 ">
 				<h1>Never Miss</h1>
 				<p>another movie or episode ever again!</p>
 				<p>{error && {error}}</p>
 
-				<form onSubmit={handleSubmit} className="row m-3">
-					<div className="row">
+				<form onSubmit={handleSubmit} className="container  m-3">
+					<div className="row justify-content-center">
 						<div className="col-md-6 mb-3">
 							<input type="text" name="firstName" placeholder="First Name" onChange={handleChange} required/>
 						</div>
