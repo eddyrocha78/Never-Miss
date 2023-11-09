@@ -88,9 +88,9 @@ def create_token():
     return jsonify(response_body), 200
 
 
-@api.route("/hello", methods=["GET"])
+@api.route("/users", methods=["GET"])
 @jwt_required()
-def get_hello():
+def get_users():
     
     email = get_jwt_identity()
     dictionary = {
