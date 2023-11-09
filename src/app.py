@@ -123,25 +123,33 @@ def get_hello():
     }
     return jsonify(dictionary)
 
-@app.route('/users/<int:user_id>', methods=['GET'])
+@app.route('/users/<int:user_id>', methods=['PUT', 'GET'])
 def handle_user(user_id):
     if request.method == 'GET':
         user = User.query.get(user_id)
         return jsonify(user.serialize()), 200
     
+    if request.method == 'PUT':
+        user = User.query.get(user_id)
+        body = request.get_json()
+        user.email = body.email
+        db.session.commit()
+        return jsonify(user.serialize()), 200
+    
+    
 
 @app.route('/users/<int:user_id>/favorites', methods=['GET'])
 def handle_userFavorites(user_id):
-        userFavorites = []
-        favoriteMovie = FavoriteMovie.query.all()
-        favoriteSeries = FavoriteSeries.query.all()
-        for favoriteM in favoriteMovie:
-            if favoriteM.userId == user_id:
-                userFavorites.append(favoriteM)
-        for favoriteS in favoriteSeries:
-            if favoritePl.userId == user_id:
-                userFavorites.append(favoriteS)
-                return jsonify([userFavorite.serialize() for userFavorite in userFavorites]), 200
+    userFavorites = []
+    favoriteMovie = FavoriteMovie.query.all()
+    favoriteSeries = FavoriteSeries.query.all()
+    for favoriteM in favoriteMovie:
+        if favoriteM.userId == user_id:
+            userFavorites.append(favoriteM)
+    for favoriteS in favoriteSeries:
+        if favoriteS.userId == user_id:
+            userFavorites.append(favoriteS)
+    return jsonify([userFavorite.serialize() for userFavorite in userFavorites]), 200
 
     
 @app.route('/users/<int:user_id>/favorites/movie/<int:movie_id>', methods=['POST'])
@@ -163,10 +171,10 @@ def delete_userFavorites(user_id, movie_id):
 
 @app.route('/users/<int:user_id>/favorites/series/<int:series_id>', methods=['POST'])
 def add_favoriteSeries(user_id, series_id):
-        favorite = FavoriteSeries(userId = user_id, seriesId = series_id)
-        db.session.add(favorite)
-        db.session.commit()
-        return jsonify({"msg": "favorite Series was added"}), 200
+    favorite = FavoriteSeries(userId = user_id, seriesId = series_id)
+    db.session.add(favorite)
+    db.session.commit()
+    return jsonify({"msg": "favorite Series was added"}), 200
 
 @app.route('/users/<int:user_id>/favorites/series/<int:series_id>', methods=['DELETE'])
 def delete_userSeries(user_id, series_id):
