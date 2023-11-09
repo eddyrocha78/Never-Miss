@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import "../../styles/login.css";
-import { Modal } from "../component/modal";
+import { ForgotPasswordModal } from "../component/modal";
 
 
 export const Login = () => {
@@ -21,39 +21,41 @@ export const Login = () => {
 	
 	
 	return (
-		<div className="login-wrapper">
+		<div className="login-wrapper py-5">
 			<div className="login-form col-md-6 offset-md-3">
 				<div className="avatar">
 					{store.user.avatar}
 					<img src="" alt="User Avatar" />
 				</div>
-				<div className="row m-3">
-					{(store.token && store.token!="" && store.token!=undefined) ? 
+
+				{(store.token && store.token!="" && store.token!=undefined) ? 
 						<h5>{"User logged in with"}<p className="token text-justify col-md-6">{"Token: " + store.token}</p></h5>
 						: 
 						<>
 						<h1>Login</h1>
-						<div className="col-md-6 mb-3 mt">
-							<input type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+
+						<div className="row">
+							<div className="col mb-3 mt">
+								<input type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+							</div>
 						</div>
-						<div className="col-md-6 mb-3">
-							<input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+						<div className="row">
+							<div className="col">
+								<input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+							</div>
 						</div>
-				
-						<div className="login-button">
+						<div className="login-button mt-3">
 							<button onClick={handleClick}>Login</button>
 						</div>
 						<div className="my-3">
 							<p>No account? <a href="/signup" id="signuplink">Sign Up</a></p>
-							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#forgot-password-modal">
+							<a href="#" type="button" class="" data-bs-toggle="modal" data-bs-target="#forgot-password-modal">
 							Forgot password?
-							</button>
-							<Modal modalId={"forgot-password-modal"}/>
+							</a>
+							<ForgotPasswordModal modalId={"forgot-password-modal"}/>
 						</div>
-						</>
-					} 
-				</div>
-				<button onClick={actions.logout}>Logout</button>
+					</>		
+				}
 			</div>
 		</div>
 	);
