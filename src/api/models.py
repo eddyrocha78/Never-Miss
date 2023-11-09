@@ -27,3 +27,34 @@ class User(db.Model):
             "email": self.email
             # do not serialize the password, its a security breach
         }
+
+    
+class FavoriteMovie(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    userId = db.Column(db.Integer, db.ForeignKey("user.id"))
+    movieId = db.Column(db.Integer,  nullable=False)
+    user = db.relationship(User)
+    def __repr__(self):
+        return '<FavoriteMovie %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "userId": self.userId,
+            "movieId": self.movieId
+        }
+
+class FavoriteSeries(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    userId = db.Column(db.Integer, db.ForeignKey("user.id"))
+    seriesId = db.Column(db.Integer, nullable=False)
+    user = db.relationship(User)
+    def __repr__(self):
+        return '<FavoriteSeries %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "userId": self.userId,
+            "seriesId": self.seriesId
+        }
