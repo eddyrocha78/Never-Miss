@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import "../../styles/login.css";
-import { Modal } from "../component/modal";
+import { ForgotPasswordModal } from "../component/modal";
 
 
 export const Login = () => {
@@ -48,7 +48,7 @@ export const Login = () => {
 							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#forgot-password-modal">
 							Forgot password?
 							</button>
-							<Modal modalId={"forgot-password-modal"}/>
+							<ForgotPasswordModal modalId={"forgot-password-modal"}/>
 						</div>
 						</>
 					} 
