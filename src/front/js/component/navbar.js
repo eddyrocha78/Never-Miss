@@ -18,8 +18,9 @@ export const Navbar = () => {
               height="50"
             />
           </Link>
-          <h1 className="ms-4 text-white">Never</h1>
-          <h1 className=" text-white tittle">Miss</h1>
+
+          <h1 className="ms-4 text-white puff">Never</h1>
+          <h1 className=" text-white tittle puff">Miss</h1>
         </div>
 
         <div className="me-5">
