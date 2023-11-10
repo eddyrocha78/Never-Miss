@@ -89,10 +89,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
-			
-			getUsers: async (email) => {
-				console.log(email);
-				
+
+
+			forgotPassword: async (modalData) =>{
+				console.log(modalData);
+				//insert 3rd party API to send email to user with backend stored email
 				try{	
 					const resp = await fetch(process.env.BACKEND_URL + "api/users");
 					const data = await resp.json()
@@ -101,29 +102,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return true;
 				}
 				catch(error){
-					console.error("Error detected on login")
+					console.error("Error detected on sending user password")
 				}
-
-
-
-
-				fetch('https://playground.4geeks.com/apis/fake/contact/agenda/biancas')
-					.then(resp => {
-						console.log("is response succesful: " + resp.ok); // will be true if the response is successfull
-						console.log("status code: "+ resp.status); // the status code = 200 or code = 400 etc.
-						return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
-					})
-					.then(data => {
-						//here is where your code should start after the fetch finishes
-						console.log(data); //this will print on the console the exact object received from the server
-						setStore({contacts: data})
-						console.log(getStore().contacts)
-					})
-					.catch(error => {
-						//error handling
-						console.log(error);
-					});
 			},
+
 
 			getMessage: async () => {
 				const store = getStore();
