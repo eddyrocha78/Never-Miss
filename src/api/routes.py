@@ -8,7 +8,7 @@ from api.utils import generate_sitemap, APIException
 from flask import Flask, request, jsonify, url_for, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 
-from flask_jwt_extended import create_access_token, jwt_required, current_user, JWTManager
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 from flask_cors import CORS
 from api.models import db, User
@@ -23,14 +23,19 @@ CORS(api, supports_credentials=True)
 # Simple in-memory storage for user data (replace with a database in production)
 users = []
 
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
+@api.route('/user', methods=['GET'])
+@jwt_required()
+def get_user():
 
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
+    email = get_jwt_identity()
+    json = {
+        "email" : str(email["email"]),
+        "id" : str(email["id"]),
+        "name" : str(email["firstName"]),
+        "lastName" : str(email["lastName"])
     }
+    return jsonify(json)
 
-    return jsonify(response_body), 200
 
 @api.route('/signup', methods=['POST'])
 def signup():
@@ -88,15 +93,6 @@ def create_token():
     return jsonify(response_body), 200
 
 
-@api.route("/users", methods=["GET"])
-@jwt_required()
-def get_users():
-    
-    email = get_jwt_identity()
-    dictionary = {
-        "message": "welcome " + email
-    }
-    return jsonify(dictionary)
 
 
 @api.route('/users')

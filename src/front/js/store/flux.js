@@ -3,6 +3,10 @@ import { Navigate } from "react-router-dom";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			userId : null,
+			userEmail : null,
+			userName : null,
+			userLastName : null,
 			token: null,
 			message: null,
 			user: []
@@ -35,7 +39,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				
+<<<<<<< HEAD
 				const resp = await fetch("https://expert-space-sniffle-rjqgqg6rvj4cxgg-3001.app.github.dev/api/login", opts)
+=======
+				const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/login", opts)
+>>>>>>> 8ec5390 (retive info form backend)
 
 				console.log(resp)
 					if(!resp.ok){
@@ -71,7 +79,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				
 				try{	
-					const resp = await fetch("https://expert-space-sniffle-rjqgqg6rvj4cxgg-3001.app.github.devapi/signup", opts);
+					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/signup", opts);
 					
 					console.log(resp)
 					if(!resp.ok){
@@ -116,9 +124,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				try{
 					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "api/hello", opts)
+					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/user", opts)
 					const data = await resp.json()
-					setStore({ message: data.message })
+					setStore({ userId: data.id })
+					setStore({ userEmail: data.email })
+					setStore({ userName: data.name })
+					setStore({ userLastName: data.lastName })
 					// don't forget to return something, that is how the async resolves
 					return data;
 				}catch(error){
