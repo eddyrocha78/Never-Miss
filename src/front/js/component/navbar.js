@@ -64,7 +64,7 @@ export const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <Link to="/">
+            <Link to="/login">
               <button
                 style={{ backgroundColor: "rgba(217, 217, 217, 1)" }}
                 className="btn btn-primary rounded-pill border-0 text-dark text-bold fw-bold"

@@ -7,55 +7,55 @@ import { ForgotPasswordModal } from "../component/modal";
 
 export const Login = () => {
 	const { store, actions } = useContext(Context);
-	const [ email, setEmail ] = useState("");
-	const [ password, setPassword ] = useState("");	
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
 
 	console.log("This is your token", store.token);
-	
+
 	const handleClick = () => {
 		actions.login(email, password);
 		/*if(email!=store.user.email && password!=store.user.password) navigate("/signup");*/
-		if(store.token && store.token !="" && store.token !=undefined) navigate("/");
+		if (store.token && store.token != "" && store.token != undefined) navigate("/");
 	};
-	
-	
+
+
 	return (
-		<div className="login-wrapper py-5">
-			<div className="login-form col-md-6 offset-md-3">
-				<div className="avatar">
-					{store.user.avatar}
-					<img src="" alt="User Avatar" />
+		<div className="container-fluid" >
+			<div className=" text-white rounded p-4 my-5 col-4 mx-auto" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} >
+				<div className="text-center">
+					<img className="img-fluid" src="https://static.thenounproject.com/png/3911675-200.png" alt="User Avatar" style={{ width: "20%" }} />
 				</div>
-
-				{(store.token && store.token!="" && store.token!=undefined) ? 
-						<h5>{"User logged in with"}<p className="token text-justify col-md-6">{"Token: " + store.token}</p></h5>
-						: 
+				<div className="mt-3">
+					{store.token && store.token !== null && store.token !== "" ? (
 						<>
-						<h1>Login</h1>
-
-						<div className="row">
-							<div className="col mb-3 mt">
-								<input type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+							<h5 className="text-center">User logged in with</h5>
+							<p className="text-justify">Token: {store.token}</p>
+						</>
+					) : (
+						<>
+							<div className="col-6 mx-auto">
+								<h1 className="text-center">Login</h1>
+								<div className="mb-3">
+									<input type="text" className="form-control" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+								</div>
+								<div className="mb-3">
+									<input type="password" className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+								</div>
+								<div className="text-center">
+								<button className="btn btn-success btn-block mx-auto" onClick={handleClick}>Login</button>
+								</div>
 							</div>
-						</div>
-						<div className="row">
-							<div className="col">
-								<input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+							<div className="my-3 text-center">
+								<p className="mb-0">No account? <a href="/signup" id="signuplink">Sign Up</a></p>
+								<a href="#" className="text-muted" data-bs-toggle="modal" data-bs-target="#forgot-password-modal">
+									Forgot password?
+								</a>
+								<ForgotPasswordModal modalId="forgot-password-modal" />
 							</div>
-						</div>
-						<div className="login-button mt-3">
-							<button onClick={handleClick}>Login</button>
-						</div>
-						<div className="my-3">
-							<p>No account? <a href="/signup" id="signuplink">Sign Up</a></p>
-							<a href="#" type="button" class="" data-bs-toggle="modal" data-bs-target="#forgot-password-modal">
-							Forgot password?
-							</a>
-							<ForgotPasswordModal modalId={"forgot-password-modal"}/>
-						</div>
-					</>		
-				}
+						</>
+					)}
+				</div>
 			</div>
 		</div>
 	);

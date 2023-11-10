@@ -1,8 +1,8 @@
 import React from "react";
 
 export const Footer = () => (
-  <footer className="text-white">
-    <div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="container-fluid pt-2">
+  <footer className="text-white mt-2">
+    <div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="container-fluid pt-2 ">
       <div className="row">
         <p className="text-center">Europe <a href="https://4geeks.com">4 Geeks Academy</a> final Project</p>
       </div>
