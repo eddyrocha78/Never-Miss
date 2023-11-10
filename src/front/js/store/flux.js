@@ -70,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(signUpData);
 				
 				// Creating opts for the fetch
-				const opts = {
+				const options = {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
@@ -79,7 +79,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				
 				try{	
-					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/signup", opts);
+					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/signup", options);
 					
 					console.log(resp)
 					if(!resp.ok){
@@ -135,6 +135,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}catch(error){
 					console.log("Error loading message from backend", error)
 				}
+			},
+
+			addToList: async (userID, favoriteID, favoriteType, favoriteStatus) => {
+				const opts = {
+					method: "POST",
+					headers: {"Content-Type": "application/json"},
+					body: JSON.stringify({
+						status: favoriteStatus
+					})
+				};
+
+				
+				
+				try{	
+					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/users/" + userID + "/favorites/"+ favoriteType +"/"+ favoriteID, opts)
+					
+					console.log(resp)
+					if(!resp.ok){
+						alert("Error detected");
+						return false;
+					}
+
+					const data = await resp.json();
+					console.log(data)
+
+					return true;
+				}
+				catch(error){
+					console.error("Error detected" + error)
+				}
+
 			},
 			
 		}

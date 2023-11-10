@@ -33,6 +33,15 @@ export const Details = props => {
 		getPeople()
 	}, []);
 
+	useEffect(() => {
+		if(store.token && store.token !="" && store.token !=null)
+    {
+      actions.getMessage();
+      console.log(store.token)
+    }
+    
+	}, [store.token])
+
 	//https://placehold.co/1280x720/527552/527552/png?text=   <= Placeholder Image
 
 	const getInfo = () => 
@@ -130,6 +139,27 @@ export const Details = props => {
 		setCastChar([...castChar, ...newCastChar]);
 	}
 
+	const addToWatched = () =>{
+		if(store.token && store.token !="" && store.token !=null)
+		{
+			actions.addToList(store.userId, params.theid, params.type, "watched")
+		}
+	}
+
+	const addTowatching = () =>{
+		if(store.token && store.token !="" && store.token !=null)
+		{
+			actions.addToList(store.userId, params.theid, params.type, "watching")
+		}
+	}
+
+	const addToplanToWatch = () =>{
+		if(store.token && store.token !="" && store.token !=null)
+		{
+			actions.addToList(store.userId, params.theid, params.type, "planToWatch")
+		}
+	}
+
 	return (params.type == "movie" ?
 		<div  className="text-center mt-5 text-light container-fluid">
 			<h1 className="text-white-50 display-1 fw-bold">{info.title}</h1>
@@ -211,9 +241,9 @@ export const Details = props => {
 							<i className="fa-solid fa-square-plus fa-2xl me-5"></i>Add to a List
   						</button>
   						<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-							<li><button className="dropdown-item px-4 fs-3" type="button"><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
-    						<li><button className="dropdown-item px-4 fs-3" type="button"><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
-    						<li><button className="dropdown-item px-4 fs-3" type="button"><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
+							<li><button className="dropdown-item px-4 fs-3" type="button" onClick={()=>{addToWatched()}}><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
+    						<li><button className="dropdown-item px-4 fs-3" type="button" onClick={()=>{addTowatching()}}><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
+    						<li><button className="dropdown-item px-4 fs-3" type="button" onClick={()=>{addToplanToWatch()}}><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
   						</ul>
 					</div>
 				</div>

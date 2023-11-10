@@ -11,7 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 from flask_cors import CORS
-from api.models import db, User
+from api.models import db, User , FavoriteMovie, FavoriteSeries
 from api.utils import generate_sitemap, APIException
 
 
@@ -99,3 +99,76 @@ def create_token():
 def handle_users():
     users = User.query.all()
     return jsonify([p.serialize() for p in users]), 200
+
+@api.route('/users/<int:user_id>', methods=['PUT', 'GET'])
+def handle_user(user_id):
+    if request.method == 'GET':
+        user = User.query.get(user_id)
+        return jsonify(user.serialize()), 200
+    
+    if request.method == 'PUT':
+        user = User.query.get(user_id)
+        body = request.get_json()
+        user.email = body.email
+        db.session.commit()
+        return jsonify(user.serialize()), 200
+    
+    
+
+@api.route('/users/<int:user_id>/favorites', methods=['GET'])
+def handle_userFavorites(user_id):
+    userFavorites = []
+    favoriteMovie = FavoriteMovie.query.all()
+    favoriteSeries = FavoriteSeries.query.all()
+    for favoriteM in favoriteMovie:
+        if favoriteM.userId == user_id:
+            userFavorites.append(favoriteM)
+    for favoriteS in favoriteSeries:
+        if favoriteS.userId == user_id:
+            userFavorites.append(favoriteS)
+    return jsonify([userFavorite.serialize() for userFavorite in userFavorites]), 200
+
+    
+@api.route('/users/<int:user_id>/favorites/movie/<int:movie_id>', methods=['POST'])
+def add_favoriteMovie(user_id, movie_id):
+    favorite_data = request.get_json()
+
+    favorite = FavoriteMovie()
+    favorite.userId = user_id
+    favorite.movieId = movie_id
+    favorite.status = favorite_data["status"]
+    db.session.add(favorite)
+    db.session.commit()
+    return jsonify({"msg": "favorite Movie was added"}), 200
+    
+@api.route('/users/<int:user_id>/favorites/movie/<int:movie_id>', methods=['DELETE'])
+def delete_userFavorites(user_id, movie_id):
+    favorites = FavoriteMovie.query.all()
+    for favorite in favorites:
+        if favorite.userId == user_id and favorite.movieId == movie_id:
+            userFavorite = favorite
+            db.session.delete(userFavorite)
+            db.session.commit()
+            return jsonify({"msg": "favorite Movie was removed"}), 200
+
+@api.route('/users/<int:user_id>/favorites/tv/<int:series_id>', methods=['POST'])
+def add_favoriteSeries(user_id, series_id):
+    favorite_data = request.get_json()
+
+    favorite = FavoriteSeries()
+    favorite.userId = user_id
+    favorite.seriesId = series_id
+    favorite.status = favorite_data["status"]
+    db.session.add(favorite)
+    db.session.commit()
+    return jsonify({"msg": "favorite Series was added"}), 200
+
+@api.route('/users/<int:user_id>/favorites/series/<int:series_id>', methods=['DELETE'])
+def delete_userSeries(user_id, series_id):
+    favorites = FavoriteSeries.query.all()
+    for favorite in favorites:
+        if favorite.userId == user_id and favorite.seriesId == series_id:
+            userFavorite = favorite
+            db.session.delete(userFavorite)
+            db.session.commit()
+            return jsonify({"msg": "favorite Series was removed"}), 200

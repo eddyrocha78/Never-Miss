@@ -8,11 +8,6 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
-<<<<<<< HEAD
-  useEffect(() => {
-    if (store.token && store.token != "" && store.token != null) actions.getMessage();
-  }, [store.token])
-=======
 	useEffect(() => {
 		if(store.token && store.token !="" && store.token !=null)
     {
@@ -21,9 +16,6 @@ export const Home = () => {
     }
     
 	}, [store.token])
-
-	let sessiontoken = sessionStorage.getItem("token")
->>>>>>> a6f6ee4 (retive info form backend)
   
   let sessiontoken = sessionStorage.getItem("token")
 
@@ -116,7 +108,7 @@ export const Home = () => {
       {store.token && store.token !="" && store.token !=null?
       <div className="row text-center my-5">
       <h1 className="text-white-50 display-4">
-          Welcome back {store.userName}, {store.userLastName} 
+          Welcome back {store.userName} {store.userLastName} 
         </h1>
         </div>
         :

@@ -14,7 +14,7 @@ class User(db.Model):
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
     def __repr__(self):
-        return f'<User {self.email}>'
+        return f'User {self.firstName}'
 
     def check_password(self, password):
         return compare_digest(password, self.password)
@@ -33,6 +33,7 @@ class FavoriteMovie(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     userId = db.Column(db.Integer, db.ForeignKey("user.id"))
     movieId = db.Column(db.Integer,  nullable=False)
+    status = db.Column(db.String(80), nullable=False)
     user = db.relationship(User)
     def __repr__(self):
         return '<FavoriteMovie %r>' % self.id
@@ -41,13 +42,15 @@ class FavoriteMovie(db.Model):
         return {
             "id": self.id,
             "userId": self.userId,
-            "movieId": self.movieId
+            "movieId": self.movieId,
+            "status": self.status
         }
 
 class FavoriteSeries(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     userId = db.Column(db.Integer, db.ForeignKey("user.id"))
     seriesId = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.String(80), nullable=False)
     user = db.relationship(User)
     def __repr__(self):
         return '<FavoriteSeries %r>' % self.id
@@ -56,5 +59,6 @@ class FavoriteSeries(db.Model):
         return {
             "id": self.id,
             "userId": self.userId,
-            "seriesId": self.seriesId
+            "seriesId": self.seriesId,
+            "status": self.status
         }
