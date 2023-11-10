@@ -24,7 +24,7 @@ export const Navbar = () => {
         </div>
 
         <div className="me-5">
-       
+          {store.token && store.token != "" && store.token != null ? ( 
             <div className="dropdown-center text-center">
               <button
                 style={{ backgroundColor: "rgba(217, 217, 217, 1)" }}
@@ -48,7 +48,7 @@ export const Navbar = () => {
                 </li>
                 <li className="dropdown-divider bg-white"></li>
                 <li>
-                  <a className="dropdown-item text-white" >
+                  <a className="dropdown-item text-white">
                     Profile Info
                   </a>
                 </li>
@@ -64,7 +64,7 @@ export const Navbar = () => {
                 </li>
               </ul>
             </div>
-       
+          ) : (
             <Link to="/login">
               <button
                 style={{ backgroundColor: "rgba(217, 217, 217, 1)" }}
@@ -73,7 +73,7 @@ export const Navbar = () => {
                 <i className="fa-solid fa-circle-user fa-xl me-2"></i>Sign In
               </button>
             </Link>
-      
+          )}
         </div>
       </div>
     </nav>
