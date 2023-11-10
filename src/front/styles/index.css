@@ -13,7 +13,7 @@
 /* hide in small screens */
 
 @media screen and (max-width: 600px) {
-    .small {
+    .puff {
         display: none !important;
     }
 }
