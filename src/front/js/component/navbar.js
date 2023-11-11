@@ -24,7 +24,7 @@ export const Navbar = () => {
         </div>
 
         <div className="me-5">
-          {store.token && store.token != "" && store.token != null ? (
+          {store.token && store.token != "" && store.token != null ? ( 
             <div className="dropdown-center text-center">
               <button
                 style={{ backgroundColor: "rgba(217, 217, 217, 1)" }}
@@ -35,7 +35,7 @@ export const Navbar = () => {
               >
                 <i className="fa-solid fa-circle-user fa-2xl"></i>
               </button>
-              <ul style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="dropdown-menu border-white">
+              <ul style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="dropdown-menu op border-white">
                 <li>
                   <a className="dropdown-item text-white">
                     Movies

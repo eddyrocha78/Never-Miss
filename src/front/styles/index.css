@@ -2,13 +2,23 @@
     General Styles used on every website (Don't Repeat Yourself)
 */
 
+/* navbar liist */
 
+ul.op {
+    background-color: rgba(37, 53, 37, 1);
+    border: 1px solid #fff;
+    
+  }
 
+ul.op li a {
+    color: white ; 
+    text-decoration: none;
+  }
 
-.transp{
-    background-color: transparent;
-}
-
+ul.op li a:hover {
+    background-color: #fff;
+    color: black !important;
+  }
 
 /* hide in small screens */
 
@@ -17,6 +27,17 @@
         display: none !important;
     }
 }
+
+
+
+
+.transp{
+    background-color: transparent;
+}
+
+
+
+
 
 /* scrollbar */
 

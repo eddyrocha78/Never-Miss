@@ -35,7 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				
-				const resp = await fetch(process.env.BACKEND_URL + "api/login", opts)
+				const resp = await fetch("https://expert-space-sniffle-rjqgqg6rvj4cxgg-3001.app.github.dev/api/login", opts)
 
 				console.log(resp)
 					if(!resp.ok){
@@ -71,7 +71,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 				
 				try{	
-					const resp = await fetch(process.env.BACKEND_URL + "api/signup", opts);
+					const resp = await fetch("https://expert-space-sniffle-rjqgqg6rvj4cxgg-3001.app.github.devapi/signup", opts);
 					
 					console.log(resp)
 					if(!resp.ok){
@@ -95,7 +95,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(modalData);
 				//insert 3rd party API to send email to user with backend stored email
 				try{	
-					const resp = await fetch(process.env.BACKEND_URL + "api/users");
+					const resp = await fetch("https://expert-space-sniffle-rjqgqg6rvj4cxgg-3001.app.github.devapi/users");
 					const data = await resp.json()
 					console.log(data)
 
