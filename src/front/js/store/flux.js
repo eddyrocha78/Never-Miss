@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom";
 
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -9,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		},
 		actions: {
+
 			syncTokenFromSessionStore: () => {
 				const token = sessionStorage.getItem("token");
 				console.log("Application loaded, synching session storage token");
@@ -22,6 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			login: async (email, password) => {
+				
 				console.log(email, password);
 				try {
 					// Creating opts for the fetch
@@ -45,7 +48,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					const data = await resp.json();
 					console.log("Backend data", data);
-
 					sessionStorage.setItem("token", data.access_token);
 					setStore({ token: data.access_token });
 					return true;
@@ -95,7 +97,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(modalData);
 				//insert 3rd party API to send email to user with backend stored email
 				try {
-					const resp = await fetch("https://expert-space-sniffle-rjqgqg6rvj4cxgg-3001.app.github.devapi/users");
+					const resp = await fetch(process.env.BACKEND_URL + "api/users");
 					const data = await resp.json()
 					console.log(data)
 

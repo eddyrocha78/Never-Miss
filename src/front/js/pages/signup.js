@@ -26,13 +26,13 @@ export const Signup = () => {
 		if (formData.password !== formData.confirmPassword) {
 			setError("Passwords don't match");
 			return;
-		}
+		} navigate("/login");
 
 		setError(null);
 		let isSignedUp = await actions.signup(formData);
-		if (isSignedUp) {
-			navigate("/login");
-		}
+		
+		
+		
 	};
 
 
@@ -54,18 +54,18 @@ export const Signup = () => {
 						<form onSubmit={handleSubmit} className="row m-3">
 							<div className="row d-flex text-center">
 								<div className="col-md-6 mb-3">
-									<label for="firstname" class="form-label">First Name:</label>
+									<label for="firstname" className="form-label">First Name:</label>
 									<input id="firstname" className="form-control" type="text" name="firstName" placeholder="First Name" onChange={handleChange} required />
 								</div>
 								<div className="col-md-6 mb-3">
-									<label for="lastname" class="form-label">Last Name:</label>
+									<label for="lastname" className="form-label">Last Name:</label>
 									<input id="lastname" className="form-control" type="text" name="lastName" placeholder="Last Name" onChange={handleChange} required />
 								</div>
 							</div>
 
 							<div className="row ">
 								<div className="col-md-6 text-center mb-3">
-									<label for="email" class="form-label">Email :</label>
+									<label for="email" className="form-label">Email :</label>
 								</div>
 								<div className="col-md-6  mb-3">
 									<input id="email" className="form-control" type="email" name="email" placeholder="Email" onChange={handleChange} required />
@@ -73,7 +73,7 @@ export const Signup = () => {
 							</div>
 							<div className="row">
 								<div className="col-md-6 text-center mb-3">
-									<label for="password" class="form-label">Password :</label>
+									<label for="password" className="form-label">Password :</label>
 								</div>
 								<div className="col-md-6 mb-3">
 									<input id="password" className="form-control" type="password" name="password" placeholder="Password" onChange={handleChange} required />
@@ -81,7 +81,7 @@ export const Signup = () => {
 							</div>
 							<div className="row">
 								<div className="col-md-6 mb-3 text-center mx-auto">
-									<label for="passwordcheck" class="form-label">Confirm Password :</label>
+									<label for="passwordcheck" className="form-label">Confirm Password :</label>
 								</div>
 								<div className="col-md-6 mb-3 mx-auto">
 									<input id="passwordcheck" className="form-control" type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} required />
