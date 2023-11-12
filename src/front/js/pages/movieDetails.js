@@ -225,9 +225,9 @@ export const Details = props => {
 					</div>
 				</div>
 			</div>
-			<div style={{ backgroundImage: "url('" + backLink + "')", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center" }} className="py-5 Background m-2 my-5 row">
+			<div style={{ backgroundImage: "url('" + backLink + "')", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center",borderRadius: "12px"}} className="py-5 Background m-2 my-5 row">
 				<div className="col-4 offset-md-1">
-					<img className="img-fluid border border-black border-5" src={"https://image.tmdb.org/t/p/w300_and_h450_bestv2/" + posterLink} />
+					<img className="poster img-fluid border border-black border-5" src={"https://image.tmdb.org/t/p/w300_and_h450_bestv2/" + posterLink} />
 				</div>
 				<div className="col-4 video align-self-center ">
 					{videoKey !== "" ? <ReactPlayer
@@ -235,7 +235,7 @@ export const Details = props => {
 						controls={true}
 						width="650px"
 						height="400px"
-						className="border border-black border-5"
+						className="poster border border-black border-5"
 					/>
 						:
 						<div></div>
@@ -332,9 +332,9 @@ export const Details = props => {
 								<i className="fa-solid fa-square-plus fa-2xl me-5"></i>Add to a List
 							</button>
 							<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("watching") }}><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
-								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("watched") }}><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
-								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("planToWatch") }}><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
+								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { navigate("/login") }}><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
+								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { navigate("/login") }}><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
+								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { navigate("/login") }}><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
 							</ul>
 						</div>
 					}
@@ -428,9 +428,9 @@ export const Details = props => {
 					</p>
 				</div>
 			</div>
-			<div style={{ backgroundImage: "url('" + backLink + "')", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center" }} className="py-5 Background m-2 my-5 row">
+			<div style={{ backgroundImage: "url('" + backLink + "')", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center" ,borderRadius: "12px"}} className="py-5 Background m-2 my-5 row">
 				<div className="col-4 offset-md-1">
-					<img className="img-fluid border border-black border-5" src={"https://image.tmdb.org/t/p/w300_and_h450_bestv2/" + posterLink} />
+					<img className="poster img-fluid border border-black border-5" src={"https://image.tmdb.org/t/p/w300_and_h450_bestv2/" + posterLink} />
 				</div>
 				<div className="col-4 video align-self-center ">
 					{videoKey !== "" ? <ReactPlayer
@@ -438,7 +438,7 @@ export const Details = props => {
 						controls={true}
 						width="650px"
 						height="400px"
-						className="border border-black border-5"
+						className="poster border border-black border-5"
 					/>
 						:
 						<div></div>
@@ -535,9 +535,9 @@ export const Details = props => {
 								<i className="fa-solid fa-square-plus fa-2xl me-5"></i>Add to a List
 							</button>
 							<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("watching") }}><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
-								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("watched") }}><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
-								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("planToWatch") }}><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
+								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { navigate("/login") }}><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
+								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { navigate("/login") }}><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
+								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { navigate("/login") }}><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
 							</ul>
 						</div>
 					}
