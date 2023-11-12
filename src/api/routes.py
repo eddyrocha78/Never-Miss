@@ -140,6 +140,16 @@ def add_favoriteMovie(user_id, movie_id):
     db.session.add(favorite)
     db.session.commit()
     return jsonify({"msg": "favorite Movie was added"}), 200
+
+@api.route('/users/<int:user_id>/favorites/movie/<int:movie_id>', methods=['PUT'])
+def manage_favoriteMovie(user_id, movie_id):
+    favorite_data = request.get_json()
+    favorites = FavoriteMovie.query.all()
+    for favorite in favorites:
+        if favorite.userId == user_id and favorite.movieId == movie_id:
+            favorite.status = favorite_data["status"]
+            db.session.commit()
+            return jsonify({"msg": "favorite Movie was updated"}), 200
     
 @api.route('/users/<int:user_id>/favorites/movie/<int:movie_id>', methods=['DELETE'])
 def delete_userFavorites(user_id, movie_id):
