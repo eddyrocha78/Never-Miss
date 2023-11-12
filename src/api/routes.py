@@ -173,7 +173,17 @@ def add_favoriteSeries(user_id, series_id):
     db.session.commit()
     return jsonify({"msg": "favorite Series was added"}), 200
 
-@api.route('/users/<int:user_id>/favorites/series/<int:series_id>', methods=['DELETE'])
+@api.route('/users/<int:user_id>/favorites/tv/<int:series_id>', methods=['PUT'])
+def manage_favoriteSeries(user_id, series_id):
+    favorite_data = request.get_json()
+    favorites = FavoriteSeries.query.all()
+    for favorite in favorites:
+        if favorite.userId == user_id and favorite.seriesId == series_id:
+            favorite.status = favorite_data["status"]
+            db.session.commit()
+            return jsonify({"msg": "favorite Series was updated"}), 200
+
+@api.route('/users/<int:user_id>/favorites/tv/<int:series_id>', methods=['DELETE'])
 def delete_userSeries(user_id, series_id):
     favorites = FavoriteSeries.query.all()
     for favorite in favorites:

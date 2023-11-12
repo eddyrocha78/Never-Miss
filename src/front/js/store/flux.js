@@ -184,6 +184,86 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
+			addToList: async (userID, favoriteID, favoriteType, favoriteStatus) => {
+				const opts = {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						status: favoriteStatus
+					})
+				};
+
+
+
+				try {
+					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
+
+					console.log(resp)
+					if (!resp.ok) {
+						alert("Error detected");
+						return false;
+					}
+
+					const data = await resp.json();
+					console.log(data)
+
+					return true;
+				}
+				catch (error) {
+					console.error("Error detected" + error)
+				}
+
+			},
+			deleteFavorite: async (userID, favoriteID, favoriteType) => {
+				const opts = {
+					method: "DELETE",
+					headers: { "Content-Type": "application/json" }
+				};
+
+
+
+				try {
+					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
+					const data = await resp.json();
+					setStore({ userFavorites: data });
+
+					return data;
+				}
+				catch (error) {
+					console.error("Error detected" + error)
+				}
+
+			},
+			updateFavorite: async (userID, favoriteID, favoriteType, favoriteStatus) => {
+				const opts = {
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						status: favoriteStatus
+					})
+				};
+
+
+
+				try {
+					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
+
+					console.log(resp)
+					if (!resp.ok) {
+						alert("Error detected");
+						return false;
+					}
+
+					const data = await resp.json();
+					console.log(data)
+
+					return true;
+				}
+				catch (error) {
+					console.error("Error detected" + error)
+				}
+
+			}
 
 		}
 	};

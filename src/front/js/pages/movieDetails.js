@@ -45,14 +45,28 @@ export const Details = props => {
 	}, [store.userId])
 
 	useEffect(() => {
-		if (store.userFavorites !== null) {
-			let resp = store.userFavorites;
-			console.log(store.userFavorites);
-			resp.map((_, index) => {
-				if (resp[index].movieId == params.theid) {
-					setFavorite(resp[index]);
-				}
-			})
+		if (params.type == "movie") {
+			if (store.userFavorites !== null) {
+				let resp = store.userFavorites;
+				console.log(store.userFavorites);
+				resp.map((_, index) => {
+					if (resp[index].movieId == params.theid) {
+						setFavorite(resp[index]);
+					}
+				})
+			}
+			
+		}else{
+			if (store.userFavorites !== null) {
+				let resp = store.userFavorites;
+				console.log(store.userFavorites);
+				resp.map((_, index) => {
+					if (resp[index].seriesId == params.theid) {
+						setFavorite(resp[index]);
+					}
+				})
+			}
+
 		}
 
 	}, [store.userFavorites])
@@ -166,11 +180,22 @@ export const Details = props => {
 	const addFavorite = (status) => {
 		if (store.token && store.token != "" && store.token != null) {
 			actions.addToList(store.userId, params.theid, params.type, status)
+			window.location.reload();
 		}
 	}
 
 	const removeFavorite = () => {
+		if (store.token && store.token != "" && store.token != null) {
+			actions.deleteFavorite(store.userId, params.theid, params.type)
+			window.location.reload();
+		}
+	}
 
+	const updateFavorite = (status) => {
+		if (store.token && store.token != "" && store.token != null) {
+			actions.updateFavorite(store.userId, params.theid, params.type, status)
+			window.location.reload();
+		}
 	}
 
 	return (params.type == "movie" ?
@@ -251,15 +276,45 @@ export const Details = props => {
 				<div className="col-4 me-2">
 					{store.token && store.token != "" && store.token != null ?
 						Object.values(favorite).length > 0 ?
-							<div className="d-grid gap-2">
-								<button className="btn btn-success btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">{favorite.status}
-								</button>
-								<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-									<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("watching") }}><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
-									<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("watched") }}><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
-									<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("planToWatch") }}><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
-								</ul>
-							</div>
+							favorite.status == "watching" ?
+								<div className="d-grid gap-2">
+									<button className="btn btn-outline-success btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+										<i className="fa-solid fa-eye fa-lg me-3 text-success-emphasis"></i>Watching
+									</button>
+									<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+										<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { removeFavorite() }}><i className="fa-solid fa-trash ms-1 fa-lg me-3 text-danger"></i>Remove</button></li>
+										<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { updateFavorite("watched") }}><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Change to Watched</button></li>
+										<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { updateFavorite("planToWatch") }}><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Change to Plan to Watch</button></li>
+									</ul>
+								</div>
+								:
+								favorite.status == "watched" ?
+									<div className="d-grid gap-2">
+										<button className="btn btn-outline-secondary btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+											<i className="fa-solid fa-eye fa-lg me-3 text-secondary-emphasis"></i>Watched
+										</button>
+										<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+											<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { removeFavorite() }}><i className="fa-solid fa-trash ms-1 fa-lg me-3 text-danger"></i>Remove</button></li>
+											<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { updateFavorite("watching") }}><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Change to Watching</button></li>
+											<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { updateFavorite("planToWatch") }}><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Change to Plan to Watch</button></li>
+										</ul>
+									</div>
+									:
+									favorite.status == "planToWatch" ?
+										<div className="d-grid gap-2">
+											<button className="btn btn-outline-primary btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+												<i className="fa-solid fa-eye fa-lg me-3 text-primary-emphasis"></i>Plan To Watch
+											</button>
+											<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+												<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { removeFavorite() }}><i className="fa-solid fa-trash ms-1 fa-lg me-3 text-danger"></i>Remove</button></li>
+												<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { updateFavorite("watching") }}><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Change to Watching</button></li>
+												<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { updateFavorite("watched") }}><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Change to Watched</button></li>
+											</ul>
+										</div>
+										:
+										<div>
+
+										</div>
 							:
 							<div className="d-grid gap-2">
 								<button className="btn btn-success btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -422,15 +477,129 @@ export const Details = props => {
 										</div>
 				}
 				<div className="col-4 me-2">
-					<div className="d-grid gap-2">
-						<button className="btn btn-success btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i className="fa-solid fa-square-plus fa-2xl me-5"></i>Add to a List
-						</button>
-						<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-							<li><button className="dropdown-item px-4 fs-3" type="button"><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
-							<li><button className="dropdown-item px-4 fs-3" type="button"><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
-							<li><button className="dropdown-item px-4 fs-3" type="button"><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
-						</ul>
+					{store.token && store.token != "" && store.token != null ?
+						Object.values(favorite).length > 0 ?
+							favorite.status == "watching" ?
+								<div className="d-grid gap-2">
+									<button className="btn btn-outline-success btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+										<i className="fa-solid fa-eye fa-lg me-3 text-success-emphasis"></i>Watching
+									</button>
+									<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+										<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { removeFavorite() }}><i className="fa-solid fa-trash ms-1 fa-lg me-3 text-danger"></i>Remove</button></li>
+										<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { updateFavorite("watched") }}><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Change to Watched</button></li>
+										<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { updateFavorite("planToWatch") }}><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Change to Plan to Watch</button></li>
+									</ul>
+								</div>
+								:
+								favorite.status == "watched" ?
+									<div className="d-grid gap-2">
+										<button className="btn btn-outline-secondary btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+											<i className="fa-solid fa-eye fa-lg me-3 text-secondary-emphasis"></i>Watched
+										</button>
+										<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+											<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { removeFavorite() }}><i className="fa-solid fa-trash ms-1 fa-lg me-3 text-danger"></i>Remove</button></li>
+											<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { updateFavorite("watching") }}><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Change to Watching</button></li>
+											<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { updateFavorite("planToWatch") }}><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Change to Plan to Watch</button></li>
+										</ul>
+									</div>
+									:
+									favorite.status == "planToWatch" ?
+										<div className="d-grid gap-2">
+											<button className="btn btn-outline-primary btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+												<i className="fa-solid fa-eye fa-lg me-3 text-primary-emphasis"></i>Plan To Watch
+											</button>
+											<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+												<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { removeFavorite() }}><i className="fa-solid fa-trash ms-1 fa-lg me-3 text-danger"></i>Remove</button></li>
+												<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { updateFavorite("watching") }}><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Change to Watching</button></li>
+												<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { updateFavorite("watched") }}><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Change to Watched</button></li>
+											</ul>
+										</div>
+										:
+										<div>
+
+										</div>
+							:
+							<div className="d-grid gap-2">
+								<button className="btn btn-success btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<i className="fa-solid fa-square-plus fa-2xl me-5"></i>Add to a List
+								</button>
+								<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+									<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("watching") }}><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
+									<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("watched") }}><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
+									<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("planToWatch") }}><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
+								</ul>
+							</div>
+						:
+						<div className="d-grid gap-2">
+							<button className="btn btn-success btn-lg py-3 dropdown-toggle fs-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+								<i className="fa-solid fa-square-plus fa-2xl me-5"></i>Add to a List
+							</button>
+							<ul className="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("watching") }}><i className="fa-solid fa-eye fa-lg me-3 text-success"></i>Watching</button></li>
+								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("watched") }}><i className="fa-solid fa-eye fa-lg me-3 text-secondary"></i>Watched</button></li>
+								<li><button className="dropdown-item px-4 fs-3" type="button" onClick={() => { addFavorite("planToWatch") }}><i className="fa-solid fa-eye fa-lg me-3 text-primary"></i>Plan to Watch</button></li>
+							</ul>
+						</div>
+					}
+				</div>
+				<div className="row"><div className=" Filler col-12 mb-2"></div></div>
+				<div className="row justify-content-start mt-5">
+					<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-2 py-2 rounded offset-md-1">
+						<p className="text-start text-light text-center h2">
+							Synopsis
+						</p>
+					</div>
+				</div>
+				<div className="row mb-2 justify-content-center">
+					<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="col-10 rounded p-4">
+						<p className="h4 text-start text-light py-2">
+							{info.overview}
+						</p>
+					</div>
+				</div>
+				<div className="row mt-5 justify-content-center">
+					<div className="col-5 me-3">
+						<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="rounded px-5 py-4 text-start">
+							<div className="row">
+								<div className="col-12">
+									<p className="text-white h2 fw-bold">Directors</p>
+								</div>
+							</div>
+							<div className="row d-flex flex-nowrap overflow-auto">
+								{directors.map((_, index) => (
+									<p className="bg-success rounded py-2 text-center m-1 col-4 text-light mt-2" key={index}>{directors[index]}</p>
+								))}
+							</div>
+							<div className="row mt-5">
+								<div className="col-12 mt-2">
+									<p className="text-white h2 fw-bold">Writers</p>
+								</div>
+							</div>
+							<div className="row d-flex flex-nowrap overflow-auto">
+								{writers.map((_, index) => (
+									<p className="bg-success py-2 text-center m-1 rounded col-4 text-light" key={index}>{writers[index]}</p>
+								))}
+							</div>
+							<div className="row mt-5">
+								<div className="col-12 mt-2">
+									<p className="text-white h2 fw-bold">Cast</p>
+								</div>
+							</div>
+							<div className="row d-flex flex-nowrap overflow-auto">
+								{cast.map((_, index) => (
+									<div className=" bg-success text-start py-1 rounded col-5 text-light m-1" key={index}>
+										<p className="mt-4">{"Name : " + cast[index]}</p>
+										<p>{"Character : " + castChar[index]}</p>
+									</div>
+								))}
+							</div>
+						</div>
+					</div>
+					<div className="col-5 ms-2">
+						<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="rounded px-5 py-4">
+							<p className="text-white h2 fw-bold">Comments</p>
+
+						</div>
 					</div>
 				</div>
 			</div>
