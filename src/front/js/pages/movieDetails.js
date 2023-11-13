@@ -422,7 +422,7 @@ export const Details = props => {
 						Episodes : {info.number_of_episodes}
 					</p>
 				</div>
-				<div className="col-2 bg-info bg-opacity-50 ms-2">
+				<div className="col-2 bg-info bg-opacity-50  ms-2">
 					<p className="text-light text-center h5 p-1">
 						Seasons : {info.number_of_seasons}
 					</p>
