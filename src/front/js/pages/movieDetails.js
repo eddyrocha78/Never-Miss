@@ -112,7 +112,7 @@ export const Details = props => {
 
 		fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/images`, options)
 			.then(response => response.json())
-			.then(response => { setImages(response); setPosterLink(response.posters["0"].file_path); /*console.log(response)*/; setBackLink(response.backdrops !== null ? "https://image.tmdb.org/t/p/w1280_and_h720_bestv2/" + response.backdrops["0"].file_path : "https://placehold.co/1280x720/527552/527552/png?text=") })
+			.then(response => { if(Object.values(response.posters).length > 0) { setImages(response); setPosterLink("https://image.tmdb.org/t/p/w300_and_h450_bestv2/" + response.posters["0"].file_path); console.log(response); setBackLink("https://image.tmdb.org/t/p/w1280_and_h720_bestv2/" + response.backdrops["0"].file_path) }else{setBackLink("https://placehold.co/1280x720/253525/253525/png?text="); setPosterLink("https://placehold.co/220x330/png?text=No%20Image")} })
 			.catch(err => console.error(err));
 	}
 
@@ -127,7 +127,7 @@ export const Details = props => {
 
 		fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}/videos?language=en-US`, options)
 			.then(response => response.json())
-			.then(response => {/*console.log(response); */setVideos(response); setVideoKey(response.results["0"].key) })
+			.then(response => { if(Object.values(response.results).length > 0) {/*console.log(response); */setVideos(response); setVideoKey(response.results["0"].key) }})
 			.catch(err => console.error(err));
 	}
 
@@ -227,7 +227,7 @@ export const Details = props => {
 			</div>
 			<div style={{ backgroundImage: "url('" + backLink + "')", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center",borderRadius: "12px"}} className="py-5 Background m-2 my-5 row">
 				<div className="col-4 offset-md-1">
-					<img className="poster img-fluid border border-black border-5" src={"https://image.tmdb.org/t/p/w300_and_h450_bestv2/" + posterLink} />
+					<img className="poster img-fluid border border-black border-5" src={posterLink} />
 				</div>
 				<div className="col-4 video align-self-center ">
 					{videoKey !== "" ? <ReactPlayer
@@ -430,7 +430,7 @@ export const Details = props => {
 			</div>
 			<div style={{ backgroundImage: "url('" + backLink + "')", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center" ,borderRadius: "12px"}} className="py-5 Background m-2 my-5 row">
 				<div className="col-4 offset-md-1">
-					<img className="poster img-fluid border border-black border-5" src={"https://image.tmdb.org/t/p/w300_and_h450_bestv2/" + posterLink} />
+					<img className="poster img-fluid border border-black border-5" src={posterLink} />
 				</div>
 				<div className="col-4 video align-self-center ">
 					{videoKey !== "" ? <ReactPlayer
