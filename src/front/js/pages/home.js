@@ -9,11 +9,16 @@ export const Home = () => {
   const { store, actions } = useContext(Context);
 
 	useEffect(() => {
-		if(store.token && store.token !="" && store.token !=null) actions.getMessage();
+		if(store.token && store.token !="" && store.token !=null)
+    {
+      actions.getMessage();
+      console.log(store.token)
+    }
+    
 	}, [store.token])
-
-	let sessiontoken = sessionStorage.getItem("token")
   
+  let sessiontoken = sessionStorage.getItem("token")
+
   const navigate = useNavigate();
 
   const [search, setSearch] = useState("");
@@ -70,9 +75,9 @@ export const Home = () => {
 
   const newSearch = (newS) => {
     if (newS.trim() === "") {
-			alert("Search cannot be empty");
+      alert("Search cannot be empty");
     }
-    else{
+    else {
       navigate("/search/" + newS + "/1");
       window.location.reload();
     }
@@ -84,32 +89,34 @@ export const Home = () => {
         <h1 className="text-white display-1 fw-bold">Never Miss</h1>
       </div>
       <div className="row text-center mt-5">
-        <h1 className="text-white-50 display-4">
+        <h1 className="text-white-50 display-5">
           Look up your favorite movie or series now!
         </h1>
       </div>
       <div className="row text-center justify-content-center mt-5 mx-5">
-      <div className="col-8">
-        <input style={{ borderColor: "rgba(37, 53, 37, 1)" }}
-          className="form-control form-control-lg text-start border-5" onKeyDown={(e)=>{e.key == "Enter" ? newSearch(search) : null}} dir="auto" id="inner_search_v4"
-          name="query" type="text" tabIndex="1" autoCorrect="off" autofill="off" autoComplete="off" placeholder="Search for a movie or tv show "
-          value={search}
-          onChange={(e) => {setSearch(e.target.value) }} />
-          </div>
+        <div className="col-8">
+          <input style={{ borderColor: "rgba(37, 53, 37, 1)" }}
+            className="form-control form-control-lg text-start border-5" onKeyDown={(e) => { e.key == "Enter" ? newSearch(search) : null }} dir="auto" id="inner_search_v4"
+            name="query" type="text" tabIndex="1" autoCorrect="off" autofill="off" autoComplete="off" placeholder="Search for a movie or tv show "
+            value={search}
+            onChange={(e) => { setSearch(e.target.value) }} />
+        </div>
         <div className="col-2 d-grid gap-2 p-0">
           <button className="btn btn-success fs-4 p-0" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
         </div>
       </div>
+      {store.token && store.token !="" && store.token !=null?
       <div className="row text-center my-5">
-      <h1 className="text-white-50 display-4">
-          Welcome back First Name, Last Name 
+      <h1 className="text-white-50 display-5">
+          Welcome back {store.userName} {store.userLastName} 
         </h1>
         </div>
+        :
       <div className="row text-center my-5">
-        <h1 className="text-white-50 display-4">
+        <h1 className="text-white-50 display-5">
           Subscribe to never miss a thing
         </h1>
-      </div>
+      </div>}
       <div className="row my-5">
         <div className="col">
           <div
@@ -126,11 +133,11 @@ export const Home = () => {
                 {movieinfo.results &&
                   movieinfo.results.map((data, index) => (
                     <Link key={index} className="text-start text-decoration-none text-light" to={"/movie/details/" + data.id}>
-                    <Card
-                      imgpath={data.poster_path}
-                      title={data.original_title}
-                      description={data.overview}
-                    />
+                      <Card
+                        imgpath={data.poster_path}
+                        title={data.original_title}
+                        description={data.overview}
+                      />
                     </Link>
                   ))}
               </div>
@@ -150,11 +157,11 @@ export const Home = () => {
                 {seriesinfo.results &&
                   seriesinfo.results.map((data, index) => (
                     <Link key={index} className="text-start text-decoration-none text-light" to={"/tv/details/" + data.id}>
-                    <Card
-                      imgpath={data.poster_path}
-                      title={data.name}
-                      description={data.overview}
-                    />
+                      <Card
+                        imgpath={data.poster_path}
+                        title={data.name}
+                        description={data.overview}
+                      />
                     </Link>
                   ))}
               </div>
