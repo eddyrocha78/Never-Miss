@@ -15,8 +15,7 @@ export const Login = () => {
 
 	const handleClick = () => {
 		actions.login(email, password);
-		/*if(email!=store.user.email && password!=store.user.password) navigate("/signup");*/
-		if (store.token && store.token != "" && store.token != undefined) navigate("/");
+		navigate("/");
 	};
 
 
