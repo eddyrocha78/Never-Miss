@@ -82,7 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				try {
 
-					const resp = await fetch(process.env.BACKEND_URL + "/api/signup", opts)
+					const resp = await fetch(process.env.BACKEND_URL + "/api/signup", options)
 
 
 					console.log(resp)
