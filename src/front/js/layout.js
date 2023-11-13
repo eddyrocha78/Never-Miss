@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
 import { BackendURL } from "./component/backendURL";
-
+import { UserProfile2 } from "./pages/userProfile2";
 import { Home } from "./pages/home";
 import { Signup } from "./pages/signup";
 import { Login } from "./pages/login";
@@ -36,6 +36,7 @@ const Layout = () => {
             <Route exact element={<Login />} path="/login" />
             <Route exact element={<Signup />} path="/signup" />
             <Route exact element={<UserSpace />} path="/userspace" />
+            <Route element={<UserProfile2 />} path="/userprofile" />
             <Route element={<Results />} path="/search/:keyword/:page" />
             <Route element={<Details />} path=":type/details/:theid" />
             <Route element={<Single />} path="/single/:theid" />
