@@ -26,7 +26,7 @@ const Layout = () => {
     return <BackendURL />;
 
   return (
-    <div style={{ backgroundColor: "rgba(16, 17, 18, 1)" }}>
+    <div style={{ backgroundColor: "rgba(16, 17, 18, 1)", minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
       <BrowserRouter basename={basename}>
         <ScrollToTop>
           <Navbar />

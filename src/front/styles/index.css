@@ -1,13 +1,41 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+
+/* navbar liist */
+
+ul.op {
+    background-color: rgba(37, 53, 37, 1);
+    border: 1px solid #fff;
+    
+  }
+
+ul.op li a {
+    color: white ; 
+    text-decoration: none;
+  }
+
+ul.op li a:hover {
+    background-color: #fff;
+    color: black !important;
+  }
+
 /* hide in small screens */
 
 @media screen and (max-width: 600px) {
-    .small {
+    .puff {
         display: none !important;
     }
 }
+
+
+
+
+.transp{
+    background-color: transparent;
+}
+
+
 
 
 
@@ -34,7 +62,7 @@
     border: 6px solid #253a25;
 }
 
-/* card images */
+/* cards */
 .card{
     flex: 1;
     flex-basis: 300px;
@@ -47,6 +75,10 @@
     transition: all .5s cubic-bezier(.8,.5,.2,1.4);
     overflow: hidden;
     position: relative;
+}
+.poster{
+    border: 5px solid black !important;
+    border-radius: 8px;
 }
 .card img{
     
@@ -83,11 +115,13 @@
 .card h1{
     color: #006f00;
     letter-spacing: 1px;
-    margin: 0px;
+    font-size: x-large;
+    
 }
 .card p{
     line-height: 24px;
     height: 70%;
+    color: black;
 }
 .card button{
     width: fit-content;
