@@ -40,7 +40,7 @@ export const Login = () => {
 							<div className="col-6 mx-auto">
 								<h1 className="text-center">Login</h1>
 								<div className="mb-3">
-									<input type="text" className="form-control" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+									<input type="email" className="form-control" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
 								</div>
 								<div className="mb-3">
 									<input type="password" className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />

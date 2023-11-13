@@ -204,21 +204,21 @@ export const Details = props => {
 			<p className="text-secondary h2 my-5 fw-bold">{info.tagline}</p>
 			<div className=" row justify-content-center mt-5">
 				<div className="col-3">
-					<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="p-1 ms-5">
+					<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="rounded p-1 ms-5">
 						<p className="text-center text-light h5">
 							Release : {info.release_date}
 						</p>
 					</div>
 				</div>
 				<div className="col-3">
-					<div style={{ backgroundColor: "rgba(47, 165, 130, 1)" }} className="p-1 mx-3">
+					<div style={{ backgroundColor: "rgba(47, 165, 130, 1)" }} className="rounded p-1 mx-3">
 						<p className="text-light text-center h5">
 							Rating : {info.adult ? "R" : "PG"}
 						</p>
 					</div>
 				</div>
 				<div className="col-3">
-					<div style={{ backgroundColor: "rgba(120, 160, 55, 1)" }} className="p-1 me-5">
+					<div style={{ backgroundColor: "rgba(120, 160, 55, 1)" }} className="rounded p-1 me-5">
 						<p className="text-light text-center h5">
 							Duration : {info.runtime} minutes
 						</p>
@@ -407,22 +407,22 @@ export const Details = props => {
 			<h1 className="text-white-50 display-1 fw-bold">{info.name}</h1>
 			<p className="text-secondary h2 my-5 fw-bold">{info.tagline}</p>
 			<div className="row justify-content-center mt-5">
-				<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="col-2">
+				<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="col-2 rounded">
 					<p className="text-center text-light h5 p-1">
 						Release : {info.first_air_date}
 					</p>
 				</div>
-				<div style={{ backgroundColor: "rgba(47, 165, 130, 1)" }} className="col-2 ms-2">
+				<div style={{ backgroundColor: "rgba(47, 165, 130, 1)" }} className="col-2 ms-2 rounded">
 					<p className="text-light text-center h5 p-1">
 						Rating : {info.adult ? "R" : "PG"}
 					</p>
 				</div>
-				<div className="col-2 bg-primary bg-opacity-50 ms-2">
+				<div className="col-2 bg-primary bg-opacity-50 ms-2 rounded">
 					<p className="text-light text-center h5 p-1">
 						Episodes : {info.number_of_episodes}
 					</p>
 				</div>
-				<div className="col-2 bg-info bg-opacity-50  ms-2">
+				<div className="col-2 bg-info bg-opacity-50  ms-2 rounded">
 					<p className="text-light text-center h5 p-1">
 						Seasons : {info.number_of_seasons}
 					</p>

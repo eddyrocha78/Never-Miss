@@ -44,7 +44,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 
-					const resp = await fetch(process.env.BACKEND_URL + "api/login", opts)
+					const resp = await fetch(process.env.BACKEND_URL + "/api/login", opts)
 
 
 					console.log(resp)
@@ -82,7 +82,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				try {
 
-					const resp = await fetch(process.env.BACKEND_URL + "api/signup", opts)
+					const resp = await fetch(process.env.BACKEND_URL + "/api/signup", opts)
 
 
 					console.log(resp)
@@ -108,7 +108,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//insert 3rd party API to send email to user with backend stored email
 
 				try {
-					const resp = await fetch(process.env.BACKEND_URL + "api/users");
+					const resp = await fetch(process.env.BACKEND_URL + "/api/users");
 					const data = await resp.json()
 					console.log(data)
 
@@ -182,7 +182,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 				try {
-					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/users/" + userID + "/favorites", opts)
+					const resp = await fetch(process.env.BACKEND_URL + "/api/users/" + userID + "/favorites", opts)
 					const data = await resp.json();
 					setStore({ userFavorites: data });
 
@@ -205,7 +205,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 				try {
-					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
+					const resp = await fetch(process.env.BACKEND_URL + "/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
 
 					console.log(resp)
 					if (!resp.ok) {
@@ -232,7 +232,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 				try {
-					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
+					const resp = await fetch(process.env.BACKEND_URL + "/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
 					const data = await resp.json();
 					setStore({ userFavorites: data });
 
