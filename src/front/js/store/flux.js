@@ -39,7 +39,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 					};
 
-					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/login", opts)
+
+					const resp = await fetch(process.env.BACKEND_URL + "/api/login", opts)
 
 					console.log(resp)
 					if (!resp.ok) {
@@ -75,7 +76,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/signup", options);
+					const resp = await fetch(process.env.BACKEND_URL + "/api/signup", options);
 
 					console.log(resp)
 					if (!resp.ok) {
@@ -121,7 +122,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				try {
 					// fetching data from the backend
-					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/user", opts)
+					const resp = await fetch(process.env.BACKEND_URL + "/api/user", opts)
 					const data = await resp.json()
 					setStore({ userId: data.id })
 					setStore({ userEmail: data.email })
@@ -146,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 				try {
-					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
+					const resp = await fetch(process.env.BACKEND_URL + "/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
 
 					console.log(resp)
 					if (!resp.ok) {
@@ -246,7 +247,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 				try {
-					const resp = await fetch("https://3001-bennycarval-fullstackfi-vkp7hzksf3p.ws-eu106.gitpod.io/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
+					const resp = await fetch(process.env.BACKEND_URL + "/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
 
 					console.log(resp)
 					if (!resp.ok) {
