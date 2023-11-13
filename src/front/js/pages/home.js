@@ -89,7 +89,7 @@ export const Home = () => {
         <h1 className="text-white display-1 fw-bold">Never Miss</h1>
       </div>
       <div className="row text-center mt-5">
-        <h1 className="text-white-50 display-4">
+        <h1 className="text-white-50 display-5">
           Look up your favorite movie or series now!
         </h1>
       </div>
@@ -107,13 +107,13 @@ export const Home = () => {
       </div>
       {store.token && store.token !="" && store.token !=null?
       <div className="row text-center my-5">
-      <h1 className="text-white-50 display-4">
+      <h1 className="text-white-50 display-5">
           Welcome back {store.userName} {store.userLastName} 
         </h1>
         </div>
         :
       <div className="row text-center my-5">
-        <h1 className="text-white-50 display-4">
+        <h1 className="text-white-50 display-5">
           Subscribe to never miss a thing
         </h1>
       </div>}
