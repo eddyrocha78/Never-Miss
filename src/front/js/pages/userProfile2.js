@@ -5,14 +5,20 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 
 export const UserProfile2 = () => {
   const { store, actions } = useContext(Context);
+  const [isReadOnly1, setIsReadOnly1] = useState(false);
+  const [isReadOnly2, setIsReadOnly2] = useState(false);
+  const [isReadOnly3, setIsReadOnly3] = useState(false);
+  const [formData, setFormData] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+	});
 
 	useEffect(() => {
 		if(store.token && store.token !="" && store.token !=null) actions.getMessage();
 	}, [store.token])
 
 	let sessiontoken = sessionStorage.getItem("token")
-  
-  const navigate = useNavigate();
 
   //const [search, setSearch] = useState("");
 
@@ -77,14 +83,34 @@ export const UserProfile2 = () => {
 		setFormData({...formData, [name]: value});
 	  };
 
-  function editName(number) {
-      
+  function handleEdit1() {
+      setIsReadOnly1(true);
+  };
+
+  function handleEdit2() {
+    setIsReadOnly2(true);
+  };
+
+  function handleEdit3() {
+  setIsReadOnly3(true);
+  };
+
+  function handleSave1() {
+    setIsReadOnly1(false);
+  };
+
+  function handleSave2() {
+    setIsReadOnly1(false);
+  };
+
+  function handleSave3() {
+    setIsReadOnly1(false);
   };
 
   return (
     <div className="container">
       <div className="row">
-        <h1 className="text-white display-1 fw-bold text-center">{store.user.firstName} {store.user.lastName} Profile</h1>
+        <h1 className="text-white display-1 fw-bold text-center">{store.userName} {store.userLastName} Profile</h1>
       </div>
       
       <div className="container">
@@ -97,19 +123,44 @@ export const UserProfile2 = () => {
               <i className="fa-solid fa-circle-user fa-2xl py-5"></i>
 
               {/*first name, last name and email edit div*/}
+              {isReadOnly1 ? (
               <div className="input-group mb-3">
-                <button className="btn btn-outline-success" type="button" id="input1" onClick={editName('1')}>Edit</button>
-                <input type="text" className="form-control" name="firstName" placeholder={store.firstName} aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange} readOnly></input>
+                <button className="btn btn-outline-success" type="button" id="input1" onClick={handleSave1}>Save</button>
+                <input type="text" className="form-control" name="firstName" aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange} placeholder={store.userName} ></input>
               </div>
+              ) 
+              : (
               <div className="input-group mb-3">
-                <button className="btn btn-outline-success" type="button" id="input2" onClick={editName('2')}>Edit</button>
-                <input type="text" className="form-control" name="lastName" placeholder={store.lastName} aria-label="Example text with button addon" aria-describedby="input2" onChange={handleChange} readOnly></input>
+                <button className="btn btn-outline-success" type="button" id="input1" onClick={handleEdit1}>Edit</button>
+                <input type="text" className="form-control" name="firstName" aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange} readOnly placeholder={store.userName} ></input>
               </div>
-              <div className="input-group mb-3">
-                <button className="btn btn-outline-success" type="button" id="input3" onClick={editName('3')}>Edit</button>
-                <input type="email" className="form-control" name="email" placeholder={store.email} aria-label="Example text with button addon" aria-describedby="input3" onChange={handleChange} readOnly></input>
-              </div>
+              )}
 
+              {isReadOnly2 ? (
+              <div className="input-group mb-3">
+                <button className="btn btn-outline-success" type="button" id="input1" onClick={handleSave2}>Save</button>
+                <input type="text" className="form-control" name="firstName" placeholder={store.userLastName} aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange}></input>
+              </div>
+              ) 
+              : (
+              <div className="input-group mb-3">
+                <button className="btn btn-outline-success" type="button" id="input1" onClick={handleEdit2}>Edit</button>
+                <input type="text" className="form-control" name="firstName" placeholder={store.userLastName} aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange} readOnly></input>
+              </div>
+              )}
+
+              {isReadOnly3 ? (
+              <div className="input-group mb-3">
+                <button className="btn btn-outline-success" type="button" id="input1" onClick={handleSave3}>Save</button>
+                <input type="text" className="form-control" name="firstName" placeholder={store.userEmail} aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange}></input>
+              </div>
+              ) 
+              : (
+              <div className="input-group mb-3">
+                <button className="btn btn-outline-success" type="button" id="input1" onClick={handleEdit3}>Edit</button>
+                <input type="text" className="form-control" name="firstName" placeholder={store.userEmail} aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange} readOnly></input>
+              </div>
+              )}
             </div>
           
 
