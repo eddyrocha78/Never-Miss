@@ -30,10 +30,11 @@ export const Signup = () => {
 
 		setError(null);
 		let isSignedUp = await actions.signup(formData);
-		
-		
-		
-	};
+		if(isSignedUp) {
+			navigate("/login");
+		}
+	  };
+	
 
 
 	return (
