@@ -8,10 +8,7 @@ export const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    actions.logout();
-		navigate("/");
-	};
+
 
   return (
     <nav style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="navbar">
@@ -56,12 +53,12 @@ export const Navbar = () => {
                 </li>
                 <li className="dropdown-divider bg-white"></li>
                 <li>
-                  <a className="dropdown-item text-white">
+                  <a className="dropdown-item text-white" onClick={() => navigate("/userprofile")}>
                     Profile Info
                   </a>
                 </li>
                 <li>
-                  <a className="dropdown-item text-white">
+                  <a className="dropdown-item text-white" onClick={() => navigate("/userspace")}>
                     User Space
                   </a>
                 </li>
