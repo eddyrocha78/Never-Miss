@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom";
 
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -14,6 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 		},
 		actions: {
+
 			syncTokenFromSessionStore: () => {
 				const token = sessionStorage.getItem("token");
 				console.log("Application loaded, synching session storage token");
@@ -27,6 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			login: async (email, password) => {
+				
 				console.log(email, password);
 				try {
 					// Creating opts for the fetch
@@ -40,7 +43,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					};
 
 
-					const resp = await fetch(process.env.BACKEND_URL + "/api/login", opts)
+
+					const resp = await fetch(process.env.BACKEND_URL + "api/login", opts)
+
 
 					console.log(resp)
 					if (!resp.ok) {
@@ -76,7 +81,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				};
 
 				try {
-					const resp = await fetch(process.env.BACKEND_URL + "/api/signup", options);
+
+					const resp = await fetch(process.env.BACKEND_URL + "api/signup", opts)
+
 
 					console.log(resp)
 					if (!resp.ok) {
@@ -134,6 +141,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+
 
 			addToList: async (userID, favoriteID, favoriteType, favoriteStatus) => {
 				const opts = {

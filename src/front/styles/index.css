@@ -2,6 +2,19 @@
     General Styles used on every website (Don't Repeat Yourself)
 */
 
+/* ul cursor change */
+
+ul *:not(a) {
+    cursor: default;
+  }
+
+/* modal */
+
+.sample{
+    background-color: rgba(37, 53, 37, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
 /* navbar liist */
 
 ul.op {
@@ -28,15 +41,11 @@ ul.op li a:hover {
     }
 }
 
-
-
+/* transparent */
 
 .transp{
     background-color: transparent;
 }
-
-
-
 
 
 /* scrollbar */

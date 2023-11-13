@@ -32,7 +32,7 @@ export const Navbar = () => {
         </div>
 
         <div className="me-5">
-          {store.token && store.token != "" && store.token != null ? ( 
+          {store.token && store.token != "" && store.token != null ? (
             <div className="dropdown-center text-center">
               <button
                 style={{ backgroundColor: "rgba(217, 217, 217, 1)" }}
@@ -43,7 +43,7 @@ export const Navbar = () => {
               >
                 <i className="fa-solid fa-circle-user fa-2xl"></i>
               </button>
-              <ul style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="dropdown-menu op border-white">
+              <ul style={{ backgroundColor: "rgba(37, 53, 37, 1)", maxWidth: "20px" }} className="dropdown-menu position-absolute start-50 translate-middle-x op border-white">
                 <li>
                   <a className="dropdown-item text-white">
                     Movies
@@ -66,7 +66,9 @@ export const Navbar = () => {
                   </a>
                 </li>
                 <li>
-                  <a onClick={() => {handleClick()}} className="dropdown-item text-danger">
+
+                  <a className="dropdown-item text-danger" onClick={() => actions.logout()}>
+
                     Log Out
                   </a>
                 </li>

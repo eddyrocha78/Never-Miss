@@ -13,9 +13,13 @@ export const Login = () => {
 
 	console.log("This is your token", store.token);
 
+	if (store.token) {
+		navigate("/")
+	}
+	
 	const handleClick = () => {
 		actions.login(email, password);
-		navigate("/");
+
 	};
 
 
@@ -42,7 +46,7 @@ export const Login = () => {
 									<input type="password" className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
 								</div>
 								<div className="text-center">
-								<button className="btn btn-success btn-block mx-auto" onClick={handleClick}>Login</button>
+									<button className="btn btn-success btn-block mx-auto" onClick={handleClick}>Login</button>
 								</div>
 							</div>
 							<div className="my-3 text-center">
