@@ -1,10 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    actions.logout();
+		navigate("/");
+	};
+
   return (
     <nav style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="navbar">
       <div className="container-fluid">
@@ -58,7 +66,9 @@ export const Navbar = () => {
                   </a>
                 </li>
                 <li>
+
                   <a className="dropdown-item text-danger" onClick={() => actions.logout()}>
+
                     Log Out
                   </a>
                 </li>
