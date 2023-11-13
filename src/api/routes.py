@@ -108,10 +108,11 @@ def handle_user(user_id):
     
     if request.method == 'PUT':
         user = User.query.get(user_id)
-        body = request.get_json()
-        user.email = body.email
+        user_data = request.get_json()
+        user.password = user_data["password"]
+        user.confirmPassword = user_data["password"]
         db.session.commit()
-        return jsonify(user.serialize()), 200
+        return jsonify({"msg": "Password changed"}), 200
     
     
 
