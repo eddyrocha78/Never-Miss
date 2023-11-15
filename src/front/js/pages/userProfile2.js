@@ -162,7 +162,7 @@ export const UserProfile2 = () => {
 
           {/* my comments div*/}
           <div className="row">
-            <div className="col ms-1 rounded mb-2" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(37, 53, 37, 1)" }}>
+            <div className="col ms-1 rounded mb-2">
               <div className="col-md-12">
                 <div className="header d-inline-flex align-items-center pt-2">
                   <h4>My Comments</h4>
