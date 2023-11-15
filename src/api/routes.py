@@ -118,7 +118,18 @@ def handle_user(user_id):
         user.confirmPassword = user_data["password"]
         db.session.commit()
         return jsonify({"msg": "Password changed"}), 200
-    
+
+@api.route('/users/<int:user_id>/edit', methods=['PUT'])
+def edit_user(user_id):
+        
+    if request.method == 'PUT':
+        user = User.query.get(user_id)
+        user_data = request.get_json()
+        user.userName = user_data["userName"]
+        user.userLastName = user_data["userLastName"]
+        user.userPassword = user_data["userPassword"]
+        db.session.commit()
+        return jsonify({"msg": "User profile data changed"}), 200    
     
 
 @api.route('/users/<int:user_id>/favorites', methods=['GET'])

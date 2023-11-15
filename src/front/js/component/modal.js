@@ -29,6 +29,7 @@ export const ForgotPasswordModal = (props) => {
 							<div className="col text-center">
 								<label htmlFor="email">Enter your e-mail</label>
 								<input className='form-control' type="email" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
+
 							</div>
 						</div>
 					</div>
