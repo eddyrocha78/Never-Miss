@@ -11,10 +11,8 @@ export const Login = () => {
 	const [password, setPassword] = useState("");
 	const navigate = useNavigate();
 
-	console.log("This is your token", store.token);
-
 	if (store.token) {
-		navigate("/")
+		navigate("/userspace")
 	}
 	
 	const handleClick = () => {

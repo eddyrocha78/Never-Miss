@@ -8,6 +8,10 @@ export const Navbar = () => {
 
   const navigate = useNavigate();
 
+  const handlesignout = () => {
+    actions.logout()
+    navigate("/")
+  }
 
 
   return (
@@ -42,17 +46,6 @@ export const Navbar = () => {
               </button>
               <ul style={{ backgroundColor: "rgba(37, 53, 37, 1)", maxWidth: "20px" }} className="dropdown-menu position-absolute start-50 translate-middle-x op border-white">
                 <li>
-                  <a className="dropdown-item text-white">
-                    Movies
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item text-white" >
-                    Series
-                  </a>
-                </li>
-                <li className="dropdown-divider bg-white"></li>
-                <li>
                   <a className="dropdown-item text-white" onClick={() => navigate("/userprofile")}>
                     Profile Info
                   </a>
@@ -64,7 +57,7 @@ export const Navbar = () => {
                 </li>
                 <li>
 
-                  <a className="dropdown-item text-danger" onClick={() => actions.logout()}>
+                  <a className="dropdown-item text-danger" onClick={() => handlesignout()}>
 
                     Log Out
                   </a>

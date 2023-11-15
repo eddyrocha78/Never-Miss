@@ -7,29 +7,12 @@ import { Context } from "../store/appContext";
 export const ForgotPasswordModal = (props) => {
 	const { store, actions } = useContext(Context);
 	const [error, setError] = useState(null);
-	const [modalData, setModalData] = useState({
-		firstName: '',
-		lastName: '',
-		email: ''
-	});
+	const [email, setEmail] = useState("");
 
-	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setModalData({ ...modalData, [name]: value });
-	};
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		if (modalData.email !== store.users.email) {
-			setError("Email is not registered in users");
-			return;
-		}
+	const handleSubmit = () => {
+		actions.forgotPassword(email);
 
-		setError(null);
-		let forgotPassword = await actions.forgotPassword(modalData);
-		if (forgotPassword) {
-			navigate("/login");
-		}
 	};
 
 	return (
@@ -45,7 +28,8 @@ export const ForgotPasswordModal = (props) => {
 						<div className="row my-3 mx-1">
 							<div className="col text-center">
 								<label htmlFor="email">Enter your e-mail</label>
-								<input className='form-control' type="email" name="email" placeholder="Email" onChange={handleChange} required />
+								<input className='form-control' type="email" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
+
 							</div>
 						</div>
 					</div>
