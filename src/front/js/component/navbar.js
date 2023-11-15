@@ -42,17 +42,6 @@ export const Navbar = () => {
               </button>
               <ul style={{ backgroundColor: "rgba(37, 53, 37, 1)", maxWidth: "20px" }} className="dropdown-menu position-absolute start-50 translate-middle-x op border-white">
                 <li>
-                  <a className="dropdown-item text-white" onClick={() => navigate("/search/movie/1")}>
-                    Movies
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item text-white" onClick={() => navigate("/search/tv/1")} >
-                    Series
-                  </a>
-                </li>
-                <li className="dropdown-divider bg-white"></li>
-                <li>
                   <a className="dropdown-item text-white" onClick={() => navigate("/userprofile")}>
                     Profile Info
                   </a>

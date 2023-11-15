@@ -42,21 +42,6 @@ export const Results = props => {
     }
 
   }
-  const getall = (type) => {
-
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NjJjYjAxZWFiNThjNGRlNzdjOWNhMmY0ZGM4ODQ0NyIsInN1YiI6IjY1Mzk1YmFhZWM0NTUyMDBlYTRkNDMxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cz3I9EbEUfEny1vJHlbpG7zW_2dSZRBsGCrx6Xy3768'
-      }
-    };
-
-    fetch(`https://api.themoviedb.org/3/search/${type}include_adult=false&language=en-US&page=${params.page}}`, options)
-      .then(response => response.json())
-      .then(response => { console.log(response); setResult(response.results); setResp(response) })
-      .catch(err => console.error(err));
-  }
 
 
   const getInfo = newSearch => {
