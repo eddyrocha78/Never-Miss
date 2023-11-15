@@ -43,6 +43,7 @@ export const Results = props => {
 
   }
 
+
   const getInfo = newSearch => {
     const options = {
       method: 'GET',
@@ -76,38 +77,42 @@ export const Results = props => {
           <button className="btn btn-success fs-4 p-0" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
         </div>
       </div>
-      <div className="row mt-3 justify-content-center">
-        {result.map((_, index) => (
-          result[index].media_type !== "person" ?
-            <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} key={index} className="btn btn-lg py-3 rounded col-8 mt-2">
-              <Link className="text-start text-decoration-none text-light" to={"/" + result[index].media_type + "/details/" + result[index].id}>
-                <div className="row">
-                  <div className="col-md-2 col-sm-4 text-center">
-                    {result[index].poster_path != null ?
-                      <img style={{ height: "150px" }} className="rounded" src={"https://www.themoviedb.org/t/p/w220_and_h330_face" + result[index].poster_path} />
-                      :
-                      <img style={{ height: "150px" }} className="rounded" src={"https://placehold.co/220x330/png?text=No \nImage"} />
-                    }
-                  </div>
-                  <div className="col">
-                    {
-                      result[index].media_type == "movie" ?
-                        <p className="fw-bold fs-3">{result[index].title}</p>
+      <div className="row mt-3 justify-content-center ">
+        <div className="col-8 border border-2 rounded py-2 borgreen">
+          {result.map((_, index) => (
+            result[index].media_type !== "person" ?
+              <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} key={index} className="btn btn-lg col-12 py-3 rounded mt-2">
+                <Link className="text-start text-decoration-none text-light" to={"/" + result[index].media_type + "/details/" + result[index].id}>
+                  <div className="row">
+                    <div className="col-md-2 col-sm-4 text-center">
+                      {result[index].poster_path != null ?
+                        <img style={{ height: "150px" }} className="rounded" src={"https://www.themoviedb.org/t/p/w220_and_h330_face" + result[index].poster_path} />
                         :
-                        <p className="fw-bold fs-3">{result[index].name}</p>
-                    }
-                    <div style={{ height: "100px" }} className="overflow-y-auto row text-start">
-                      <p className="fs-5 text-white-50">{result[index].overview}</p>
+                        <img style={{ height: "150px" }} className="rounded" src={"https://placehold.co/220x330/png?text=No \nImage"} />
+                      }
+                    </div>
+                    <div className="col">
+                      {
+                        result[index].media_type == "movie" ?
+                          <p className="fw-bold fs-3">{result[index].title}</p>
+                          :
+                          <p className="fw-bold fs-3">{result[index].name}</p>
+                      }
+                      <div style={{ height: "100px", overflowY: "auto" }} className="overflow-y-auto row text-start">
+                        <p className="fs-5 text-white-50">{result[index].overview}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            </div>
-            :
-            <div key={index}></div>
-        ))}
+                </Link>
+              </div>
+
+              :
+
+              <div key={index}></div>
+          ))}
+        </div>
         <div className="row mt-5 justify-content-center">
-        <div className="col-md-2 offset-md-2 md-me-5 my-2 col-sm-10">
+          <div className="col-md-2 offset-md-2 md-me-5 my-2 col-sm-10">
             <button className="btn btn-lg btn-success" onClick={() => { setPage(parseInt(params.page) - 1) }} >Prev</button>
           </div>
           <div className="col-md-4 my-2 ms-md-5 col-sm-10">
@@ -121,6 +126,7 @@ export const Results = props => {
             <button className="btn btn-lg btn-success" onClick={() => { setPage(parseInt(params.page) + 1) }}>Next</button>
           </div>
         </div>
+
       </div>
       <div className="row text-center my-5">
         <h1 className="text-white-50 display-4">

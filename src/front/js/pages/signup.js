@@ -26,15 +26,16 @@ export const Signup = () => {
 		if (formData.password !== formData.confirmPassword) {
 			setError("Passwords don't match");
 			return;
-		} navigate("/login");
+		} navigate("/signup");
 
 		setError(null);
 		let isSignedUp = await actions.signup(formData);
-		if(isSignedUp) {
-			navigate("/login");
+		if (isSignedUp) {
+			actions.login(formData.email, formData.password)
+			navigate("/")
 		}
-	  };
-	
+	};
+
 
 
 	return (

@@ -44,7 +44,7 @@ export const ForgotPasswordModal = (props) => {
 						<h6 className="text-start">Please enter your registered email bellow to recover password.</h6>
 						<div className="row my-3 mx-1">
 							<div className="col text-center">
-								<label for="email">Enter your e-mail</label>
+								<label htmlFor="email">Enter your e-mail</label>
 								<input className='form-control' type="email" name="email" placeholder="Email" onChange={handleChange} required />
 							</div>
 						</div>
