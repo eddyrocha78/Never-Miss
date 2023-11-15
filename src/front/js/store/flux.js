@@ -103,19 +103,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			forgotPassword: async (modalData) => {
-				console.log(modalData);
-				//insert 3rd party API to send email to user with backend stored email
+			forgotPassword: async (userEmail) => {
 
+				
 				try {
-					const resp = await fetch(process.env.BACKEND_URL + "/api/users");
-					const data = await resp.json()
+
+					const resp = await fetch(process.env.BACKEND_URL + "/api/forgot/" + userEmail)
+
+					const data = await resp.json();
 					console.log(data)
 
 					return true;
 				}
 				catch (error) {
-					console.error("Error detected on sending user password")
+					console.error("Error detected" + error)
 				}
 			},
 

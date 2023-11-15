@@ -14,6 +14,11 @@ from flask_cors import CORS
 from api.models import db, User , FavoriteMovie, FavoriteSeries
 from api.utils import generate_sitemap, APIException
 
+import resend
+
+
+
+
 
 api = Blueprint('api', __name__)
 
@@ -193,3 +198,20 @@ def delete_userSeries(user_id, series_id):
             db.session.delete(userFavorite)
             db.session.commit()
             return jsonify({"msg": "favorite Series was removed"}), 200
+
+
+
+@api.route('/forgot/<user_email>')
+def index(user_email):
+    resend.api_key = "re_g1G8dwq6_M5ap2TPQ2tm4HLFxMiHekmbU"
+    user = User.query.filter_by(email=user_email).one_or_none()
+    if not user:
+        return jsonify("Email Not Found"), 401
+    params = {
+        "from": "Never Miss <nevermiss@info.mridul.tech>",
+        "to": [user.email],
+        "subject": "Lost Password",
+        "html": "<strong>hello " + user.firstName + " " + user.lastName + "</strong><p>Here is your Password "+ user.password +"</p>",
+    }
+    r = resend.Emails.send(params)
+    return jsonify(r)
