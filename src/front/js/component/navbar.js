@@ -8,6 +8,10 @@ export const Navbar = () => {
 
   const navigate = useNavigate();
 
+  const handlesignout = () => {
+    actions.logout()
+    navigate("/")
+  }
 
 
   return (
@@ -53,7 +57,7 @@ export const Navbar = () => {
                 </li>
                 <li>
 
-                  <a className="dropdown-item text-danger" onClick={() => actions.logout()}>
+                  <a className="dropdown-item text-danger" onClick={() => handlesignout()}>
 
                     Log Out
                   </a>

@@ -12,7 +12,7 @@ export const Login = () => {
 	const navigate = useNavigate();
 
 	if (store.token) {
-		navigate("/")
+		navigate("/userspace")
 	}
 	
 	const handleClick = () => {
