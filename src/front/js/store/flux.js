@@ -201,7 +201,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify({
 						title : favoriteTitle,
 						status: favoriteStatus,
-						posterPath : favoritePoster_path,
+						poster : favoritePoster_path,
 						runtime : favoriteRuntime
 
 					})

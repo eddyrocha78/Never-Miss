@@ -35,7 +35,7 @@ class FavoriteMovie(db.Model):
     movieId = db.Column(db.Integer,  nullable=False)
     title = db.Column(db.String(120), nullable=False)
     status = db.Column(db.String(80), nullable=False)
-    posterPath = db.Column(db.String(120), nullable=False)
+    poster = db.Column(db.String(120), nullable=False)
     runtime = db.Column(db.Integer, nullable=False)
     user = db.relationship(User)
     def __repr__(self):
@@ -55,7 +55,7 @@ class FavoriteSeries(db.Model):
     seriesId = db.Column(db.Integer, nullable=False)
     title = db.Column(db.String(120), nullable=False)
     status = db.Column(db.String(80), nullable=False)
-    posterPath = db.Column(db.String(80), nullable=False)
+    poster = db.Column(db.String(80), nullable=False)
     runtime = db.Column(db.Integer, nullable=False)
     user = db.relationship(User)
     def __repr__(self):

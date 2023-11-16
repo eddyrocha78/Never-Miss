@@ -27,16 +27,16 @@ export const UserProfile2 = () => {
     if (store.userFavorites != "" && store.userFavorites != null) {
       console.log(store.userFavorites);
       setFavorites(store.userFavorites);
-      addNumbers();
+      setadded(true);
     }
   }, [store.userFavorites]);
 
   useEffect(() => {
-    if (added == false && store.userFavorites != "" && store.userFavorites != null)
+    if (added == true && store.userFavorites != "" && store.userFavorites != null)
     {
       addNumbers();
     }
-  }, [favorites]);
+  }, [added]);
 
   useEffect(() => {
     if (store.token && store.token != "" && store.token != null) actions.getMessage();
@@ -44,7 +44,6 @@ export const UserProfile2 = () => {
 
   const addNumbers = () => {
       favorites.map((_, index) => {
-        setadded(true);
         if (favorites[index].seriesId !== undefined) {
           if (favorites[index].status == "watched") {
             const updatedWatched = watched;

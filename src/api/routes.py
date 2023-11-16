@@ -155,7 +155,7 @@ def add_favoriteMovie(user_id, movie_id):
     favorite.movieId = movie_id
     favorite.title = favorite_data["title"]
     favorite.status = favorite_data["status"]
-    favorite.posterPath = favorite_data["posterPath"]
+    favorite.poster = favorite_data["poster"]
     favorite.runtime = favorite_data["runtime"]
     db.session.add(favorite)
     db.session.commit()
@@ -190,7 +190,7 @@ def add_favoriteSeries(user_id, series_id):
     favorite.seriesId = series_id
     favorite.title = favorite_data["title"]
     favorite.status = favorite_data["status"]
-    favorite.posterPath = favorite_data["posterPath"]
+    favorite.poster = favorite_data["poster"]
     favorite.runtime = favorite_data["runtime"]
     db.session.add(favorite)
     db.session.commit()
