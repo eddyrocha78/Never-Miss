@@ -12,6 +12,7 @@ export const UserProfile2 = () => {
   const [added, setadded] = useState(false);
   const [watched, setWatched] = useState({series: 0 ,movies: 0});
   const [watching, setWatching] = useState({series: 0 ,movies: 0});
+  const [watchingTime, setWatchingTime] = useState(0);
   const [planTo, setPlanTo] = useState({series: 0 ,movies: 0});
 
 
@@ -113,22 +114,6 @@ export const UserProfile2 = () => {
   function handleSave2() {
     setIsReadOnly1(false);
   };
-
-  const getInfo = (mediatype, mediaId) => {
-    const options = {
-      method: 'GET',
-      headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1NjJjYjAxZWFiNThjNGRlNzdjOWNhMmY0ZGM4ODQ0NyIsInN1YiI6IjY1Mzk1YmFhZWM0NTUyMDBlYTRkNDMxYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cz3I9EbEUfEny1vJHlbpG7zW_2dSZRBsGCrx6Xy3768'
-      }
-    };
-
-    fetch(`https://api.themoviedb.org/3/${mediatype}/${mediaId}?language=en-US`, options)
-      .then(response => response.json())
-      .then(response => { /*console.log(response);*/})
-      .catch(err => console.error(err));
-  };
-
 
   return (
     <div className="container">

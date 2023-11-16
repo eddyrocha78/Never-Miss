@@ -33,7 +33,10 @@ class FavoriteMovie(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     userId = db.Column(db.Integer, db.ForeignKey("user.id"))
     movieId = db.Column(db.Integer,  nullable=False)
+    title = db.Column(db.String(120), nullable=False)
     status = db.Column(db.String(80), nullable=False)
+    posterPath = db.Column(db.String(120), nullable=False)
+    runtime = db.Column(db.Integer, nullable=False)
     user = db.relationship(User)
     def __repr__(self):
         return '<FavoriteMovie %r>' % self.id
@@ -50,7 +53,10 @@ class FavoriteSeries(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     userId = db.Column(db.Integer, db.ForeignKey("user.id"))
     seriesId = db.Column(db.Integer, nullable=False)
+    title = db.Column(db.String(120), nullable=False)
     status = db.Column(db.String(80), nullable=False)
+    posterPath = db.Column(db.String(80), nullable=False)
+    runtime = db.Column(db.Integer, nullable=False)
     user = db.relationship(User)
     def __repr__(self):
         return '<FavoriteSeries %r>' % self.id
