@@ -194,12 +194,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
-			addToList: async (userID, favoriteID, favoriteType, favoriteStatus) => {
+			addToList: async (userID, favoriteID, favoriteType, favoriteTitle ,favoriteStatus, favoritePoster_path, favoriteRuntime) => {
 				const opts = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
-						status: favoriteStatus
+						title : favoriteTitle,
+						status: favoriteStatus,
+						posterPath : favoritePoster_path,
+						runtime : favoriteRuntime
+
 					})
 				};
 

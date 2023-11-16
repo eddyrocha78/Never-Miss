@@ -97,7 +97,7 @@ export const Details = props => {
 
 		fetch(`https://api.themoviedb.org/3/${params.type}/${params.theid}?language=en-US`, options)
 			.then(response => response.json())
-			.then(response => { /*console.log(response)*/; setInfo(response) })
+			.then(response => { console.log(response); setInfo(response) })
 			.catch(err => console.error(err));
 	}
 
@@ -179,8 +179,13 @@ export const Details = props => {
 
 	const addFavorite = (status) => {
 		if (store.token && store.token != "" && store.token != null) {
-			actions.addToList(store.userId, params.theid, params.type, status)
-			window.location.reload();
+			if (params.type == "movie") {
+				actions.addToList(store.userId, params.theid, params.type, info.title , status, info.poster_path, info.runtime)
+				window.location.reload();
+			}else{
+				actions.addToList(store.userId, params.theid, params.type, info.name , status, info.poser_path, info.last_episode_to_air.runtime)
+				window.location.reload();
+			}
 		}
 	}
 
@@ -198,7 +203,8 @@ export const Details = props => {
 		}
 	}
 
-	return (params.type == "movie" ?
+	return (info.adult == false ?
+		params.type == "movie" ?
 		<div className="text-center mt-5 text-light container-fluid">
 			<h1 className="text-white-50 display-1 fw-bold">{info.title}</h1>
 			<p className="text-secondary h2 my-5 fw-bold">{info.tagline}</p>
@@ -664,7 +670,7 @@ export const Details = props => {
 				</div>
 			</div>
 		</div>
-	);
+		: <div><p className="display-1 text-center text-light ">Forbidden</p></div>);
 };
 
 Details.propTypes = {

@@ -153,7 +153,10 @@ def add_favoriteMovie(user_id, movie_id):
     favorite = FavoriteMovie()
     favorite.userId = user_id
     favorite.movieId = movie_id
+    favorite.title = favorite_data["title"]
     favorite.status = favorite_data["status"]
+    favorite.posterPath = favorite_data["posterPath"]
+    favorite.runtime = favorite_data["runtime"]
     db.session.add(favorite)
     db.session.commit()
     return jsonify({"msg": "favorite Movie was added"}), 200
@@ -185,7 +188,10 @@ def add_favoriteSeries(user_id, series_id):
     favorite = FavoriteSeries()
     favorite.userId = user_id
     favorite.seriesId = series_id
+    favorite.title = favorite_data["title"]
     favorite.status = favorite_data["status"]
+    favorite.posterPath = favorite_data["posterPath"]
+    favorite.runtime = favorite_data["runtime"]
     db.session.add(favorite)
     db.session.commit()
     return jsonify({"msg": "favorite Series was added"}), 200
