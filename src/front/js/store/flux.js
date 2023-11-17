@@ -11,7 +11,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userFavorites: [],
 			token: null,
 			message: null,
-			userPassword : null,
 			user: []
 
 		},

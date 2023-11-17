@@ -29,11 +29,9 @@ export const UserProfile2 = () => {
   }, [store.userId]);
 
   useEffect(() => {
-    if (sessionStorage.getItem("email") !== "" && sessionStorage.getItem("password") !== "") {
-      store.userPassword = sessionStorage.getItem("password");
+    if (sessionStorage.getItem("email") !== "") {
       actions.login(sessionStorage.getItem("email"), sessionStorage.getItem("password"));
       sessionStorage.setItem("email", "");
-      sessionStorage.setItem("password", "");
       navigate("/userspace")
     }
   }, []);
@@ -127,7 +125,7 @@ export const UserProfile2 = () => {
     if (firstName.trim() === "" || lastName.trim() === "" || password.trim() === "") {
       alert("Inputs cannot be empty")
     } else {
-      if(password == store.userPassword){
+      if(password ==  sessionStorage.getItem("password")){
         actions.editUser(store.userId, firstName, lastName);
         actions.logout();
         sessionStorage.setItem("email", store.userEmail);
