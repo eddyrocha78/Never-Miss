@@ -203,7 +203,7 @@ export const UserProfile2 = () => {
           </div>
         </div>
 
-        {/* my comments div
+        {/* my comments div*/}
         <div className="row">
           <div className="col ms-1 rounded mb-2">
             <div className="col-md-12">
@@ -216,7 +216,7 @@ export const UserProfile2 = () => {
               </div>
             </div>
           </div>
-        </div>*/}
+        </div>
 
 
 
