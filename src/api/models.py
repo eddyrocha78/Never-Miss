@@ -46,7 +46,10 @@ class FavoriteMovie(db.Model):
             "id": self.id,
             "userId": self.userId,
             "movieId": self.movieId,
-            "status": self.status
+            "title": self.title,
+            "status": self.status,
+            "poster": self.poster,
+            "runtime": self.runtime
         }
 
 class FavoriteSeries(db.Model):
@@ -66,5 +69,8 @@ class FavoriteSeries(db.Model):
             "id": self.id,
             "userId": self.userId,
             "seriesId": self.seriesId,
-            "status": self.status
+            "title": self.title,
+            "status": self.status,
+            "poster": self.poster,
+            "runtime": self.runtime
         }

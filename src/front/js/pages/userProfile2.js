@@ -5,15 +5,21 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 
 export const UserProfile2 = () => {
   const { store, actions } = useContext(Context);
-  const [isReadOnly1, setIsReadOnly1] = useState(false);
-  const [isReadOnly2, setIsReadOnly2] = useState(false);
+
+  const navigate = useNavigate();
+
+  const [firstName, setFirstname] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
 
   const [favorites, setFavorites] = useState([]);
   const [added, setadded] = useState(false);
-  const [watched, setWatched] = useState({series: 0 ,movies: 0});
-  const [watching, setWatching] = useState({series: 0 ,movies: 0});
-  const [watchingTime, setWatchingTime] = useState(0);
-  const [planTo, setPlanTo] = useState({series: 0 ,movies: 0});
+  const [watched, setWatched] = useState({ series: 0, movies: 0 });
+  const [watchedTime, setWatchedTime] = useState({ series: 0, movies: 0 });
+  const [watching, setWatching] = useState({ series: 0, movies: 0 });
+  const [watchingTime, setWatchingTime] = useState({ series: 0, movies: 0 });
+  const [planTo, setPlanTo] = useState({ series: 0, movies: 0 });
+  const [planToTime, setPlanToTime] = useState({ series: 0, movies: 0 });
 
 
 
@@ -24,67 +30,92 @@ export const UserProfile2 = () => {
   }, [store.userId]);
 
   useEffect(() => {
+    if (sessionStorage.getItem("email") !== "" && sessionStorage.getItem("password") !== "") {
+      actions.login(sessionStorage.getItem("email"), sessionStorage.getItem("password"));
+      store.userPassword = sessionStorage.getItem("password");
+      sessionStorage.setItem("email", "");
+      sessionStorage.setItem("password", "");
+    }
+  }, []);
+
+  useEffect(() => {
     if (store.userFavorites != "" && store.userFavorites != null) {
       console.log(store.userFavorites);
       setFavorites(store.userFavorites);
-      setadded(true);
     }
   }, [store.userFavorites]);
 
   useEffect(() => {
-    if (added == true && store.userFavorites != "" && store.userFavorites != null)
-    {
+    if (added == false && store.userFavorites != "" && store.userFavorites != null) {
       addNumbers();
     }
-  }, [added]);
+  }, [favorites]);
 
   useEffect(() => {
-    if (store.token && store.token != "" && store.token != null) actions.getMessage();
+    if (store.token && store.token != "" && store.token != null) { actions.getMessage(); }
   }, [store.token])
 
   const addNumbers = () => {
-      favorites.map((_, index) => {
-        if (favorites[index].seriesId !== undefined) {
-          if (favorites[index].status == "watched") {
-            const updatedWatched = watched;
-            updatedWatched.series += 1;
-            setWatched(updatedWatched);
-          }
-          else if (favorites[index].status == "watching") {
-            const updatedWatching = watching;
-            updatedWatching.series += 1;
-            updatedWatching.movies += 1;
-            setWatching(updatedWatching);
-
-          }
-          else if (favorites[index].status == "planToWatch") {
-            const updatedPlanToWatch = planTo;
-            updatedPlanToWatch.series += 1;
-            setPlanTo(updatedPlanToWatch);
-          }
+    setadded(true);
+    favorites.map((_, index) => {
+      if (favorites[index].seriesId !== undefined) {
+        if (favorites[index].status == "watched") {
+          const updatedWatched = watched;
+          updatedWatched.series += 1;
+          const updateTime = watchedTime;
+          updateTime.series += favorites[index].runtime
+          setWatchedTime(updateTime);
+          setWatched(updatedWatched);
         }
-        else if (favorites[index].movieId !== null || favorites[index].movieId !== undefined){
+        else if (favorites[index].status == "watching") {
+          const updatedWatching = watching;
+          updatedWatching.series += 1;
+          const updateTime = watchingTime;
+          updateTime.series += favorites[index].runtime
+          setWatchingTime(updateTime);
+          setWatching(updatedWatching);
 
-          if (favorites[index].status == "watched") {
-            const updatedWatched = watched;
-            updatedWatched.movies += 1;
-            setWatched(updatedWatched);
-          }
-          else if (favorites[index].status == "watching") {
-            const updatedWatching = watching;
-            updatedWatching.movies += 1;
-            setWatching(updatedWatching);
-
-          }
-          else if (favorites[index].status == "planToWatch") {
-            const updatedPlanToWatch = planTo;
-            updatedPlanToWatch.movies += 1;
-            setPlanTo(updatedPlanToWatch);
-
-          }
-          
         }
-      })
+        else if (favorites[index].status == "planToWatch") {
+          const updatedPlanToWatch = planTo;
+          updatedPlanToWatch.series += 1;
+          const updateTime = planToTime;
+          updateTime.series += favorites[index].runtime
+          setPlanToTime(updateTime);
+          setPlanTo(updatedPlanToWatch);
+        }
+      }
+      else if (favorites[index].movieId !== null || favorites[index].movieId !== undefined) {
+
+        if (favorites[index].status == "watched") {
+          const updatedWatched = watched;
+          updatedWatched.movies += 1;
+          const updateTime = watchedTime;
+          updateTime.movies += favorites[index].runtime
+          setWatchedTime(updateTime);
+          setWatched(updatedWatched);
+        }
+        else if (favorites[index].status == "watching") {
+          const updatedWatching = watching;
+          updatedWatching.movies += 1;
+          const updateTime = watchingTime;
+          updateTime.movies += favorites[index].runtime
+          setWatchingTime(updateTime);
+          setWatching(updatedWatching);
+
+        }
+        else if (favorites[index].status == "planToWatch") {
+          const updatedPlanToWatch = planTo;
+          updatedPlanToWatch.movies += 1;
+          const updateTime = planToTime;
+          updateTime.movies += favorites[index].runtime
+          setPlanToTime(updateTime);
+          setPlanTo(updatedPlanToWatch);
+
+        }
+
+      }
+    })
     console.log(watched);
     console.log(watching);
     console.log(planTo);
@@ -93,26 +124,22 @@ export const UserProfile2 = () => {
   let sessiontoken = sessionStorage.getItem("token")
 
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleClick = () => {
+    if (firstName.trim() === "" || lastName.trim() === "" || password.trim() === "") {
+      alert("Inputs cannot be empty")
+    } else {
+      if(password == store.userPassword){
+        actions.editUser(store.userId, firstName, lastName);
+        actions.logout();
+        sessionStorage.setItem("email", store.userEmail);
+        sessionStorage.setItem("password", password);
+        window.location.reload();
+      }else{
+        alert("Wrong password")
+      }
+    }
   };
 
-  function handleEdit1() {
-    setIsReadOnly1(true);
-  };
-
-  function handleEdit2() {
-    setIsReadOnly2(true);
-  };
-
-  function handleSave1() {
-    setIsReadOnly1(false);
-  };
-
-  function handleSave2() {
-    setIsReadOnly1(false);
-  };
 
   return (
     <div className="container">
@@ -129,44 +156,20 @@ export const UserProfile2 = () => {
                 <img className="img-fluid" src="https://static.thenounproject.com/png/3911675-200.png" alt="User Avatar" style={{ width: "100%" }} />
               </div>
             </div>
-            {isReadOnly1 ? (
-              <div className="input-group mb-3">
-                <button className="btn btn-success" type="button" id="input1" onClick={handleSave1}>Save</button>
-                <input type="text" className="form-control" name="firstName" aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange} placeholder={store.userName} ></input>
+            <div className="d-grid gap-2">
+              <div className="mb-3">
+                <input type="text" className="form-control" name="firstName" aria-label="Example text with button addon" onChange={(e) => { setFirstname(e.target.value) }} placeholder={store.userName} />
               </div>
-            )
-              : (
-                <div className="input-group mb-3">
-                  <button className="btn btn-success" type="button" id="input1" onClick={handleEdit1}>Edit</button>
-                  <input type="text" className="form-control" name="firstName" aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange} readOnly placeholder={store.userName} ></input>
-                </div>
-              )}
-
-            {isReadOnly2 ? (
-              <div className="input-group mb-3">
-                <button className="btn btn-success" type="button" id="input1" onClick={handleSave2}>Save</button>
-                <input type="text" className="form-control" name="lastName" placeholder={store.userLastName} aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange}></input>
+              <div className="mb-3">
+                <input type="text" className="form-control" name="lastName" placeholder={store.userLastName} aria-label="Example text with button addon" onChange={(e) => { setLastName(e.target.value) }} />
               </div>
-            )
-              : (
-                <div className="input-group mb-3">
-                  <button className="btn btn-success" type="button" id="input1" onClick={handleEdit2}>Edit</button>
-                  <input type="text" className="form-control" name="lastName" placeholder={store.userLastName} aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange} readOnly></input>
-                </div>
-              )}
-
-            {/*{isReadOnly3 ? (
-              <div className="input-group mb-3">
-                <button className="btn btn-outline-success" type="button" id="input1" onClick={handleSave3}>Save</button>
-                <input type="text" className="form-control" name="password" placeholder={store.userPassword} aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange}></input>
+              <div className="mb-3">
+                <input type="password" className="form-control" placeholder="re-enter password" aria-label="Example text with button addon" onChange={(e) => { setPassword(e.target.value) }} />
               </div>
-              ) 
-              : (
-              <div className="input-group mb-3">
-                <button className="btn btn-outline-success" type="button" id="input1" onClick={handleEdit3}>Edit</button>
-                <input type="text" className="form-control" name="password" placeholder={store.userPassword} aria-label="Example text with button addon" aria-describedby="input1" onChange={handleChange} readOnly></input>
-              </div>
-              )}*/}
+            </div>
+            <div className="d-grid gap-2">
+              <button className="btn btn-success" onClick={handleClick}>Save Changes</button>
+            </div>
           </div>
 
 
@@ -177,29 +180,29 @@ export const UserProfile2 = () => {
               <div className="p-2">
                 <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row rounded  ps-1">
                   <div className="col-4 align-self-center">
-                    <h2 className="">Watching</h2>
+                    <h2 className="ms-2">Watching</h2>
                   </div>
                   <div className="col-7">
                     <p className="fs-4 text-center mt-2">Movies: {watching.movies} | Series: {watching.movies}</p >
-                    <p className="fs-4 text-center mt-2">Total Time : 99999 Minutes</p >
+                    <p className="fs-4 text-center mt-2">Total Time : {watchingTime.series + watchingTime.movies} Minutes</p >
                   </div>
                 </div>
                 <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row mt-5 rounded  ps-1">
                   <div className="col-4 align-self-center">
-                    <h2 className="">Watched</h2>
+                    <h2 className="ms-2">Watched</h2>
                   </div>
                   <div className="col-7">
                     <p className="fs-4 text-center mt-2">Movies: {watched.movies} | Series: {watched.series}</p >
-                    <p className="fs-4 text-center mt-2">Total Time : 99999 Minutes</p >
+                    <p className="fs-4 text-center mt-2">Total Time : {watchedTime.series + watchedTime.movies} Minutes</p >
                   </div>
                 </div>
                 <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row mt-5 rounded  ps-1">
                   <div className="col-4 align-self-center ">
-                    <h3 className="">Plan to Watch</h3>
+                    <h3 className="ms-2">Plan to Watch</h3>
                   </div>
                   <div className="col-7">
                     <p className="fs-4 text-center mt-2">Movies: {planTo.movies} | Series: {planTo.series}</p >
-                    <p className="fs-4 text-center mt-2">Total Time : 99999 Minutes</p >
+                    <p className="fs-4 text-center mt-2">Total Time : {planToTime.series + planToTime.movies} Minutes</p >
                   </div>
                 </div>
               </div>
@@ -207,7 +210,7 @@ export const UserProfile2 = () => {
           </div>
         </div>
 
-        {/* my comments div*/}
+        {/* my comments div
         <div className="row">
           <div className="col ms-1 rounded mb-2">
             <div className="col-md-12">
@@ -215,13 +218,12 @@ export const UserProfile2 = () => {
                 <h4>My Comments</h4>
               </div>
               <div className="completed rounded d-flex flex-row ps-1 mb-1" style={{ overflowX: "scroll", backgroundColor: "black", }}>
-                {/* plan to watch list*/}
                 1. movie<br></br>
                 2. Serie
               </div>
             </div>
           </div>
-        </div>
+        </div>*/}
 
 
 

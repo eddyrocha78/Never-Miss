@@ -12,6 +12,7 @@ export const Login = () => {
 	const navigate = useNavigate();
 
 	if (store.token) {
+		store.userPassword = password;
 		navigate("/userspace")
 	}
 	

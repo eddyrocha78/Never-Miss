@@ -11,6 +11,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userFavorites: [],
 			token: null,
 			message: null,
+			userPassword : null,
 			user: []
 
 		},
@@ -58,7 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					sessionStorage.setItem("token", data.access_token);
 					setStore({ token: data.access_token });
-					return true;
+					return resp;
 
 				}
 				catch (error) {
@@ -261,6 +262,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				try {
 					const resp = await fetch(process.env.BACKEND_URL + "/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
+
+					console.log(resp)
+					if (!resp.ok) {
+						alert("Error detected");
+						return false;
+					}
+
+					const data = await resp.json();
+					console.log(data)
+
+					return true;
+				}
+				catch (error) {
+					console.error("Error detected" + error)
+				}
+
+			},
+
+			editUser: async (userID, userFirstname, userLastName) => {
+				const opts = {
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						firstName : userFirstname,
+						lastName: userLastName
+					})
+				};
+
+
+
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/users/" + userID + "/edit", opts)
 
 					console.log(resp)
 					if (!resp.ok) {
