@@ -183,7 +183,7 @@ export const Details = props => {
 				actions.addToList(store.userId, params.theid, params.type, info.title , status, info.poster_path, info.runtime)
 				window.location.reload();
 			}else{
-				actions.addToList(store.userId, params.theid, params.type, info.name , status, info.poser_path, info.last_episode_to_air.runtime)
+				actions.addToList(store.userId, params.theid, params.type, info.name , status, info.poster_path, 20)
 				window.location.reload();
 			}
 		}

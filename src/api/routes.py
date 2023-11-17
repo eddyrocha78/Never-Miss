@@ -121,15 +121,12 @@ def handle_user(user_id):
 
 @api.route('/users/<int:user_id>/edit', methods=['PUT'])
 def edit_user(user_id):
-        
-    if request.method == 'PUT':
-        user = User.query.get(user_id)
-        user_data = request.get_json()
-        user.userName = user_data["userName"]
-        user.userLastName = user_data["userLastName"]
-        user.userPassword = user_data["userPassword"]
-        db.session.commit()
-        return jsonify({"msg": "User profile data changed"}), 200    
+    user = User.query.get(user_id)
+    user_data = request.get_json()
+    user.firstName = user_data["firstName"]
+    user.lastName = user_data["lastName"]
+    db.session.commit()
+    return jsonify({"msg": "User profile data changed"}), 200    
     
 
 @api.route('/users/<int:user_id>/favorites', methods=['GET'])
@@ -155,7 +152,7 @@ def add_favoriteMovie(user_id, movie_id):
     favorite.movieId = movie_id
     favorite.title = favorite_data["title"]
     favorite.status = favorite_data["status"]
-    favorite.posterPath = favorite_data["posterPath"]
+    favorite.poster = favorite_data["poster"]
     favorite.runtime = favorite_data["runtime"]
     db.session.add(favorite)
     db.session.commit()
@@ -190,7 +187,7 @@ def add_favoriteSeries(user_id, series_id):
     favorite.seriesId = series_id
     favorite.title = favorite_data["title"]
     favorite.status = favorite_data["status"]
-    favorite.posterPath = favorite_data["posterPath"]
+    favorite.poster = favorite_data["poster"]
     favorite.runtime = favorite_data["runtime"]
     db.session.add(favorite)
     db.session.commit()
