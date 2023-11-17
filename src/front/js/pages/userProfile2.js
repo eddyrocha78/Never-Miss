@@ -13,7 +13,6 @@ export const UserProfile2 = () => {
   const [password, setPassword] = useState("");
 
   const [favorites, setFavorites] = useState([]);
-  const [added, setadded] = useState(false);
   const [watched, setWatched] = useState({ series: 0, movies: 0 });
   const [watchedTime, setWatchedTime] = useState({ series: 0, movies: 0 });
   const [watching, setWatching] = useState({ series: 0, movies: 0 });
@@ -31,10 +30,11 @@ export const UserProfile2 = () => {
 
   useEffect(() => {
     if (sessionStorage.getItem("email") !== "" && sessionStorage.getItem("password") !== "") {
-      actions.login(sessionStorage.getItem("email"), sessionStorage.getItem("password"));
       store.userPassword = sessionStorage.getItem("password");
+      actions.login(sessionStorage.getItem("email"), sessionStorage.getItem("password"));
       sessionStorage.setItem("email", "");
       sessionStorage.setItem("password", "");
+      navigate("/userspace")
     }
   }, []);
 
@@ -46,7 +46,7 @@ export const UserProfile2 = () => {
   }, [store.userFavorites]);
 
   useEffect(() => {
-    if (added == false && store.userFavorites != "" && store.userFavorites != null) {
+    if (store.userFavorites != "" && store.userFavorites != null) {
       addNumbers();
     }
   }, [favorites]);
@@ -56,7 +56,6 @@ export const UserProfile2 = () => {
   }, [store.token])
 
   const addNumbers = () => {
-    setadded(true);
     favorites.map((_, index) => {
       if (favorites[index].seriesId !== undefined) {
         if (favorites[index].status == "watched") {
