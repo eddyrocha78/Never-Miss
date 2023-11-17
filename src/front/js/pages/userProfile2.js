@@ -44,7 +44,7 @@ export const UserProfile2 = () => {
   }, [store.userFavorites]);
 
   useEffect(() => {
-    if (store.userFavorites != "" && store.userFavorites != null) {
+    if (favorites != "" && favorites != null) {
       addNumbers();
     }
   }, [favorites]);
@@ -118,8 +118,6 @@ export const UserProfile2 = () => {
     console.log(planTo);
   }
 
-  let sessiontoken = sessionStorage.getItem("token")
-
 
   const handleClick = () => {
     if (firstName.trim() === "" || lastName.trim() === "" || password.trim() === "") {
@@ -169,8 +167,6 @@ export const UserProfile2 = () => {
             </div>
           </div>
 
-
-          {/* Statistics div*/}
           <div className="col-md-6 rounded mb-2" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(37, 53, 37, 1)" }}>
             <div className="header pt-2">
               <h1 className="p-2 text-center">Statistics</h1>
