@@ -146,7 +146,7 @@ export const UserProfile2 = () => {
         <div className="row">
           <div className="col-md-6 ps-1">
 
-            <div className="text-white col-md-5 rounded-circle p-3 my-5 mx-auto" style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} >
+            <div className="text-white col-md-7 rounded-circle p-3 my-5 mx-auto" style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} >
               <div className="text-center">
                 <img className="img-fluid" src="https://static.thenounproject.com/png/3911675-200.png" alt="User Avatar" style={{ width: "100%" }} />
               </div>
@@ -176,8 +176,11 @@ export const UserProfile2 = () => {
                     <h4 className="ms-2">Watching</h4>
                   </div>
                   <div className="col-md-7 py-2">
-                    <div className="fs-6 text-center mt-2">Movies: {watching.movies} | Series: {watching.movies}</div >
-                    <div className="fs-6 text-center mt-2">Total Time : {watchingTime.series + watchingTime.movies} Minutes</div >
+                    <div className="fs-6 text-start mt-2">
+                      Movies: {watching.movies} | 
+                      Series: {watching.movies}<br></br>
+                      Total Time : {watchingTime.series + watchingTime.movies} Minutes
+                    </div >
                   </div>
                 </div>
                 <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row mt-2 rounded ps-1">
@@ -185,8 +188,11 @@ export const UserProfile2 = () => {
                     <h4 className="ms-2">Watched</h4>
                   </div>
                   <div className="col-md-7 py-2">
-                    <div className="fs-6 text-center mt-2">Movies: {watched.movies} | Series: {watched.series}</div >
-                    <div className="fs-6 text-center mt-2">Total Time : {watchedTime.series + watchedTime.movies} Minutes</div >
+                    <div className="fs-6 text-start mt-2" style={{ overflowX: "scroll"}}>
+                      Movies: {watched.movies} | 
+                      Series: {watched.series}<br></br>
+                      Total Time : {watchedTime.series + watchedTime.movies} Minutes
+                    </div >
                   </div>
                 </div>
                 <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row mt-2 rounded ps-1">
@@ -194,8 +200,11 @@ export const UserProfile2 = () => {
                     <h4 className="ms-2">Plan to Watch</h4>
                   </div>
                   <div className="col-md-7 py-3">
-                    <div className="fs-6 text-center mt-2">Movies: {planTo.movies} | Series: {planTo.series}</div >
-                    <div className="fs-6 text-center mt-2">Total Time : {planToTime.series + planToTime.movies} Minutes</div >
+                    <div className="fs-6 text-start mt-2" style={{ overflowX: "scroll"}}>
+                      Movies: {planTo.movies} | 
+                      Series: {planTo.series} <br></br> 
+                      Total Time : {planToTime.series + planToTime.movies} Minutes
+                    </div >
                   </div>
                 </div>
               </div>
