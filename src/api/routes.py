@@ -11,7 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 from flask_cors import CORS
-from api.models import db, User , FavoriteMovie, FavoriteSeries
+from api.models import db, User , FavoriteMovie, FavoriteSeries, Comment
 from api.utils import generate_sitemap, APIException
 
 import resend
@@ -229,3 +229,28 @@ def index(user_email):
     }
     r = resend.Emails.send(params)
     return jsonify(r)
+
+
+@api.route('/users/<int:user_id>/comment/<target_type>/<int:target_id>', methods=['POST'])
+def add_Comment(user_id, target_id, target_type):
+    comment_data = request.get_json()
+
+    comment = Comment()
+    comment.userId = user_id
+    comment.targetId = target_id
+    comment.targetType = target_type
+    comment.userName = comment_data["userName"]
+    comment.text = comment_data["text"]
+    db.session.add(comment)
+    db.session.commit()
+    return jsonify({"msg": "Comment was added"}), 200
+    
+@api.route('/users/<int:user_id>/comment/<target_type>/<int:target_id>', methods=['DELETE'])
+def delete_Comment(user_id, target_id, target_type):
+    comments = Comment.query.all()
+    for comment in comments:
+        if comment.userId == user_id and comment.targetId == target_id and comment.targetType == target_type:
+            userComment = comment
+            db.session.delete(userComment)
+            db.session.commit()
+            return jsonify({"msg": "Comment was removed"}), 200

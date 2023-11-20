@@ -74,3 +74,24 @@ class FavoriteSeries(db.Model):
             "poster": self.poster,
             "runtime": self.runtime
         }
+
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    userId = db.Column(db.Integer, db.ForeignKey("user.id"))
+    targetId = db.Column(db.Integer,  nullable=False)
+    targetType = db.Column(db.String(80), nullable=False)
+    userName = db.Column(db.String(120), nullable=False)
+    text = db.Column(db.String(250), nullable=False)
+    user = db.relationship(User)
+    def __repr__(self):
+        return '<FavoriteMovie %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "userId": self.userId,
+            "movieId": self.movieId,
+            "userName": self.userName,
+            "text": self.text
+        }
