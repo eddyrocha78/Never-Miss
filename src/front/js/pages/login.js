@@ -24,7 +24,7 @@ export const Login = () => {
 
 	return (
 		<div className="container-fluid" >
-			<div className=" text-white rounded p-4 my-5 col-4 mx-auto" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} >
+			<div className=" text-white rounded p-4 my-5 col-md-4 mx-auto" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} >
 				<div className="text-center">
 					<img className="img-fluid" src="https://static.thenounproject.com/png/3911675-200.png" alt="User Avatar" style={{ width: "20%" }} />
 				</div>
@@ -36,7 +36,7 @@ export const Login = () => {
 						</>
 					) : (
 						<>
-							<div className="col-6 mx-auto">
+							<div className="col-md-6 mx-auto">
 								<h1 className="text-center">Login</h1>
 								<div className="mb-3">
 									<input type="email" className="form-control" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />

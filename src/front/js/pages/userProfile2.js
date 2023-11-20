@@ -144,58 +144,58 @@ export const UserProfile2 = () => {
 
       <div className="container">
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-6 ps-1">
 
-            <div className="text-white col-md-7 rounded-circle p-3 my-5 mx-auto" style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} >
+            <div className="text-white col-md-5 rounded-circle p-3 my-5 mx-auto" style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} >
               <div className="text-center">
                 <img className="img-fluid" src="https://static.thenounproject.com/png/3911675-200.png" alt="User Avatar" style={{ width: "100%" }} />
               </div>
             </div>
-            <div className="d-grid gap-2">
-              <div className="mb-3">
+            <div className="d-grid">
+              <div className="mb-2">
                 <input type="text" className="form-control" name="firstName" aria-label="Example text with button addon" onChange={(e) => { setFirstname(e.target.value) }} placeholder={store.userName} />
               </div>
-              <div className="mb-3">
+              <div className="mb-2">
                 <input type="text" className="form-control" name="lastName" placeholder={store.userLastName} aria-label="Example text with button addon" onChange={(e) => { setLastName(e.target.value) }} />
               </div>
-              <div className="mb-3">
+              <div className="mb-2">
                 <input type="password" className="form-control" placeholder="re-enter password" aria-label="Example text with button addon" onChange={(e) => { setPassword(e.target.value) }} />
               </div>
             </div>
-            <div className="d-grid gap-2">
+            <div className="d-grid mb-5">
               <button className="btn btn-success" onClick={handleClick}>Save Changes</button>
             </div>
           </div>
 
-          <div className="col-md-6 rounded mb-2" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(37, 53, 37, 1)" }}>
+          <div className="col-md-6 rounded my-5" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(37, 53, 37, 1)" }}>
             <div className="header pt-2">
-              <h1 className="p-2 text-center">Statistics</h1>
+              <h4 className="p-2 text-center">Statistics</h4>
               <div className="p-2">
-                <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row rounded  ps-1">
-                  <div className="col-4 align-self-center">
-                    <h2 className="ms-2">Watching</h2>
+                <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row rounded ps-1">
+                  <div className="col-md-4 align-self-center">
+                    <h4 className="ms-2">Watching</h4>
                   </div>
-                  <div className="col-7">
-                    <p className="fs-4 text-center mt-2">Movies: {watching.movies} | Series: {watching.movies}</p >
-                    <p className="fs-4 text-center mt-2">Total Time : {watchingTime.series + watchingTime.movies} Minutes</p >
-                  </div>
-                </div>
-                <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row mt-5 rounded  ps-1">
-                  <div className="col-4 align-self-center">
-                    <h2 className="ms-2">Watched</h2>
-                  </div>
-                  <div className="col-7">
-                    <p className="fs-4 text-center mt-2">Movies: {watched.movies} | Series: {watched.series}</p >
-                    <p className="fs-4 text-center mt-2">Total Time : {watchedTime.series + watchedTime.movies} Minutes</p >
+                  <div className="col-md-7 py-2">
+                    <div className="fs-6 text-center mt-2">Movies: {watching.movies} | Series: {watching.movies}</div >
+                    <div className="fs-6 text-center mt-2">Total Time : {watchingTime.series + watchingTime.movies} Minutes</div >
                   </div>
                 </div>
-                <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row mt-5 rounded  ps-1">
-                  <div className="col-4 align-self-center ">
-                    <h3 className="ms-2">Plan to Watch</h3>
+                <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row mt-2 rounded ps-1">
+                  <div className="col-md-4 align-self-center">
+                    <h4 className="ms-2">Watched</h4>
                   </div>
-                  <div className="col-7">
-                    <p className="fs-4 text-center mt-2">Movies: {planTo.movies} | Series: {planTo.series}</p >
-                    <p className="fs-4 text-center mt-2">Total Time : {planToTime.series + planToTime.movies} Minutes</p >
+                  <div className="col-md-7 py-2">
+                    <div className="fs-6 text-center mt-2">Movies: {watched.movies} | Series: {watched.series}</div >
+                    <div className="fs-6 text-center mt-2">Total Time : {watchedTime.series + watchedTime.movies} Minutes</div >
+                  </div>
+                </div>
+                <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row mt-2 rounded ps-1">
+                  <div className="col-md-4 align-self-center ">
+                    <h4 className="ms-2">Plan to Watch</h4>
+                  </div>
+                  <div className="col-md-7 py-3">
+                    <div className="fs-6 text-center mt-2">Movies: {planTo.movies} | Series: {planTo.series}</div >
+                    <div className="fs-6 text-center mt-2">Total Time : {planToTime.series + planToTime.movies} Minutes</div >
                   </div>
                 </div>
               </div>
@@ -205,7 +205,7 @@ export const UserProfile2 = () => {
 
         {/* my comments div*/}
         <div className="row">
-          <div className="col ms-1 rounded mb-2">
+          <div className="col ms-1 rounded mb-5" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(37, 53, 37, 1)" }}>
             <div className="col-md-12">
               <div className="header d-inline-flex align-items-center pt-2">
                 <h4>My Comments</h4>
