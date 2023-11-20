@@ -6,6 +6,10 @@
     border-color: rgba(37, 53, 37, 1) !important;
 }
 
+.subtitle{
+    color: rgba(164, 164, 164, 1) !important;
+}
+
 /* ul cursor change */
 
 ul *:not(a) {

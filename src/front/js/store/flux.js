@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userName: null,
 			userLastName: null,
 			userFavorites: [],
+			comments : [],
 			token: null,
 			message: null,
 			user: []
@@ -311,26 +312,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
-			getComments: async () => {
+			getAllComments: async () => {
 
 				const opts = {
-					method: "PUT",
+					method: "GET",
 					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						firstName : userFirstname,
-						lastName: userLastName
-					})
 				};
 				
 				try {
 					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/user", opts)
+					const resp = await fetch(process.env.BACKEND_URL + "/api/comments", opts)
 					const data = await resp.json()
-					setStore({ userId: data.id })
-					setStore({ userEmail: data.email })
-					setStore({ userName: data.name })
-					setStore({ userLastName: data.lastName })
 					// don't forget to return something, that is how the async resolves
+					console.log(data)
+					setStore({ comments: data })
 					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)
