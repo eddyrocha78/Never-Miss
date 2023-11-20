@@ -79,6 +79,7 @@ class FavoriteSeries(db.Model):
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     userId = db.Column(db.Integer, db.ForeignKey("user.id"))
+    userName = db.Column(db.String(120), nullable=False)
     targetId = db.Column(db.Integer,  nullable=False)
     targetType = db.Column(db.String(80), nullable=False)
     text = db.Column(db.String(250), nullable=False)
@@ -90,6 +91,7 @@ class Comment(db.Model):
         return {
             "id": self.id,
             "userId": self.userId,
+            "userName": self.userName,
             "target_type": self.targetType,
             "target_id": self.targetId,
             "text": self.text

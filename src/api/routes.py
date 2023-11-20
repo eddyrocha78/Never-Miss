@@ -256,6 +256,7 @@ def add_Comment(user_id, target_id, target_type):
     comment.userId = user_id
     comment.targetId = target_id
     comment.targetType = target_type
+    comment.userName = comment_data["userName"]
     comment.text = comment_data["text"]
     db.session.add(comment)
     db.session.commit()

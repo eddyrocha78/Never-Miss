@@ -22,6 +22,8 @@ export const Details = props => {
 	const [castChar, setCastChar] = useState([]);
 
 	const [comments, setComments] = useState([]);
+	const [newcomment, setNewComment] = useState([]);
+	const [userComment, setUserComment] = useState(false);
 
 	const [favorite, setFavorite] = useState([]);
 
@@ -79,11 +81,13 @@ export const Details = props => {
 			resp.map((_, index) => {
 				if (resp[index].target_type == "movie") {
 					if (resp[index].target_id == params.theid) {
+						setUserComment(true);
 						setComments((comments) => comments.concat(resp[index]))
 						//console.log(resp[index])
 					}
-				}else if (resp[index].target_type == "tv"){
+				} else if (resp[index].target_type == "tv") {
 					if (resp[index].target_id == params.theid) {
+						setUserComment(true);
 						setComments((comments) => comments.concat(resp[index]))
 						//console.log(resp[index])
 					}
@@ -203,6 +207,16 @@ export const Details = props => {
 			} else {
 				actions.addToList(store.userId, params.theid, params.type, info.name, status, info.poster_path, 20)
 				window.location.reload();
+			}
+		}
+	}
+
+	const addNewComment = (text) => {
+		if (store.token && store.token != "" && store.token != null) {
+			if (text.trim() === "") {
+				alert("Search cannot be empty");
+			} else {
+				actions.addComment(store.userId, "" + store.userName + " " + store.userLastName + "", text, params.type, params.theid);
 			}
 		}
 	}
@@ -417,16 +431,27 @@ export const Details = props => {
 							</div>
 						</div>
 						<div className="col-5 ms-2">
-							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="rounded px-5 py-4">
-								<p className="subtitle h2 fw-bold">Comments</p>
-								{Object.values(comments).length > 0 ?
-									comments.map((_, index) => (
-										<div className=" text-white rounded bg-success text-start" key={index}>
-											<p style={{ color: "rgba(164, 164, 164, 1)" }} className="h3 m-2 fw-bold">{comments[index].userId}</p>
-											<p className="text-center" >{comments[index].text}</p>
-										</div>
-									)) : null}
-
+							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="row rounded px-5 py-4">
+								<p className="subtitle h2 mb-4 fw-bold">Comments</p>
+								<div className="row d-flex flex-nowrap overflow-auto">
+									{Object.values(comments).length > 0 ?
+										comments.map((_, index) => (
+											<div className="text-white my-2 p-1 rounded bg-success text-start" key={index}>
+												<p className="h4 fw-bold">{comments[index].userName}</p>
+												<p className="text-center" >{comments[index].text}</p>
+											</div>
+										)) : null}
+								</div>
+								<div className="row justify-content-center">
+									{store.token && store.token != "" && store.token != null ?
+										userComment == false ?
+											<form>
+												<textarea className="form-control text-light bg bg-dark" onChange={(e) => { setNewComment(e.target.value) }} placeholder="New Comment" maxLength={250} rows="3"></textarea>
+												<button type="submit" onClick={() => { addNewComment(newcomment) }} className="btn btn-secondary mb-3">Comment</button>
+											</form> :
+											null
+										: null}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -627,16 +652,27 @@ export const Details = props => {
 							</div>
 						</div>
 						<div className="col-5 ms-2">
-							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="rounded px-5 py-4">
-								<p className="subtitle h2 fw-bold">Comments</p>
-								{Object.values(comments).length > 0 ?
-									comments.map((_, index) => (
-										<div className=" text-white rounded bg-success text-start" key={index}>
-											<p className="subtitle h3 m-2 fw-bold">{comments[index].userId}</p>
-											<p className="text-center" >{comments[index].text}</p>
-										</div>
-									)) : null}
-
+							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="row rounded px-5 py-4">
+								<p className="subtitle h2 mb-4 fw-bold">Comments</p>
+								<div className="row d-flex flex-nowrap overflow-auto">
+									{Object.values(comments).length > 0 ?
+										comments.map((_, index) => (
+											<div className="text-white my-2 p-1 rounded bg-success text-start" key={index}>
+												<p className="h4 fw-bold">{comments[index].userName}</p>
+												<p className="text-center" >{comments[index].text}</p>
+											</div>
+										)) : null}
+								</div>
+								<div className="row justify-content-center">
+									{store.token && store.token != "" && store.token != null ?
+										userComment == false ?
+											<form>
+												<textarea className="form-control text-light bg bg-dark" onChange={(e) => { setNewComment(e.target.value) }} placeholder="New Comment" maxLength={250} rows="3"></textarea>
+												<button type="submit" onClick={() => { addNewComment(newcomment) }} className="btn btn-secondary mb-3">Comment</button>
+											</form> :
+											null
+										: null}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -696,7 +732,7 @@ export const Details = props => {
 					</div>
 				</div>
 			</div>
-		: <div><p className="display-1 text-center text-light ">Forbidden</p></div>);
+		: <div><p className="display-4 text-center text-light ">Not Found</p></div>);
 };
 
 Details.propTypes = {
