@@ -309,7 +309,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.error("Error detected" + error)
 				}
 
-			}
+			},
+
+			getComments: async () => {
+
+				const opts = {
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						firstName : userFirstname,
+						lastName: userLastName
+					})
+				};
+				
+				try {
+					// fetching data from the backend
+					const resp = await fetch(process.env.BACKEND_URL + "/api/user", opts)
+					const data = await resp.json()
+					setStore({ userId: data.id })
+					setStore({ userEmail: data.email })
+					setStore({ userName: data.name })
+					setStore({ userLastName: data.lastName })
+					// don't forget to return something, that is how the async resolves
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
 
 		}
 	};

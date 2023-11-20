@@ -230,6 +230,23 @@ def index(user_email):
     r = resend.Emails.send(params)
     return jsonify(r)
 
+@api.route('/comments', methods=['GET'])
+def handle_getCommets():
+    userComments = []
+    comments = Comment.query.all()
+    for comment in comments:
+        userComments.append(comment)
+    return jsonify([userComment.serialize() for userComment in userComments]), 200
+
+@api.route('/user/<int:user_id>/comments', methods=['GET'])
+def handle_userComments(user_id):
+    userComments = []
+    comments = Comment.query.all()
+    for comment in comments:
+        if comment.userId == user_id:
+            userComments.append(comment)
+    return jsonify([userComment.serialize() for userComment in userComments]), 200
+
 
 @api.route('/users/<int:user_id>/comment/<target_type>/<int:target_id>', methods=['POST'])
 def add_Comment(user_id, target_id, target_type):
@@ -239,7 +256,6 @@ def add_Comment(user_id, target_id, target_type):
     comment.userId = user_id
     comment.targetId = target_id
     comment.targetType = target_type
-    comment.userName = comment_data["userName"]
     comment.text = comment_data["text"]
     db.session.add(comment)
     db.session.commit()
