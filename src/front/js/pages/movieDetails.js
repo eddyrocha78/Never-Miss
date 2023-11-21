@@ -23,7 +23,7 @@ export const Details = props => {
 
 	const [comments, setComments] = useState([]);
 	const [newcomment, setNewComment] = useState([]);
-	const [userComment, setUserComment] = useState(false);
+	const [userCanComment, setUserCanComment] = useState(true);
 
 	const [favorite, setFavorite] = useState([]);
 
@@ -81,15 +81,17 @@ export const Details = props => {
 			resp.map((_, index) => {
 				if (resp[index].target_type == "movie") {
 					if (resp[index].target_id == params.theid) {
-						setUserComment(true);
+						if (resp[index].userId == store.userId) {
+							setUserCanComment(false)
+						}
 						setComments((comments) => comments.concat(resp[index]))
-						//console.log(resp[index])
 					}
 				} else if (resp[index].target_type == "tv") {
 					if (resp[index].target_id == params.theid) {
-						setUserComment(true);
+						if (resp[index].userId == store.userId) {
+							setUserCanComment(false)
+						}
 						setComments((comments) => comments.concat(resp[index]))
-						//console.log(resp[index])
 					}
 				}
 			})
@@ -103,7 +105,6 @@ export const Details = props => {
 			actions.getMessage();
 			console.log(store.token)
 		}
-
 	}, [store.token])
 
 	//https://placehold.co/1280x720/527552/527552/png?text=   <= Placeholder Image
@@ -214,10 +215,18 @@ export const Details = props => {
 	const addNewComment = (text) => {
 		if (store.token && store.token != "" && store.token != null) {
 			if (text.trim() === "") {
-				alert("Search cannot be empty");
+				alert("Comment cannot be empty");
 			} else {
 				actions.addComment(store.userId, "" + store.userName + " " + store.userLastName + "", text, params.type, params.theid);
+				window.location.reload();
 			}
+		}
+	}
+
+	const removeComment = () => {
+		if (store.token && store.token != "" && store.token != null) {
+			actions.removeComment(store.userId, params.type, params.theid);
+			window.location.reload();
 		}
 	}
 
@@ -433,25 +442,31 @@ export const Details = props => {
 						<div className="col-5 ms-2">
 							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="row rounded px-5 py-4">
 								<p className="subtitle h2 mb-4 fw-bold">Comments</p>
-								<div className="row d-flex flex-nowrap overflow-auto">
+								<div style={{ maxHeight: "500px" }} className="row d-flex overflow-auto">
 									{Object.values(comments).length > 0 ?
 										comments.map((_, index) => (
-											<div className="text-white my-2 p-1 rounded bg-success text-start" key={index}>
-												<p className="h4 fw-bold">{comments[index].userName}</p>
-												<p className="text-center" >{comments[index].text}</p>
+											<div className="row text-white my-2 p-1 rounded bg-success text-start" key={index}>
+												<div className="col-10">
+													<p className="h4 fw-bold">{comments[index].userName}</p>
+												</div>
+												<div className="col-10">
+													<p className="text-center" >{comments[index].text}</p>
+												</div>
+												{comments[index].userId == store.userId && store.token && store.token != "" && store.token != null ?
+													<button onClick={() => { removeComment() }} className="btn btn-outline-danger"><i className="fa-solid fa-trash fa-lg text-danger-emphasis"></i></button> : null}
 											</div>
 										)) : null}
 								</div>
-								<div className="row justify-content-center">
-									{store.token && store.token != "" && store.token != null ?
-										userComment == false ?
-											<form>
+								{store.token && store.token != "" && store.token != null ?
+									userCanComment ?
+										<div className="row justify-content-center">
+											<form className="d-grid gap-2">
 												<textarea className="form-control text-light bg bg-dark" onChange={(e) => { setNewComment(e.target.value) }} placeholder="New Comment" maxLength={250} rows="3"></textarea>
-												<button type="submit" onClick={() => { addNewComment(newcomment) }} className="btn btn-secondary mb-3">Comment</button>
-											</form> :
-											null
-										: null}
-								</div>
+											</form>
+											<button onClick={() => { addNewComment(newcomment) }} className="btn btn-secondary mb-3">Post Comment</button>
+										</div> :
+										null
+									: null}
 							</div>
 						</div>
 					</div>
@@ -663,16 +678,16 @@ export const Details = props => {
 											</div>
 										)) : null}
 								</div>
-								<div className="row justify-content-center">
-									{store.token && store.token != "" && store.token != null ?
-										userComment == false ?
-											<form>
+								{store.token && store.token != "" && store.token != null ?
+									userCanComment ?
+										<div className="row justify-content-center">
+											<form className="d-grid gap-2">
 												<textarea className="form-control text-light bg bg-dark" onChange={(e) => { setNewComment(e.target.value) }} placeholder="New Comment" maxLength={250} rows="3"></textarea>
-												<button type="submit" onClick={() => { addNewComment(newcomment) }} className="btn btn-secondary mb-3">Comment</button>
-											</form> :
-											null
-										: null}
-								</div>
+											</form>
+											<button onClick={() => { addNewComment(newcomment) }} className="btn btn-secondary mb-3">Post Comment</button>
+										</div> :
+										null
+									: null}
 							</div>
 						</div>
 					</div>

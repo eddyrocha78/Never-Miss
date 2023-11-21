@@ -331,6 +331,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
+			removeComment: async (userID, targetType, targetId) => {
+				const opts = {
+					method: "DELETE",
+					headers: { "Content-Type": "application/json" }
+				};
+
+
+
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/users/" + userID + "/comment/" + targetType + "/" + targetId, opts)
+					const data = await resp.json();
+					return data;
+				}
+				catch (error) {
+					console.error("Error detected" + error)
+				}
+
+			}
 
 		}
 	};
