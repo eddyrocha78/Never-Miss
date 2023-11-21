@@ -218,7 +218,8 @@ export const Details = props => {
 				alert("Comment cannot be empty");
 			} else {
 				actions.addComment(store.userId, "" + store.userName + " " + store.userLastName + "", text, params.type, params.theid);
-				window.location.reload();
+				navigate("/")
+				
 			}
 		}
 	}
@@ -445,15 +446,21 @@ export const Details = props => {
 								<div style={{ maxHeight: "500px" }} className="row d-flex overflow-auto">
 									{Object.values(comments).length > 0 ?
 										comments.map((_, index) => (
-											<div className="row text-white my-2 p-1 rounded bg-success text-start" key={index}>
-												<div className="col-10">
-													<p className="h4 fw-bold">{comments[index].userName}</p>
+											<div className="row rounded justify-content-center text-white my-2 p-1 bg-success" key={index}>
+												<div className="row rounded justify-content-center">
+													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col rounded text-start">
+														<p className="h4 fw-bold">{comments[index].userName}</p>
+													</div>
+													<div className="ms-5 col-2">
+														{comments[index].userId == store.userId && store.token && store.token != "" && store.token != null ?
+															<button onClick={() => { removeComment() }} className="btn btn-outline-danger"><i className="fa-solid fa-trash fa-lg text-danger-emphasis"></i></button> : null}
+													</div>
 												</div>
-												<div className="col-10">
-													<p className="text-center" >{comments[index].text}</p>
+												<div className="row justify-content-center  text-start">
+													<div className="col py-2 d-flex flex-wrap overflow-auto">
+														<p className="text-center" >{comments[index].text}</p>
+													</div>
 												</div>
-												{comments[index].userId == store.userId && store.token && store.token != "" && store.token != null ?
-													<button onClick={() => { removeComment() }} className="btn btn-outline-danger"><i className="fa-solid fa-trash fa-lg text-danger-emphasis"></i></button> : null}
 											</div>
 										)) : null}
 								</div>
@@ -669,12 +676,24 @@ export const Details = props => {
 						<div className="col-5 ms-2">
 							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="row rounded px-5 py-4">
 								<p className="subtitle h2 mb-4 fw-bold">Comments</p>
-								<div className="row d-flex flex-nowrap overflow-auto">
+								<div style={{ maxHeight: "500px" }} className="row d-flex overflow-auto">
 									{Object.values(comments).length > 0 ?
 										comments.map((_, index) => (
-											<div className="text-white my-2 p-1 rounded bg-success text-start" key={index}>
-												<p className="h4 fw-bold">{comments[index].userName}</p>
-												<p className="text-center" >{comments[index].text}</p>
+											<div className="row rounded justify-content-center text-white my-2 p-1 bg-success" key={index}>
+												<div className="row rounded justify-content-center">
+													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col rounded text-start">
+														<p className="h4 fw-bold">{comments[index].userName}</p>
+													</div>
+													<div className="ms-5 col-2">
+														{comments[index].userId == store.userId && store.token && store.token != "" && store.token != null ?
+															<button onClick={() => { removeComment() }} className="btn btn-outline-danger"><i className="fa-solid fa-trash fa-lg text-danger-emphasis"></i></button> : null}
+													</div>
+												</div>
+												<div className="row justify-content-center  text-start">
+													<div className="col py-2 d-flex flex-wrap overflow-auto">
+														<p className="text-center" >{comments[index].text}</p>
+													</div>
+												</div>
 											</div>
 										)) : null}
 								</div>
