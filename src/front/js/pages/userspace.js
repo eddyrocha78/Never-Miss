@@ -9,18 +9,24 @@ export const UserSpace = () => {
   const { store, actions } = useContext(Context);
   const [info, setInfo] = useState([]);
 
-
-  let sessiontoken = sessionStorage.getItem("token")
-
+  let sessiontoken = sessionStorage.getItem("token");
   const navigate = useNavigate();
 
   useEffect(() => {
-    actions.getFavorites(store.userId);
+    if (store.token && store.token !== "" && store.token !== null) {
+      actions.getMessage();
+      console.log(store.token);
+    }
+  }, [store.token]);
 
+  useEffect(() => {
+    actions.getFavorites(store.userId);
   }, [store.userId]);
+
+  console.log(store.userId);
   console.log("favoritos", store.userFavorites);
   return (
-    <div className="container-fluid">
+    <div className="container-fluid listagem">
       <div className="row text-center my-5">
         <h1 className="text-white display-1 fw-bold">{store.userName} {store.userLastName} Space</h1>
       </div>
@@ -31,39 +37,151 @@ export const UserSpace = () => {
             <div className="header container-fluid py-2 d-inline-flex align-items-center">
               <i className="fa-solid fa-eye fa-lg ms-1 me-3 text-success"></i>
               <h4>Currently Watching</h4>
-              {store.userfavorites.map((key, index) => <CardFavorite title={index.title} />)}
             </div>
-            <div className="Movies-wrapper">
-             
+            <div className="row">
+              <div className="col">
+                <h5 className="mx-3">Movies</h5>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col">
+                {store.userFavorites.map((favorite, index) => (
+                  (favorite.status === "watching" && favorite.movieId) ?
+                    (
+                      <Link to={"/movie/details/" + favorite.movieId}>
+                        <CardFavorite
+                          key={index}
+                          title={favorite.title}
+                          imgpath={favorite.poster}
+                          runtime={favorite.runtime}
+                        />
+                      </Link>
+                    ) : null
+                ))}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col">
+                <h5 className="mx-3">Series</h5>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col">
+                {store.userFavorites.map((favorite, index) => (
+                  (favorite.status === "watching" && favorite.seriesId) ?
+                    (
+                      <Link to={"/tv/details/" + favorite.seriesId}>
+                        <CardFavorite
+                          key={index}
+                          title={favorite.title}
+                          imgpath={favorite.poster}
+                          runtime={favorite.runtime}
+                        />
+                      </Link>
+                    ) : null
+                ))}
+              </div>
             </div>
           </div>
 
-
-            <div className="col-md-5">
-              <div className="plan-to-watch row ms-1 rounded mb-2" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(37, 53, 37, 1)" }}>
-                <div className="col">
-                  <div className="header d-inline-flex py-2 align-items-center">
-                    <i className="fa-solid fa-eye fa-lg ms-1 me-3 text-primary"></i>
-                    <h4>Plan to Watch</h4>
+          <div className="col-md-5">
+            <div className="plan-to-watch row ms-1 rounded mb-2" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(37, 53, 37, 1)" }}>
+              <div className="col">
+                <div className="header d-inline-flex py-2 align-items-center">
+                  <i className="fa-solid fa-eye fa-lg ms-1 me-3 text-primary"></i>
+                  <h4>Plan to Watch</h4>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <h5 className="mx-1">Movies</h5>
                   </div>
-                  <div style={{ overflowX: "scroll", backgroundColor: "black" }} className="container-fluid plan-to-watch rounded mb-1">
-                    {/* plan to watch list*/}
-                    1. movie<br></br>
-                    2. Serie
+                </div>
+                <div className="row">
+                  <div className="col">
+                    {store.userFavorites.map((favorite, index) => (
+                      (favorite.status === "planToWatch" && favorite.movieId) ?
+                        <Link to={"/movie/details/" + favorite.movieId}>
+                          <CardFavorite
+                            key={index}
+                            title={favorite.title}
+                            imgpath={favorite.poster}
+                            runtime={favorite.runtime}
+                          />
+                        </Link>
+                        : null
+                    ))}
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <h5 className="mx-1">Series</h5>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    {store.userFavorites.map((favorite, index) => (
+                      (favorite.status === "planToWatch" && favorite.seriesId) ?
+                        <Link to={"/tv/details/" + favorite.seriesId}>
+                          <CardFavorite
+                            key={index}
+                            title={favorite.title}
+                            imgpath={favorite.poster}
+                            runtime={favorite.runtime}
+                          />
+                        </Link>
+                        : null
+                    ))}
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="completed row ms-1 rounded mb-2" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(37, 53, 37, 1)" }}>
-                <div className="col">
-                  <div className="header d-inline-flex align-items-center py-2 ">
-                    <i className="fa-solid fa-eye fa-lg ms-1 me-3 text-secondary"></i>
-                    <h4>Completed</h4>
+            <div className="completed row ms-1 rounded mb-2" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(37, 53, 37, 1)" }}>
+              <div className="col">
+                <div className="header d-inline-flex align-items-center py-2 ">
+                  <i className="fa-solid fa-eye fa-lg ms-1 me-3 text-secondary"></i>
+                  <h4>Completed</h4>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <h5 className="mx-1">Movies</h5>
                   </div>
-                  <div style={{ overflowX: "scroll", backgroundColor: "black" }} className="container-fluid completed rounded d-flex flex-row mb-1">
-                    {/* plan to watch list*/}
-                    1. movie<br></br>
-                    2. Serie
+                </div>
+                <div className="row">
+                  <div className="col">
+                    {store.userFavorites.map((favorite, index) => (
+                      (favorite.status === "watched" && favorite.movieId) ?
+                        <Link to={"/movie/details/" + favorite.movieId}>
+                          <CardFavorite
+                            key={index}
+                            title={favorite.title}
+                            imgpath={favorite.poster}
+                            runtime={favorite.runtime}
+                          />
+                        </Link>
+                        : null
+                    ))}
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <h5 className="mx-1">Series</h5>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    {store.userFavorites.map((favorite, index) => (
+                      (favorite.status === "watched" && favorite.seriesId) ?
+                        <Link to={"/tv/details/" + favorite.seriesId}>
+                          <CardFavorite
+                            key={index}
+                            title={favorite.title}
+                            imgpath={favorite.poster}
+                            runtime={favorite.runtime}
+                          />
+                        </Link>
+                        : null
+                    ))}
                   </div>
                 </div>
               </div>
@@ -71,5 +189,6 @@ export const UserSpace = () => {
           </div>
         </div>
       </div>
-      );
+    </div >
+  );
 };

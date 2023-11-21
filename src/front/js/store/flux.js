@@ -29,7 +29,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			login: async (email, password) => {
-				
+
 				console.log(email, password);
 				try {
 					// Creating opts for the fetch
@@ -92,6 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 
 					const data = await resp.json();
+				
 					console.log(data)
 
 					return true;
@@ -105,7 +106,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			forgotPassword: async (userEmail) => {
 
-				
+
 				try {
 
 					const resp = await fetch(process.env.BACKEND_URL + "/api/forgot/" + userEmail)
@@ -194,15 +195,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
-			addToList: async (userID, favoriteID, favoriteType, favoriteTitle ,favoriteStatus, favoritePoster_path, favoriteRuntime) => {
+			addToList: async (userID, favoriteID, favoriteType, favoriteTitle, favoriteStatus, favoritePoster_path, favoriteRuntime) => {
 				const opts = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
-						title : favoriteTitle,
+						title: favoriteTitle,
 						status: favoriteStatus,
-						poster : favoritePoster_path,
-						runtime : favoriteRuntime
+						poster: favoritePoster_path,
+						runtime: favoriteRuntime
 
 					})
 				};
@@ -284,7 +285,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "PUT",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
-						firstName : userFirstname,
+						firstName: userFirstname,
 						lastName: userLastName
 					})
 				};

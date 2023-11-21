@@ -13,7 +13,9 @@ export const Login = () => {
 
 	if (store.token) {
 		sessionStorage.setItem("password", password);
+		console.log(store.userId)
 		navigate("/userspace")
+		
 	}
 	
 	const handleClick = () => {
