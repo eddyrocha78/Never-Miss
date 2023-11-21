@@ -23,7 +23,7 @@ export const Details = props => {
 
 	const [comments, setComments] = useState([]);
 	const [newcomment, setNewComment] = useState([]);
-	const [userCanComment, setUserCanComment] = useState(true);
+	const [userCanComment, setUserCanComment] = useState(false);
 
 	const [favorite, setFavorite] = useState([]);
 
@@ -82,14 +82,14 @@ export const Details = props => {
 				if (resp[index].target_type == "movie") {
 					if (resp[index].target_id == params.theid) {
 						if (resp[index].userId == store.userId) {
-							setUserCanComment(false)
+							setUserCanComment(true)
 						}
 						setComments((comments) => comments.concat(resp[index]))
 					}
 				} else if (resp[index].target_type == "tv") {
 					if (resp[index].target_id == params.theid) {
 						if (resp[index].userId == store.userId) {
-							setUserCanComment(false)
+							setUserCanComment(true)
 						}
 						setComments((comments) => comments.concat(resp[index]))
 					}
@@ -218,6 +218,7 @@ export const Details = props => {
 				alert("Comment cannot be empty");
 			} else {
 				actions.addComment(store.userId, "" + store.userName + " " + store.userLastName + "", text, params.type, params.theid);
+				setUserCanComment(false);
 				navigate("/")
 				
 			}
@@ -451,7 +452,7 @@ export const Details = props => {
 													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col rounded text-start">
 														<p className="h4 fw-bold">{comments[index].userName}</p>
 													</div>
-													<div className="ms-5 col-2">
+													<div className="ms-5 col-3">
 														{comments[index].userId == store.userId && store.token && store.token != "" && store.token != null ?
 															<button onClick={() => { removeComment() }} className="btn btn-outline-danger"><i className="fa-solid fa-trash fa-lg text-danger-emphasis"></i></button> : null}
 													</div>
@@ -465,7 +466,7 @@ export const Details = props => {
 										)) : null}
 								</div>
 								{store.token && store.token != "" && store.token != null ?
-									userCanComment ?
+									userCanComment == false ?
 										<div className="row justify-content-center">
 											<form className="d-grid gap-2">
 												<textarea className="form-control text-light bg bg-dark" onChange={(e) => { setNewComment(e.target.value) }} placeholder="New Comment" maxLength={250} rows="3"></textarea>
@@ -684,7 +685,7 @@ export const Details = props => {
 													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col rounded text-start">
 														<p className="h4 fw-bold">{comments[index].userName}</p>
 													</div>
-													<div className="ms-5 col-2">
+													<div className="ms-5 col-3">
 														{comments[index].userId == store.userId && store.token && store.token != "" && store.token != null ?
 															<button onClick={() => { removeComment() }} className="btn btn-outline-danger"><i className="fa-solid fa-trash fa-lg text-danger-emphasis"></i></button> : null}
 													</div>
@@ -698,7 +699,7 @@ export const Details = props => {
 										)) : null}
 								</div>
 								{store.token && store.token != "" && store.token != null ?
-									userCanComment ?
+									userCanComment == false ?
 										<div className="row justify-content-center">
 											<form className="d-grid gap-2">
 												<textarea className="form-control text-light bg bg-dark" onChange={(e) => { setNewComment(e.target.value) }} placeholder="New Comment" maxLength={250} rows="3"></textarea>

@@ -10,20 +10,40 @@ export const UserProfile2 = () => {
 
   const [favorites, setFavorites] = useState([]);
 
-  const [movies, setMovies] = useState({ watched: 0, watching: 0,  planTo: 0});
-  const [series, setSeries] = useState({ watched: 0, watching: 0,  planTo: 0});
+  const [comments, setComments] = useState([]);
+  
+
+  const [movies, setMovies] = useState({ watched: 0, watching: 0, planTo: 0 });
+  const [moviesTime, setMoviesTime] = useState({ watched: 0, watching: 0, planTo: 0 });
+  const [series, setSeries] = useState({ watched: 0, watching: 0, planTo: 0 });
+  const [seriesTime, setSeriesTime] = useState({ watched: 0, watching: 0, planTo: 0 });
   const [added, setAdded] = useState(false);
+  const [addedCom, setAddedCom] = useState(false);
 
 
 
-  /*const [watched, setWatched] = useState({ series: 0, movies: 0 });
-  const [watchedTime, setWatchedTime] = useState({ series: 0, movies: 0 });
-  const [watching, setWatching] = useState({ series: 0, movies: 0 });
-  const [watchingTime, setWatchingTime] = useState({ series: 0, movies: 0 });
-  const [planTo, setPlanTo] = useState({ series: 0, movies: 0 });
-  const [planToTime, setPlanToTime] = useState({ series: 0, movies: 0 });*/
+
+  useEffect(() => {
+    actions.getAllComments();
+  }, []);
+
+  useEffect(() => {
+    if (store.comments !== null && comments == "" && addedCom == false) {
+      addUserComments()
+    }
+  }, [store.comments])
 
 
+  const addUserComments = () => {
+    setAddedCom(true);
+    let resp = store.comments;
+    resp.map((_, index) => {
+          if (resp[index].userId == store.userId) {
+          setComments((comments) => comments.concat(resp[index]))
+        }
+    })
+
+  }
 
   useEffect(() => {
     if (store.userId != "" && store.userId != null) {
@@ -33,14 +53,13 @@ export const UserProfile2 = () => {
 
   useEffect(() => {
     if (store.userFavorites != "" && store.userFavorites != null) {
-      console.log(store.userFavorites);
       setFavorites(store.userFavorites);
     }
   }, [store.userFavorites]);
 
   useEffect(() => {
     if (favorites != "" && favorites != null && added == false) {
-      addNumbers();
+      addStatusNumbers();
     }
   }, [favorites]);
 
@@ -49,50 +68,65 @@ export const UserProfile2 = () => {
     if (store.token && store.token != "" && store.token != null) { actions.getMessage(); }
   }, [store.token])
 
-  const addNumbers = () => {
+  const addStatusNumbers = () => {
     setAdded(true);
     favorites.map((_, index) => {
       if (favorites[index].movieId !== undefined) {
         if (favorites[index].status == "watched") {
           let updatedWatched = movies;
           updatedWatched.watched += 1;
-          setMovies(updatedWatched)
+          setMovies(updatedWatched);
+          let updatedWatchedT = moviesTime;
+          updatedWatchedT.watched += favorites[index].runtime;
+          setMoviesTime(updatedWatchedT);
         }
         else if (favorites[index].status == "watching") {
-        let updatedWatching = movies;
-        updatedWatching.watching += 1;
-        setMovies(updatedWatching)
+          let updatedWatching = movies;
+          updatedWatching.watching += 1;
+          setMovies(updatedWatching);
+          let updatedWatchingT = moviesTime;
+          updatedWatchingT.watching += favorites[index].runtime;
+          setMoviesTime(updatedWatchingT);
         }
         else if (favorites[index].status == "planToWatch") {
-          let updatedPlanToWatch =  movies;
+          let updatedPlanToWatch = movies;
           updatedPlanToWatch.planTo += 1;
-          setMovies(updatedPlanToWatch)
+          setMovies(updatedPlanToWatch);
+          let updatedPlanToT = moviesTime;
+          updatedPlanToT.planTo += favorites[index].runtime;
+          setMoviesTime(updatedPlanToT);
         }
       }
-      else if (favorites[index].movieId !== null || favorites[index].movieId !== undefined) 
-      {
+      else if (favorites[index].movieId !== null || favorites[index].movieId !== undefined) {
         if (favorites[index].status == "watched") {
           let updatedWatched = series;
           updatedWatched.watched += 1;
-          setSeries(updatedWatched)
+          setSeries(updatedWatched);
+          let updatedWatchedT = seriesTime;
+          updatedWatchedT.watched += favorites[index].runtime;
+          setSeriesTime(updatedWatchedT);
         }
         else if (favorites[index].status == "watching") {
-        let updatedWatching = series;
-        updatedWatching.watching += 1;
-        setSeries(updatedWatching)
+          let updatedWatching = series;
+          updatedWatching.watching += 1;
+          setSeries(updatedWatching);
+          let updatedWatchingT = seriesTime;
+          updatedWatchingT.watching += favorites[index].runtime;
+          setSeriesTime(updatedWatchingT);
         }
         else if (favorites[index].status == "planToWatch") {
-          let updatedPlanToWatch =  series;
+          let updatedPlanToWatch = series;
           updatedPlanToWatch.planTo += 1;
-          setSeries(updatedPlanToWatch)
+          setSeries(updatedPlanToWatch);
+          let updatedWatchingT = seriesTime;
+          updatedWatchingT.watching += favorites[index].runtime;
+          setSeriesTime(updatedWatchingT);
         }
       }
     })
   }
 
 
-  const handleClick = () => {
-  };
 
 
   return (
@@ -119,8 +153,8 @@ export const UserProfile2 = () => {
                 <div className="col-md-7 py-2">
                   <div className="fs-6 text-start mt-2">
                     Movies: {movies.watching} |
-                    Series: {series.planTo}<br></br>
-                    Total Time :  Minutes
+                    Series: {series.watching}<br></br>
+                    Total Time {moviesTime.watching + seriesTime.watching} :  Minutes
                   </div >
                 </div>
               </div>
@@ -132,7 +166,7 @@ export const UserProfile2 = () => {
                   <div className="fs-6 text-start mt-2">
                     Movies: {movies.watched} |
                     Series: {series.watched}<br></br>
-                    Total Time :  Minutes
+                    Total Time {moviesTime.watched + seriesTime.watched} :  Minutes
                   </div >
                 </div>
               </div>
@@ -144,7 +178,7 @@ export const UserProfile2 = () => {
                   <div className="fs-6 text-start mt-2" >
                     Movies: {movies.planTo} |
                     Series: {series.planTo}<br></br>
-                    Total Time : Minutes
+                    Total Time {moviesTime.planTo + seriesTime.planTo}: Minutes
                   </div >
                 </div>
               </div>
@@ -152,21 +186,31 @@ export const UserProfile2 = () => {
           </div>
         </div>
       </div>
-
-      {/* my comments div*/}
       <div className="row">
         <div className="col ms-1 rounded mb-5" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(37, 53, 37, 1)" }}>
           <div className="col-md-12">
-            <div className="header d-inline-flex align-items-center pt-2">
+            <div className="header d-inline-flex align-items-center p-2">
               <h4>My Comments</h4>
             </div>
-            <div className="completed rounded d-flex flex-row ps-1 mb-1" style={{ overflowX: "scroll", backgroundColor: "black", }}>
-              1. movie<br></br>
-              2. Serie
             </div>
+            {Object.values(comments).length > 0 ?
+            comments.map((_, index) => (
+											<div onClick={() => {navigate("/"+ comments[index].target_type +"/details/"+ comments[index].target_id)}} style={{ backgroundColor: "rgba(82, 117, 82, 1)" }}className="offset-md-1 col-10 rounded justify-content-center text-white my-2 p-1 " key={index}>
+												<div className="row rounded justify-content-center">
+													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col-10 rounded text-start">
+														<p className="h4 mt-2 fw-bold">{comments[index].target_type == "movie" ? "Comment on a Movie" : "Comment on a Series"}</p>
+													</div>
+												</div>
+												<div className="row justify-content-center  text-start">
+													<div className="col-10 py-2 d-flex flex-wrap overflow-auto">
+														<p className="text-center" >{comments[index].text}</p>
+													</div>
+												</div>
+											</div>
+										))
+                  : null}
           </div>
         </div>
       </div>
-    </div>
   );
 };
