@@ -14,7 +14,7 @@ class User(db.Model):
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
 
     def __repr__(self):
-        return f'User {self.firstName}'
+        return f'User {self.firstName} {self.lastName}'
 
     def check_password(self, password):
         return compare_digest(password, self.password)
@@ -73,4 +73,26 @@ class FavoriteSeries(db.Model):
             "status": self.status,
             "poster": self.poster,
             "runtime": self.runtime
+        }
+
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    userId = db.Column(db.Integer, db.ForeignKey("user.id"))
+    userName = db.Column(db.String(120), nullable=False)
+    targetId = db.Column(db.Integer,  nullable=False)
+    targetType = db.Column(db.String(80), nullable=False)
+    text = db.Column(db.String(250), nullable=False)
+    user = db.relationship(User)
+    def __repr__(self):
+        return '<Comment %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "userId": self.userId,
+            "userName": self.userName,
+            "target_type": self.targetType,
+            "target_id": self.targetId,
+            "text": self.text
         }

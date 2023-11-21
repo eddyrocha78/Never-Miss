@@ -9,6 +9,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			userName: null,
 			userLastName: null,
 			userFavorites: [],
+			comments : [],
 			token: null,
 			message: null,
 			user: []
@@ -131,48 +132,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					// fetching data from the backend
 					const resp = await fetch(process.env.BACKEND_URL + "/api/user", opts)
-					const data = await resp.json()
-					setStore({ userId: data.id })
-					setStore({ userEmail: data.email })
-					setStore({ userName: data.name })
-					setStore({ userLastName: data.lastName })
-					// don't forget to return something, that is how the async resolves
+					const data = await resp.json();
+					setStore({ userId: data.id });
+					setStore({ userEmail: data.email });
+					setStore({ userName: data.name });
+					setStore({ userLastName: data.lastName });
+					//console.log(data);
 					return data;
 				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}
-			},
-
-
-			addToList: async (userID, favoriteID, favoriteType, favoriteStatus) => {
-				const opts = {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						status: favoriteStatus
-					})
-				};
-
-
-
-				try {
-					const resp = await fetch(process.env.BACKEND_URL + "/api/users/" + userID + "/favorites/" + favoriteType + "/" + favoriteID, opts)
-
-					console.log(resp)
-					if (!resp.ok) {
-						alert("Error detected");
-						return false;
-					}
-
-					const data = await resp.json();
-					console.log(data)
-
-					return true;
-				}
-				catch (error) {
-					console.error("Error detected" + error)
-				}
-
 			},
 			getFavorites: async (userID) => {
 				const opts = {
@@ -304,6 +273,76 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(data)
 
 					return true;
+				}
+				catch (error) {
+					console.error("Error detected" + error)
+				}
+
+			},
+
+			getAllComments: async () => {
+
+				const opts = {
+					method: "GET",
+					headers: { "Content-Type": "application/json" },
+				};
+				
+				try {
+					// fetching data from the backend
+					const resp = await fetch(process.env.BACKEND_URL + "/api/comments", opts)
+					const data = await resp.json()
+					// don't forget to return something, that is how the async resolves
+					console.log(data)
+					setStore({ comments: data })
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
+
+			addComment: async (userID, userFullName, text, targetType, targetId) => {
+				const opts = {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						userName : userFullName,
+						text: text
+					})
+				};
+
+
+
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/users/" + userID + "/comment/" + targetType + "/" + targetId, opts)
+
+					console.log(resp)
+					if (!resp.ok) {
+						alert("Error detected");
+						return false;
+					}
+
+					const data = await resp.json();
+					console.log(data)
+
+					return true;
+				}
+				catch (error) {
+					console.error("Error detected" + error)
+				}
+
+			},
+			removeComment: async (userID, targetType, targetId) => {
+				const opts = {
+					method: "DELETE",
+					headers: { "Content-Type": "application/json" }
+				};
+
+
+
+				try {
+					const resp = await fetch(process.env.BACKEND_URL + "/api/users/" + userID + "/comment/" + targetType + "/" + targetId, opts)
+					const data = await resp.json();
+					return data;
 				}
 				catch (error) {
 					console.error("Error detected" + error)
