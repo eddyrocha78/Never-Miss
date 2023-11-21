@@ -2,6 +2,27 @@
     General Styles used on every website (Don't Repeat Yourself)
 */
 
+/* deleting <a> styles */
+
+.listagem a {
+    text-decoration: none; /* Remove default underline */
+    color: inherit; /* Inherit color from parent */
+    
+  }
+  
+  .listagem a:hover {
+    color: inherit; /* Inherit color on hover */
+  }
+
+
+/* Stopper for overflow */
+
+.sizer{
+ max-width: 100px;   
+}
+
+/* border color */
+
 .borgreen{
     border-color: rgba(37, 53, 37, 1) !important;
 }

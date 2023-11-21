@@ -8,15 +8,14 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
-	useEffect(() => {
-		if(store.token && store.token !="" && store.token !=null)
-    {
+  useEffect(() => {
+    if (store.token && store.token != "" && store.token != null) {
       actions.getMessage();
       console.log(store.token)
     }
-    
-	}, [store.token])
-  
+
+  }, [store.token])
+
   let sessiontoken = sessionStorage.getItem("token")
 
   const navigate = useNavigate();
@@ -105,18 +104,18 @@ export const Home = () => {
           <button className="btn btn-success fs-4 p-0" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
         </div>
       </div>
-      {store.token && store.token !="" && store.token !=null?
-      <div className="row text-center my-5">
-      <h1 className="text-white-50 display-5">
-          Welcome back {store.userName} {store.userLastName} 
-        </h1>
+      {store.token && store.token != "" && store.token != null ?
+        <div className="row text-center my-5">
+          <h1 className="text-white-50 display-5">
+            Welcome back {store.userName} {store.userLastName}
+          </h1>
         </div>
         :
-      <div className="row text-center my-5">
-        <h1 className="text-white-50 display-5">
-          Subscribe to never miss a thing
-        </h1>
-      </div>}
+        <div className="row text-center my-5">
+          <h1 className="text-white-50 display-5">
+            Subscribe to never miss a thing
+          </h1>
+        </div>}
       <div className="row my-5">
         <div className="col">
           <div
