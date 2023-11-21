@@ -12,8 +12,6 @@ export const Login = () => {
 	const navigate = useNavigate();
 
 	if (store.token) {
-		sessionStorage.setItem("password", password);
-		console.log(store.userId)
 		navigate("/userspace")
 		
 	}
