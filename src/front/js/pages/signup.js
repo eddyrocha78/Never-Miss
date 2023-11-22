@@ -89,17 +89,9 @@ export const Signup = () => {
 									<input id="passwordcheck" className="form-control" type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} required />
 								</div>
 							</div>
-							<div className="row justify-content-center">
-								<div className="form-check col-auto mb-3">
-									<input className="form-check-input" type="checkbox" checked={isChecked} onChange={() => setIsChecked(!isChecked)} />
-									<label className="form-check-label" htmlFor="flexCheckDefault">
-										I've read and agree with the <a href="#">Terms and Conditions</a>
-									</label>
-								</div>
-							</div>
 
 							<div className="row justify-content-center">
-								<button disabled={!isChecked} className="col-3 btn btn-success" type="submit">Sign Up</button>
+								<button className="col-3 btn btn-success" type="submit">Sign Up</button>
 							</div>
 						</form>
 					)}
