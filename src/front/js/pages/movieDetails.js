@@ -436,7 +436,7 @@ export const Details = props => {
 								<div style={{ maxHeight: "500px" }} className="row justify-content-center d-flex overflow-auto">
 									{Object.values(comments).length > 0 ?
 										comments.map((_, index) => (
-											<div className="row rounded justify-content-center text-white my-2 p-1 bg-success" key={index}>
+											<div  style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row rounded justify-content-center text-white my-2 pt-3" key={index}>
 												<div className="row rounded justify-content-center">
 													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col rounded text-start">
 														<p className="h4 fw-bold">{comments[index].userName}</p>
@@ -667,7 +667,7 @@ export const Details = props => {
 								<div style={{ maxHeight: "500px" }} className="row justify-content-center d-flex overflow-auto">
 									{Object.values(comments).length > 0 ?
 										comments.map((_, index) => (
-											<div className="row rounded justify-content-center text-white my-2 p-1 bg-success" key={index}>
+											<div  style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row rounded justify-content-center text-white my-2 p-1" key={index}>
 												<div className="row rounded justify-content-center">
 													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col rounded text-start">
 														<p className="h4 fw-bold">{comments[index].userName}</p>
