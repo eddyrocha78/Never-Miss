@@ -21,33 +21,23 @@ export const UserProfile2 = () => {
   const [addedCom, setAddedCom] = useState(false);
 
 
-
-
   useEffect(() => {
-    actions.getAllComments();
-  }, []);
-
-  useEffect(() => {
-    if (store.comments !== null && comments == "" && addedCom == false) {
-      addUserComments()
+    if (store.comments !== null && comments == "") {
+      let resp = store.comments;
+      resp.map((_, index) => {
+            if (resp[index].userId == store.userId) {
+            setComments((comments) => comments.concat(resp[index]))
+          }
+      })
+  
     }
   }, [store.comments])
 
 
-  const addUserComments = () => {
-    setAddedCom(true);
-    let resp = store.comments;
-    resp.map((_, index) => {
-          if (resp[index].userId == store.userId) {
-          setComments((comments) => comments.concat(resp[index]))
-        }
-    })
-
-  }
-
   useEffect(() => {
     if (store.userId != "" && store.userId != null) {
       actions.getFavorites(store.userId)
+      actions.getAllComments();
     }
   }, [store.userId]);
 

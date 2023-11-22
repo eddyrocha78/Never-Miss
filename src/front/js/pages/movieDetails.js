@@ -23,7 +23,6 @@ export const Details = props => {
 
 	const [comments, setComments] = useState([]);
 	const [newcomment, setNewComment] = useState([]);
-	const [userCanComment, setUserCanComment] = useState(false);
 
 	const [favorite, setFavorite] = useState([]);
 
@@ -81,16 +80,10 @@ export const Details = props => {
 			resp.map((_, index) => {
 				if (resp[index].target_type == "movie") {
 					if (resp[index].target_id == params.theid) {
-						if (resp[index].userId == store.userId) {
-							setUserCanComment(true)
-						}
 						setComments((comments) => comments.concat(resp[index]))
 					}
 				} else if (resp[index].target_type == "tv") {
 					if (resp[index].target_id == params.theid) {
-						if (resp[index].userId == store.userId) {
-							setUserCanComment(true)
-						}
 						setComments((comments) => comments.concat(resp[index]))
 					}
 				}
@@ -215,7 +208,6 @@ export const Details = props => {
 				alert("Comment cannot be empty");
 			} else {
 				actions.addComment(store.userId, "" + store.userName + " " + store.userLastName + "", text, params.type, params.theid);
-				setUserCanComment(false);
 				navigate("/")
 				
 			}
@@ -463,15 +455,13 @@ export const Details = props => {
 										)) : null}
 								</div>
 								{store.token && store.token != "" && store.token != null ?
-									userCanComment == false ?
 										<div className="row justify-content-center">
 											<form className="d-grid gap-2">
 												<textarea className="form-control text-light bg bg-dark" onChange={(e) => { setNewComment(e.target.value) }} placeholder="New Comment" maxLength={250} rows="3"></textarea>
 											</form>
 											<button onClick={() => { addNewComment(newcomment) }} className="btn btn-secondary mb-3">Post Comment</button>
 										</div> :
-										null
-									: null}
+										null}
 							</div>
 						</div>
 					</div>
@@ -696,15 +686,13 @@ export const Details = props => {
 										)) : null}
 								</div>
 								{store.token && store.token != "" && store.token != null ?
-									userCanComment == false ?
 										<div className="row justify-content-center">
 											<form className="d-grid gap-2">
 												<textarea className="form-control text-light bg bg-dark" onChange={(e) => { setNewComment(e.target.value) }} placeholder="New Comment" maxLength={250} rows="3"></textarea>
 											</form>
 											<button onClick={() => { addNewComment(newcomment) }} className="btn btn-secondary mb-3">Post Comment</button>
 										</div> :
-										null
-									: null}
+										null}
 							</div>
 						</div>
 					</div>
