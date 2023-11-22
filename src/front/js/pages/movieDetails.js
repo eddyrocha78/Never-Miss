@@ -63,7 +63,7 @@ export const Details = props => {
 		} else {
 			if (store.userFavorites !== null) {
 				let resp = store.userFavorites;
-				console.log(store.userFavorites);
+				/*console.log(store.userFavorites);*/
 				resp.map((_, index) => {
 					if (resp[index].seriesId == params.theid) {
 						setFavorite(resp[index]);
@@ -103,11 +103,8 @@ export const Details = props => {
 	useEffect(() => {
 		if (store.token && store.token != "" && store.token != null) {
 			actions.getMessage();
-			console.log(store.token)
 		}
 	}, [store.token])
-
-	//https://placehold.co/1280x720/527552/527552/png?text=   <= Placeholder Image
 
 	const getInfo = () => {
 		const options = {
@@ -252,39 +249,39 @@ export const Details = props => {
 				<h1 className="text-white-50 display-1 fw-bold">{info.title}</h1>
 				<p className="text-secondary h2 my-5 fw-bold">{info.tagline}</p>
 				<div className=" row justify-content-center mt-5">
-					<div className="col-3">
-						<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="rounded p-1 ms-5">
-							<p className="text-center text-light h5">
+					<div className="col-md-3 col-sm-6 m-2">
+						<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="rounded  p-1">
+							<p className="text-center text-light fw-bold fs-5">
 								Release : {info.release_date}
 							</p>
 						</div>
 					</div>
-					<div className="col-3">
-						<div style={{ backgroundColor: "rgba(47, 165, 130, 1)" }} className="rounded p-1 mx-3">
-							<p className="text-light text-center h5">
+					<div className="col-md-3 col-sm-6 m-2">
+						<div style={{ backgroundColor: "rgba(47, 165, 130, 1)" }} className="rounded  p-1">
+							<p className="text-center text-light fw-bold fs-5">
 								Rating : {info.adult ? "R" : "PG"}
 							</p>
 						</div>
 					</div>
-					<div className="col-3">
-						<div style={{ backgroundColor: "rgba(120, 160, 55, 1)" }} className="rounded p-1 me-5">
-							<p className="text-light text-center h5">
+					<div className="col-md-3 col-sm-6 m-2">
+						<div style={{ backgroundColor: "rgba(120, 160, 55, 1)" }} className="rounded p-1">
+							<p className="text-center text-light fw-bold fs-5">
 								Duration : {info.runtime} minutes
 							</p>
 						</div>
 					</div>
 				</div>
-				<div style={{ backgroundImage: "url('" + backLink + "')", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center", borderRadius: "12px" }} className="py-5 Background m-2 my-5 row">
-					<div className="col-4 offset-md-1">
+				<div style={{ backgroundImage: "url('" + backLink + "')", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center", borderRadius: "12px" }} className="py-5 Background row justify-content-center">
+					<div className="col-md-4 col-sm-6 movie">
 						<img className="poster img-fluid border border-black border-5" src={posterLink} />
 					</div>
-					<div className="col-4 video align-self-center ">
+					<div className="col-xl-6 m-1 mt-lg-2 col-lg-8 video">
 						{videoKey !== "" ? <ReactPlayer
 							url={"https://www.youtube.com/watch?v=" + videoKey}
 							controls={true}
 							width="650px"
 							height="400px"
-							className="poster border border-black border-5"
+							className="poster img-fluid border border-black border-5  m-auto"
 						/>
 							:
 							<div></div>
@@ -294,35 +291,35 @@ export const Details = props => {
 				<div className="my-5 text-warning row justify-content-evenly">
 					{
 						(info.vote_average / 2) <= 0.5 || info.vote_average / 2 == NaN || info.vote_average / 2 == undefined ?
-							<div className="col-4">
+							<div className="col-xl-4 col-lg-6 mb-4 col-sm-12">
 								<i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 							</div>
 							:
 							(info.vote_average / 2) <= 1.5 && (info.vote_average / 2) > 0.5 ?
-								<div className="col-4">
+								<div className="col-xl-4 col-lg-6 mb-4 col-sm-12">
 									<i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 								</div>
 								:
 								(info.vote_average / 2) <= 2.5 && (info.vote_average / 2) > 1.5 ?
-									<div className="col-4">
+									<div className="col-xl-4 col-lg-6 mb-4 col-sm-12">
 										<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 									</div>
 									:
 									(info.vote_average / 2) <= 3.5 && (info.vote_average / 2) > 2.5 ?
-										<div className="col-4">
+										<div className="col-xl-4 col-lg-6 mb-4 col-sm-12">
 											<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 										</div>
 										:
 										(info.vote_average / 2) <= 4.5 && (info.vote_average / 2) > 3.5 ?
-											<div className="col-4">
+											<div className="col-xl-4 col-lg-6 mb-4 col-sm-12">
 												<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 											</div>
 											:
-											<div className="col-4">
+											<div className="col-xl-4 col-lg-6 mb-4 col-sm-12">
 												<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i>
 											</div>
 					}
-					<div className="col-4 me-2">
+					<div className="col-xl-4 col-lg-6 col-sm-12">
 						{store.token && store.token != "" && store.token != null ?
 							Object.values(favorite).length > 0 ?
 								favorite.status == "watching" ?
@@ -389,8 +386,8 @@ export const Details = props => {
 						}
 					</div>
 					<div className="row"><div className=" Filler col-12 mb-2"></div></div>
-					<div className="row justify-content-start mt-5">
-						<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-2 py-2 rounded offset-md-1">
+					<div className="row justify-content-center mt-5">
+						<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-10 py-2 rounded">
 							<p className="text-start subtitle text-center h2">
 								Synopsis
 							</p>
@@ -404,7 +401,7 @@ export const Details = props => {
 						</div>
 					</div>
 					<div className="row mt-5 justify-content-center">
-						<div className="col-5 me-3">
+						<div className="col-xl-5 col-lg-11 m-3">
 							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="rounded px-5 py-4 text-start">
 								<div className="row">
 									<div className="col-12">
@@ -441,10 +438,10 @@ export const Details = props => {
 								</div>
 							</div>
 						</div>
-						<div className="col-5 ms-2">
-							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="row rounded px-5 py-4">
+						<div className="col-xl-5 col-lg-11 m-3">
+							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="row justify-content-center rounded  px-5 py-4">
 								<p className="subtitle h2 mb-4 fw-bold">Comments</p>
-								<div style={{ maxHeight: "500px" }} className="row d-flex overflow-auto">
+								<div style={{ maxHeight: "500px" }} className="row justify-content-center d-flex overflow-auto">
 									{Object.values(comments).length > 0 ?
 										comments.map((_, index) => (
 											<div className="row rounded justify-content-center text-white my-2 p-1 bg-success" key={index}>
@@ -486,38 +483,38 @@ export const Details = props => {
 				<h1 className="text-white-50 display-1 fw-bold">{info.name}</h1>
 				<p className="text-secondary h2 my-5 fw-bold">{info.tagline}</p>
 				<div className="row justify-content-center mt-5">
-					<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="col-2 rounded">
-						<p className="text-center text-light h5 p-1">
+					<div style={{ backgroundColor: "rgba(54, 138, 33, 1)" }} className="col-md-2 rounded col-sm-6 m-2">
+						<p className="text-center text-light fw-bold fs-5">
 							Release : {info.first_air_date}
 						</p>
 					</div>
-					<div style={{ backgroundColor: "rgba(47, 165, 130, 1)" }} className="col-2 ms-2 rounded">
-						<p className="text-light text-center h5 p-1">
+					<div style={{ backgroundColor: "rgba(47, 165, 130, 1)" }} className="col-md-2 rounded col-sm-6 m-2">
+						<p className="text-center text-light fw-bold fs-5">
 							Rating : {info.adult ? "R" : "PG"}
 						</p>
 					</div>
-					<div className="col-2 bg-primary bg-opacity-50 ms-2 rounded">
-						<p className="text-light text-center h5 p-1">
+					<div className="col-md-2 col-sm-6 m-2 rounded bg-primary bg-opacity-50">
+						<p className="text-center text-light fw-bold fs-5">
 							Episodes : {info.number_of_episodes}
 						</p>
 					</div>
-					<div className="col-2 bg-info bg-opacity-50  ms-2 rounded">
-						<p className="text-light text-center h5 p-1">
+					<div className="col-md-2 col-sm-6 m-2 rounded bg-info bg-opacity-50">
+						<p className="text-center text-light fw-bold fs-5">
 							Seasons : {info.number_of_seasons}
 						</p>
 					</div>
 				</div>
-				<div style={{ backgroundImage: "url('" + backLink + "')", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center", borderRadius: "12px" }} className="py-5 Background m-2 my-5 row">
-					<div className="col-4 offset-md-1">
+				<div style={{ backgroundImage: "url('" + backLink + "')", height: "100%", backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center center", borderRadius: "12px" }} className="py-5 Background row justify-content-center">
+					<div className="col-md-4 col-sm-6">
 						<img className="poster img-fluid border border-black border-5" src={posterLink} />
 					</div>
-					<div className="col-4 video align-self-center ">
+					<div className="col-xl-6 m-1 mt-lg-2 col-lg-8 video">
 						{videoKey !== "" ? <ReactPlayer
 							url={"https://www.youtube.com/watch?v=" + videoKey}
 							controls={true}
 							width="650px"
 							height="400px"
-							className="poster border border-black border-5"
+							className="poster img-fluid border border-black border-5  m-auto"
 						/>
 							:
 							<div></div>
@@ -527,35 +524,35 @@ export const Details = props => {
 				<div className="my-5 text-warning row justify-content-evenly">
 					{
 						(info.vote_average / 2) <= 0.5 || info.vote_average / 2 == NaN || info.vote_average / 2 == undefined ?
-							<div className="col-4">
+							<div className="col-xl-4 col-lg-6 mb-4 col-sm-12">
 								<i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 							</div>
 							:
 							(info.vote_average / 2) <= 1.5 && (info.vote_average / 2) > 0.5 ?
-								<div className="col-4">
+								<div className="col-xl-4 col-lg-6 mb-4 col-sm-12">
 									<i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 								</div>
 								:
 								(info.vote_average / 2) <= 2.5 && (info.vote_average / 2) > 1.5 ?
-									<div className="col-4">
+									<div className="col-xl-4 col-lg-6 mb-4 col-sm-12">
 										<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 									</div>
 									:
 									(info.vote_average / 2) <= 3.5 && (info.vote_average / 2) > 2.5 ?
-										<div className="col-4">
+										<div className="col-xl-4 col-lg-6 mb-4 col-sm-12">
 											<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 										</div>
 										:
 										(info.vote_average / 2) <= 4.5 && (info.vote_average / 2) > 3.5 ?
-											<div className="col-4">
+											<div className="col-xl-4 col-lg-6 mb-4 col-sm-12">
 												<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-regular fa-star fa-4x"></i>
 											</div>
 											:
-											<div className="col-4">
+											<div className="col-xl-4 col-lg-6 mb-4 col-sm-12">
 												<i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i><i className="fa-solid fa-star fa-4x"></i>
 											</div>
 					}
-					<div className="col-4 me-2">
+					<div className="col-xl-4 col-lg-6 col-sm-12">
 						{store.token && store.token != "" && store.token != null ?
 							Object.values(favorite).length > 0 ?
 								favorite.status == "watching" ?
@@ -622,8 +619,8 @@ export const Details = props => {
 						}
 					</div>
 					<div className="row"><div className=" Filler col-12 mb-2"></div></div>
-					<div className="row justify-content-start mt-5">
-						<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-2 py-2 rounded offset-md-1">
+					<div className="row justify-content-center mt-5">
+						<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-10 py-2 rounded">
 							<p className="text-start subtitle text-center h2">
 								Synopsis
 							</p>
@@ -637,7 +634,7 @@ export const Details = props => {
 						</div>
 					</div>
 					<div className="row mt-5 justify-content-center">
-						<div className="col-5 me-3">
+						<div className="col-xl-5 col-lg-11 m-3">
 							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="rounded px-5 py-4 text-start">
 								<div className="row">
 									<div className="col-12">
@@ -674,10 +671,10 @@ export const Details = props => {
 								</div>
 							</div>
 						</div>
-						<div className="col-5 ms-2">
-							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="row rounded px-5 py-4">
+						<div className="col-xl-5 col-lg-11 m-3">
+							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="row justify-content-center rounded px-5 py-4">
 								<p className="subtitle h2 mb-4 fw-bold">Comments</p>
-								<div style={{ maxHeight: "500px" }} className="row d-flex overflow-auto">
+								<div style={{ maxHeight: "500px" }} className="row justify-content-center d-flex overflow-auto">
 									{Object.values(comments).length > 0 ?
 										comments.map((_, index) => (
 											<div className="row rounded justify-content-center text-white my-2 p-1 bg-success" key={index}>
@@ -708,60 +705,6 @@ export const Details = props => {
 										</div> :
 										null
 									: null}
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="row"><div className=" Filler col-12 mb-2"></div></div>
-				<div className="row justify-content-start mt-5">
-					<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-2 py-2 rounded offset-md-1">
-						<p className="subtitle text-light text-center h2">
-							Synopsis
-						</p>
-					</div>
-				</div>
-				<div className="row mb-2 justify-content-center">
-					<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="col-10 rounded p-4">
-						<p className="h4 text-start py-2">
-							{info.overview}
-						</p>
-					</div>
-				</div>
-				<div className="row mt-5 justify-content-center">
-					<div className="col-5 me-3">
-						<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="rounded px-5 py-4 text-start">
-							<div className="row">
-								<div className="col-12">
-									<p className="subtitle h2 fw-bold">Directors</p>
-								</div>
-							</div>
-							<div className="row d-flex flex-nowrap overflow-auto">
-								{directors.map((_, index) => (
-									<p className="bg-success rounded py-2 text-center  m-1 col-4 text-light mt-2" key={index}>{directors[index]}</p>
-								))}
-							</div>
-							<div className="row mt-5">
-								<div className="col-12 mt-2">
-									<p className="subtitle h2 fw-bold">Writers</p>
-								</div>
-							</div>
-							<div className="row d-flex flex-nowrap overflow-auto">
-								{writers.map((_, index) => (
-									<p className="bg-success py-2 text-center  m-1 rounded col-4 text-light" key={index}>{writers[index]}</p>
-								))}
-							</div>
-							<div className="row mt-5">
-								<div className="col-12 mt-2">
-									<p className="text-white h2 fw-bold">Cast</p>
-								</div>
-							</div>
-							<div className="row d-flex flex-nowrap overflow-auto">
-								{cast.map((_, index) => (
-									<div className=" bg-success text-start py-1 rounded col-5 text-light m-1" key={index}>
-										<p className="mt-4">{"Name : " + cast[index]}</p>
-										<p>{"Character : " + castChar[index]}</p>
-									</div>
-								))}
 							</div>
 						</div>
 					</div>
