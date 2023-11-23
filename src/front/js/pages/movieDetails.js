@@ -379,21 +379,21 @@ export const Details = props => {
 					</div>
 					<div className="row"><div className=" Filler col-12 mb-2"></div></div>
 					<div className="row justify-content-center mt-5">
-						<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-10 py-2 rounded">
+						<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-lg-10 col-12 py-2 rounded">
 							<p className="text-start subtitle text-center h2">
 								Synopsis
 							</p>
 						</div>
 					</div>
 					<div className="row mb-2 justify-content-center">
-						<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="col-10 rounded p-4">
+						<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="col-lg-10 col-12 rounded py-4">
 							<p className="h4 text-start text-light py-2">
 								{info.overview}
 							</p>
 						</div>
 					</div>
 					<div className="row mt-5 justify-content-center">
-						<div className="col-xl-5 col-lg-11 m-3">
+						<div className="col-xl-5 col-lg-11 col-12 px-sm-0 my-3">
 							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="rounded px-5 py-4 text-start">
 								<div className="row">
 									<div className="col-12">
@@ -402,7 +402,7 @@ export const Details = props => {
 								</div>
 								<div className="row d-flex flex-nowrap overflow-auto">
 									{directors.map((_, index) => (
-										<p className="bg-success rounded py-2 text-center m-1 col-4 text-light mt-2" key={index}>{directors[index]}</p>
+										<p className="bg-success rounded py-2 text-center m-1 col-sm-6 col-md-4 text-light mt-2" key={index}>{directors[index]}</p>
 									))}
 								</div>
 								<div className="row mt-5">
@@ -412,7 +412,7 @@ export const Details = props => {
 								</div>
 								<div className="row d-flex flex-nowrap overflow-auto">
 									{writers.map((_, index) => (
-										<p className="bg-success py-2 text-center m-1 rounded col-4 text-light" key={index}>{writers[index]}</p>
+										<p className="bg-success py-2 text-center m-1 rounded col-sm-6 col-md-4 text-light" key={index}>{writers[index]}</p>
 									))}
 								</div>
 								<div className="row mt-5">
@@ -422,7 +422,7 @@ export const Details = props => {
 								</div>
 								<div className="row d-flex flex-nowrap overflow-auto">
 									{cast.map((_, index) => (
-										<div className=" bg-success text-start py-1 rounded col-5 text-light m-1" key={index}>
+										<div className=" bg-success text-start py-1 rounded col-sm-8 col-md-5 text-light m-1" key={index}>
 											<p className="mt-4">{"Name : " + cast[index]}</p>
 											<p>{"Character : " + castChar[index]}</p>
 										</div>
@@ -430,20 +430,18 @@ export const Details = props => {
 								</div>
 							</div>
 						</div>
-						<div className="col-xl-5 col-lg-11 m-3">
-							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="row justify-content-center rounded  px-5 py-4">
+						<div className="col-xl-5 col-lg-11 m-0 m-lg-3">
+							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="row justify-content-center rounded  px-md-5 py-4">
 								<p className="subtitle h2 mb-4 fw-bold">Comments</p>
 								<div style={{ maxHeight: "500px" }} className="row justify-content-center d-flex overflow-auto">
 									{Object.values(comments).length > 0 ?
 										comments.map((_, index) => (
 											<div  style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row rounded justify-content-center text-white my-2 pt-3" key={index}>
 												<div className="row rounded justify-content-center">
-													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col rounded text-start">
-														<p className="h4 fw-bold">{comments[index].userName}</p>
-													</div>
-													<div className="ms-5 col-3">
+													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col-12 rounded d-flex flex-nowrap overflow-auto">
+														<p className="text-start h4 fw-bold">{comments[index].userName}</p>
 														{comments[index].userId == store.userId && store.token && store.token != "" && store.token != null ?
-															<button onClick={() => { removeComment() }} className="btn btn-outline-danger"><i className="fa-solid fa-trash fa-lg text-danger-emphasis"></i></button> : null}
+															<button onClick={() => { removeComment() }} className="d-flex ms-auto p-2 btn btn-outline-danger"><i className="my-auto fa-solid fa-trash fa-lg text-danger-emphasis"></i></button> : null}
 													</div>
 												</div>
 												<div className="row justify-content-center  text-start">
@@ -610,21 +608,21 @@ export const Details = props => {
 					</div>
 					<div className="row"><div className=" Filler col-12 mb-2"></div></div>
 					<div className="row justify-content-center mt-5">
-						<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-10 py-2 rounded">
+						<div style={{ backgroundColor: "rgba(21, 40, 21, 1)" }} className="col-lg-10 col-12 py-2 rounded">
 							<p className="text-start subtitle text-center h2">
 								Synopsis
 							</p>
 						</div>
 					</div>
 					<div className="row mb-2 justify-content-center">
-						<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="col-10 rounded p-4">
+						<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="col-lg-10 col-12 rounded py-4">
 							<p className="h4 text-start text-light py-2">
 								{info.overview}
 							</p>
 						</div>
 					</div>
 					<div className="row mt-5 justify-content-center">
-						<div className="col-xl-5 col-lg-11 m-3">
+						<div className="col-xl-5 col-lg-11 col-12 px-0 my-3">
 							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="rounded px-5 py-4 text-start">
 								<div className="row">
 									<div className="col-12">
@@ -633,7 +631,7 @@ export const Details = props => {
 								</div>
 								<div className="row d-flex flex-nowrap overflow-auto">
 									{directors.map((_, index) => (
-										<p className="bg-success rounded py-2 text-center m-1 col-4 text-light mt-2" key={index}>{directors[index]}</p>
+										<p className="bg-success rounded py-2 text-center m-1 col-sm-6 col-md-4 text-light mt-2" key={index}>{directors[index]}</p>
 									))}
 								</div>
 								<div className="row mt-5">
@@ -643,7 +641,7 @@ export const Details = props => {
 								</div>
 								<div className="row d-flex flex-nowrap overflow-auto">
 									{writers.map((_, index) => (
-										<p className="bg-success py-2 text-center m-1 rounded col-4 text-light" key={index}>{writers[index]}</p>
+										<p className="bg-success py-2 text-center m-1 rounded col-sm-6 col-md-4 text-light" key={index}>{writers[index]}</p>
 									))}
 								</div>
 								<div className="row mt-5">
@@ -653,7 +651,7 @@ export const Details = props => {
 								</div>
 								<div className="row d-flex flex-nowrap overflow-auto">
 									{cast.map((_, index) => (
-										<div className=" bg-success text-start py-1 rounded col-5 text-light m-1" key={index}>
+										<div className=" bg-success text-start py-1 rounded col-sm-8 col-md-5 text-light m-1" key={index}>
 											<p className="mt-4">{"Name : " + cast[index]}</p>
 											<p>{"Character : " + castChar[index]}</p>
 										</div>
@@ -661,20 +659,18 @@ export const Details = props => {
 								</div>
 							</div>
 						</div>
-						<div className="col-xl-5 col-lg-11 m-3">
-							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="row justify-content-center rounded px-5 py-4">
+						<div className="col-xl-5 col-lg-11 m-0 m-lg-3">
+							<div style={{ backgroundColor: "rgba(37, 53, 37, 1)" }} className="row justify-content-center rounded  px-md-5 py-4">
 								<p className="subtitle h2 mb-4 fw-bold">Comments</p>
 								<div style={{ maxHeight: "500px" }} className="row justify-content-center d-flex overflow-auto">
 									{Object.values(comments).length > 0 ?
 										comments.map((_, index) => (
-											<div  style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row rounded justify-content-center text-white my-2 p-1" key={index}>
+											<div  style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} className="row rounded justify-content-center text-white my-2 pt-3" key={index}>
 												<div className="row rounded justify-content-center">
-													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col rounded text-start">
-														<p className="h4 fw-bold">{comments[index].userName}</p>
-													</div>
-													<div className="ms-5 col-3">
+													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col-12 rounded d-flex flex-nowrap overflow-auto">
+														<p className="text-start h4 fw-bold">{comments[index].userName}</p>
 														{comments[index].userId == store.userId && store.token && store.token != "" && store.token != null ?
-															<button onClick={() => { removeComment() }} className="btn btn-outline-danger"><i className="fa-solid fa-trash fa-lg text-danger-emphasis"></i></button> : null}
+															<button onClick={() => { removeComment() }} className="d-flex ms-auto p-2 btn btn-outline-danger"><i className="my-auto fa-solid fa-trash fa-lg text-danger-emphasis"></i></button> : null}
 													</div>
 												</div>
 												<div className="row justify-content-center  text-start">

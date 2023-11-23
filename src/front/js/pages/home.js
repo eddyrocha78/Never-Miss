@@ -92,16 +92,16 @@ export const Home = () => {
           Look up your favorite movie or series now!
         </h1>
       </div>
-      <div className="row text-center justify-content-center mt-5 mx-5">
-        <div className="col-8">
+      <div className="row py-2 text-center justify-content-center mt-5">
+        <div className="col-lg-8 mt-2 col-11">
           <input style={{ borderColor: "rgba(37, 53, 37, 1)" }}
             className="form-control form-control-lg text-start border-5" onKeyDown={(e) => { e.key == "Enter" ? newSearch(search) : null }} dir="auto" id="inner_search_v4"
             name="query" type="text" tabIndex="1" autoCorrect="off" autofill="off" autoComplete="off" placeholder="Search for a movie or tv show "
             value={search}
             onChange={(e) => { setSearch(e.target.value) }} />
         </div>
-        <div className="col-2 d-grid gap-2 p-0">
-          <button className="btn btn-success fs-4 p-0" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
+        <div className="col-lg-2 my-2 col-md-6 d-grid gap-2">
+          <button className="btn btn-success fs-4" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
         </div>
       </div>
       {store.token && store.token != "" && store.token != null ?
@@ -116,18 +116,18 @@ export const Home = () => {
             Subscribe to never miss a thing
           </h1>
         </div>}
-      <div className="row my-5">
-        <div className="col">
+        <div className="row justify-content-center">
+        <div className="col-12">
           <div
             style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}
-            className="row mx-5 rounded"
+            className="row mx-lg-5 text-center rounded"
           >
-            <div className="row">
-              <h1 className="mx-5 mt-2 text-decoration-underline text-white">
+            <div className="row justify-content-center">
+              <h1 className="ms-5 text-lg-start mt-2 text-decoration-underline text-white">
                 Popular Movies
               </h1>
             </div>
-            <div className="p-3">
+            <div className="py-3">
               <div style={{ overflowX: "scroll" }} className="d-flex flex-row">
                 {movieinfo.results &&
                   movieinfo.results.map((data, index) => (
@@ -144,14 +144,14 @@ export const Home = () => {
           </div>
           <div
             style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}
-            className="row mx-5 mt-5 rounded"
+            className="row my-5 mx-lg-5 text-center rounded"
           >
-            <div className="row">
-              <h1 className="mx-5 mt-2 text-decoration-underline text-white">
+            <div className="row justify-content-center">
+              <h1 className="ms-5 text-lg-start mt-2 text-decoration-underline text-white">
                 Popular Series
               </h1>
             </div>
-            <div className="p-3">
+            <div className="py-3">
               <div style={{ overflowX: "scroll" }} className="d-flex flex-row">
                 {seriesinfo.results &&
                   seriesinfo.results.map((data, index) => (
