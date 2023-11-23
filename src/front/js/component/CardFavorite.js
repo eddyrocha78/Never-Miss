@@ -30,8 +30,8 @@ export const CardFavorite = ({ title, imgpath, runtime, theid, type, userId, sta
       <img src={imageUrl} className="img-fluid sizer rounded" alt={title} />
       </div>
       <div className="col-9 d-flex flex-column">
-        <h2 className="title">{title}</h2>
-        <p className="runtime">{runtime} minutes</p>
+        <h2 className="title ms-2">{title}</h2>
+        <p className="runtime ms-2">{runtime} minutes</p>
         {status == "watching" ?
           <div className="d-flex flex-column mt-4">
             <button className="btn btn-dark dropdown-toggle align-text-bottom align-self-end mt-auto" type="button" data-bs-toggle="dropdown" aria-expanded="false">
