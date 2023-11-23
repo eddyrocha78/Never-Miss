@@ -33,7 +33,7 @@ export const UserSpace = () => {
 
       <div className="content-wrapper container">
         <div className="row justify-content-center">
-          <div className="currently-watching rounded col-md-5 pe-2 mb-2" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(37, 53, 37, 1)" }}>
+          <div className="currently-watching rounded col-md-5 pe-2 mb-2 mx-1" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(37, 53, 37, 1)" }}>
             <div className="header container-fluid py-2 d-inline-flex align-items-center">
               <i className="fa-solid fa-eye fa-lg ms-1 me-3 text-success"></i>
               <h4>Watching</h4>
@@ -92,8 +92,8 @@ export const UserSpace = () => {
             </div>
           </div>
 
-          <div className="col-md-5">
-            <div className="plan-to-watch row ms-1 rounded mb-2" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(26, 59, 86, 1)" }}>
+          <div className="col-md-5 fixer">
+            <div className="plan-to-watch row rounded mb-2 mx-1" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(26, 59, 86, 1)" }}>
               <div className="col">
                 <div className="header d-inline-flex py-2 align-items-center">
                   <i className="fa-solid fa-eye fa-lg ms-1 me-3 text-primary"></i>
@@ -153,7 +153,7 @@ export const UserSpace = () => {
               </div>
             </div>
 
-            <div className="completed row ms-1 rounded mb-2" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(52, 59, 53, 1)" }}>
+            <div className="completed row rounded mb-2 mx-1" style={{ color: "rgba(225, 225, 225, 1)", backgroundColor: "rgba(52, 59, 53, 1)" }}>
               <div className="col">
                 <div className="header d-inline-flex align-items-center py-2 ">
                   <i className="fa-solid fa-eye fa-lg ms-1 me-3 text-secondary"></i>
@@ -186,7 +186,7 @@ export const UserSpace = () => {
                 </div>
                 <div className="row">
                   <div className="col">
-                    <h5 className= "bg bg-dark rounded p-1 mx-1">Series</h5>
+                    <h5 className="bg bg-dark rounded p-1 mx-1">Series</h5>
                   </div>
                 </div>
                 <div className="row">

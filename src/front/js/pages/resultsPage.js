@@ -65,20 +65,22 @@ export const Results = props => {
       <div className="row text-center mt-5">
         <h1 className="text-white mb-5 display-1 fw-bold">Never Miss</h1>
       </div>
-      <div className="row justify-content-center text-center mt-5 mx-5">
-        <div className="col-6 p-0">
+
+      <div className="row py-2 text-center justify-content-center mt-5">
+        <div className="col-lg-8 mt-2 col-11">
           <input style={{ borderColor: "rgba(37, 53, 37, 1)" }}
             className="form-control form-control-lg text-start border-5" onKeyDown={(e) => { e.key == "Enter" ? newSearch(search) : null }} dir="auto" id="inner_search_v4"
             name="query" type="text" tabIndex="1" autoCorrect="off" autofill="off" autoComplete="off" placeholder="Search for a movie or tv show "
             value={search}
             onChange={(e) => { setSearch(e.target.value) }} />
         </div>
-        <div className="col-2 d-grid gap-2 p-0">
-          <button className="btn btn-success fs-4 p-0" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
+        <div className="col-lg-2 my-2 col-md-6 d-grid gap-2">
+          <button className="btn btn-success fs-4" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
         </div>
       </div>
+
       <div className="row mt-3 justify-content-center ">
-        <div className="col-8 border border-2 rounded py-2 borgreen">
+        <div className="col-md-8 col-sm-10 border border-2 rounded py-2 borgreen">
           {result.map((_, index) => (
             result[index].media_type !== "person" ?
               <div style={{ backgroundColor: "rgba(82, 117, 82, 1)" }} key={index} className="btn btn-lg col-12 py-3 rounded mt-2">

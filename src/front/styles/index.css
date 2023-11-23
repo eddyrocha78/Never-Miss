@@ -1,6 +1,18 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+/* fixer */
+
+.fixer{
+    padding:inherit;
+}
+
+/* search page button*/
+
+.filler{
+    width: max-content;
+}
+
 
 /* deleting <a> styles */
 

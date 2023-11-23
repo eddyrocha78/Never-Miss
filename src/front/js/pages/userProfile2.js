@@ -185,7 +185,7 @@ export const UserProfile2 = () => {
             </div>
             {Object.values(comments).length > 0 ?
             comments.map((_, index) => (
-											<div onClick={() => {navigate("/"+ comments[index].target_type +"/details/"+ comments[index].target_id)}} style={{ backgroundColor: "rgba(82, 117, 82, 1)" }}className="offset-md-1 col-10 rounded justify-content-center text-white my-2 p-1 " key={index}>
+											<div onClick={() => {navigate("/"+ comments[index].target_type +"/details/"+ comments[index].target_id)}} style={{ backgroundColor: "rgba(82, 117, 82, 1)" }}className="offset-md-1 col-md-10 col-sm-12 rounded justify-content-center text-white my-2 p-1 " key={index}>
 												<div className="row rounded justify-content-center">
 													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col-10 rounded text-start">
 														<p className="h4 mt-2 fw-bold">{comments[index].target_type == "movie" ? "Comment on a Movie" : "Comment on a Series"}</p>
