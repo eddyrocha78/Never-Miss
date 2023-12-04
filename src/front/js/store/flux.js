@@ -111,14 +111,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 
 					const resp = await fetch(process.env.BACKEND_URL + "/api/forgot/" + userEmail)
-
-					const data = await resp.json();
-					console.log(data)
-
-					return true;
+					if(resp.ok){
+						alert("email sent successfully")
+						return true;
+					}else{
+						const data = await resp.json();
+						alert(data);
+						return false;
+					}
 				}
 				catch (error) {
-					console.error("Error detected" + error)
+					console.error("Error on Forgot Password :" + error)
+					alert(error);
 				}
 			},
 

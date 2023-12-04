@@ -2,17 +2,18 @@ import React, { useState, useContext } from 'react';
 //import { ActionFunctionArgs } from 'react-router-dom/dist';
 import "../../styles/forgetpassword.css";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 
 export const ForgotPasswordModal = (props) => {
 	const { store, actions } = useContext(Context);
 	const [error, setError] = useState(null);
 	const [email, setEmail] = useState("");
+	const navigate = useNavigate();
 
 
 	const handleSubmit = () => {
 		actions.forgotPassword(email);
-
 	};
 
 	return (

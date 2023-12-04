@@ -15,6 +15,8 @@ from api.models import db, User , FavoriteMovie, FavoriteSeries, Comment
 from api.utils import generate_sitemap, APIException
 
 import resend
+import secrets
+import string
 
 
 
@@ -221,14 +223,20 @@ def index(user_email):
     user = User.query.filter_by(email=user_email).one_or_none()
     if not user:
         return jsonify("Email Not Found"), 401
-    params = {
-        "from": "Never Miss <nevermiss@info.mridul.tech>",
-        "to": [user.email],
-        "subject": "Lost Password",
-        "html": "<strong>hello " + user.firstName + " " + user.lastName + "</strong><p>Here is your Password "+ user.password +"</p>",
-    }
-    r = resend.Emails.send(params)
-    return jsonify(r)
+    else:
+        alphabet = string.ascii_letters + string.digits
+        password = ''.join(secrets.choice(alphabet) for i in range(12))  # Generates a 12-character random password
+        user.password = password
+        user.confirmPassword = password
+        db.session.commit()
+        params = {
+            "from": "Never Miss <nevermiss@info.mridul.tech>",
+            "to": [user.email],
+            "subject": "Forgot Password ?",
+            "html": "<strong>hello " + user.firstName + " " + user.lastName + "</strong><p>Looks like you've forgotten your password</p>"+"<p>Here is your new Password! : "+ password +"</p>",
+        }
+        r = resend.Emails.send(params)
+        return jsonify(r)
 
 @api.route('/comments', methods=['GET'])
 def handle_getCommets():
