@@ -100,7 +100,7 @@ export const Home = () => {
             value={search}
             onChange={(e) => { setSearch(e.target.value) }} aria-describedby="basic-addon2"/>
           
-          <span><button style={{height: "80px"}} className="input-group-text btn btn-success fs-4" id="basic-addon2" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button></span>
+          <button style={{height: "80px"}} className="input-group-text btn btn-success fs-4" id="basic-addon2" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
         </div>
       </div>
       {store.token && store.token != "" && store.token != null ?
