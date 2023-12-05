@@ -50,7 +50,7 @@ export const Login = () => {
 							</div>
 							<div className="my-3 text-center">
 								<p className="mb-0">No account? <a href="/signup" id="signuplink">Sign Up</a></p>
-								<a href="#" className="text-muted" data-bs-toggle="modal" data-bs-target="#forgot-password-modal">
+								<a href="#" className="text-white" data-bs-toggle="modal" data-bs-target="#forgot-password-modal">
 									Forgot password?
 								</a>
 								<ForgotPasswordModal modalId="forgot-password-modal" />
