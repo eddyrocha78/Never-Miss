@@ -11,6 +11,7 @@ import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import { Details } from "./pages/movieDetails";
 import { Results } from "./pages/resultsPage";
+import { ResetPassword } from "./pages/resetPassword"; 
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -39,7 +40,7 @@ const Layout = () => {
             <Route element={<UserProfile2 />} path="/userprofile" />
             <Route element={<Results />} path="/search/:keyword/:page" />
             <Route element={<Details />} path=":type/details/:theid" />
-            <Route element={<Single />} path="/single/:theid" />
+            <Route element={<ResetPassword />} path="/forgot/:token" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />

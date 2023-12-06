@@ -96,3 +96,17 @@ class Comment(db.Model):
             "target_id": self.targetId,
             "text": self.text
         }
+
+class PasswordToken(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    userEmail = db.Column(db.String(120), nullable=False)
+    token = db.Column(db.String(120), nullable=False)
+    def __repr__(self):
+        return '<FavoriteMovie %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "userEmail": self.userEmail,
+            "token": self.token,
+        }
