@@ -187,13 +187,22 @@ export const UserProfile2 = () => {
             comments.map((_, index) => (
 											<div onClick={() => {navigate("/"+ comments[index].target_type +"/details/"+ comments[index].target_id)}} style={{ backgroundColor: "rgba(82, 117, 82, 1)" }}className="offset-md-1 col-md-10 col-sm-12 rounded justify-content-center text-white my-2 p-1 " key={index}>
 												<div className="row rounded justify-content-center">
-													<div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }} className="col-10 rounded text-start">
-														<p className="h4 mt-2 fw-bold">{comments[index].target_type == "movie" ? "Comment on a Movie" : "Comment on a Series"}</p>
+                        <div className="col-md-2 col-sm-4 text-center">
+                        {comments[index].targetPoster != null ?
+                        <img style={{ height: "150px" }} className="rounded" src={"https://www.themoviedb.org/t/p/w220_and_h330_face" + comments[index].targetPoster} />
+                        :
+                        <img style={{ height: "150px" }} className="rounded" src={"https://placehold.co/220x330/png?text=No \nImage"} />
+                      }
+                      </div>
+													<div className="col-10 rounded text-start">
+                          <div style={{ backgroundColor: "rgba(39, 76, 39, 1)" }}  className="col-12 p-1 rounded text-start">
+														<p className="h4 mt-2 fw-bold">{comments[index].targetName != null || "" ? comments[index].targetName : "Comment"}</p>
+                            </div>
+                            <div className="ms-2 row justify-content-start  text-start">
+													<div className="col-11 py-2 d-flex flex-wrap overflow-auto">
+														<p className="text-center" >{comments[index].text}</p>
 													</div>
 												</div>
-												<div className="row justify-content-center  text-start">
-													<div className="col-10 py-2 d-flex flex-wrap overflow-auto">
-														<p className="text-center" >{comments[index].text}</p>
 													</div>
 												</div>
 											</div>

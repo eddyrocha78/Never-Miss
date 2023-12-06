@@ -334,13 +334,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			addComment: async (userID, userFullName, text, targetType, targetId) => {
+			addComment: async (userID, userFullName, text, targetType, targetId, title, poster) => {
 				const opts = {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({
 						userName : userFullName,
-						text: text
+						text: text,
+						targetName : title,
+						targetPoster : poster
 					})
 				};
 

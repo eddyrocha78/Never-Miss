@@ -207,8 +207,13 @@ export const Details = props => {
 			if (text.trim() === "") {
 				alert("Comment cannot be empty");
 			} else {
-				actions.addComment(store.userId, "" + store.userName + " " + store.userLastName + "", text, params.type, params.theid);
-				navigate("/")
+				if (params.type == "movie") {
+					actions.addComment(store.userId, "" + store.userName + " " + store.userLastName + "", text, params.type, params.theid, info.title, info.poster_path);
+					navigate("/")
+				} else {
+					actions.addComment(store.userId, "" + store.userName + " " + store.userLastName + "", text, params.type, params.theid, info.name, info.poster_path);
+					navigate("/")
+				}
 				
 			}
 		}

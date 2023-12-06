@@ -330,6 +330,8 @@ def add_Comment(user_id, target_id, target_type):
     comment.targetType = target_type
     comment.userName = comment_data["userName"]
     comment.text = comment_data["text"]
+    comment.targetName = comment_data["targetName"]
+    comment.targetPoster = comment_data["targetPoster"]
     db.session.add(comment)
     db.session.commit()
     return jsonify({"msg": "Comment was added"}), 200
