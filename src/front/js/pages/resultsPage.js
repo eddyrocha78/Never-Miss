@@ -66,7 +66,7 @@ export const Results = props => {
         <h1 className="text-white mb-5 display-1 fw-bold">Never Miss</h1>
       </div>
 
-      <div className="row py-lg-5 px-1 py-4 text-center justify-content-center mt-5 m-5 rounded" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}>
+      <div className="row my-5 mx-lg-5 text-center rounded  px-lg-1  justify-content-center m-lg-5" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}>
       <div className="mx-md-5 my-5">
           <div className="input-group">
             <input style={{ borderColor: "rgba(37, 53, 37, 1)", height: "80px" }}

@@ -187,7 +187,7 @@ export const UserProfile2 = () => {
             comments.map((_, index) => (
 											<div onClick={() => {navigate("/"+ comments[index].target_type +"/details/"+ comments[index].target_id)}} style={{ backgroundColor: "rgba(82, 117, 82, 1)" }}className="offset-md-1 col-md-10 col-sm-12 rounded justify-content-center text-white my-2 p-1 " key={index}>
 												<div className="row rounded justify-content-center">
-                        <div className="col-md-2 col-sm-4 text-center">
+                        <div className="col-md-2 col-sm-4 d-none d-md-block text-center">
                         {comments[index].targetPoster != null ?
                         <img style={{ height: "150px" }} className="rounded" src={"https://www.themoviedb.org/t/p/w220_and_h330_face" + comments[index].targetPoster} />
                         :

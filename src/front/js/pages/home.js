@@ -90,7 +90,7 @@ export const Home = () => {
       <div className="row Filler text-center my-md-5">
         <div className="my-md-3 col-12"></div>
       </div>
-      <div className="row py-lg-5 px-1 py-4 text-center justify-content-center mt-5 m-5 rounded" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}>
+      <div className="row my-5 mx-lg-5 text-center rounded py-lg-5 px-lg-1 py-lg-4 justify-content-center mt-lg-5 m-lg-5" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}>
         <h1 className="text-white mb-md-5 h1">
           Look up your favorite movie or series now!
         </h1>
