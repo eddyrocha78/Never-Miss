@@ -1,6 +1,17 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+
+.btnpill{
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+.srchpill{
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+
 /* fixer */
 
 .fixer{

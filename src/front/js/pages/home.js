@@ -87,21 +87,18 @@ export const Home = () => {
       <div className="row text-center my-5">
         <h1 className="text-white display-1 fw-bold">Never Miss</h1>
       </div>
-      <div className="row Filler text-center my-md-5">
-        <div className="my-md-3 col-12"></div>
-      </div>
-      <div className="row my-5 mx-lg-5 text-center rounded py-lg-5 px-lg-1 py-lg-4 justify-content-center mt-lg-5 m-lg-5" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}>
-        <h1 className="text-white mb-md-5 h1">
+      <div className="row my-5 mx-lg-5 text-center rounded rounded-pill py-lg-5 px-lg-1 py-lg-4 justify-content-center mt-lg-5 m-lg-5" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}>
+        <h1 className="text-white mb-5 h1">
           Look up your favorite movie or series now!
         </h1>
-        <div className="mx-md-5 my-5">
-          <div className="input-group">
+        <div className="mx-md-5 mb-5">
+          <div style={{ boxShadow: "0px 0px 50px 10px black" }} className="input-group rounded rounded-pill">
             <input style={{ borderColor: "rgba(37, 53, 37, 1)", height: "80px" }}
-              className="form-control form-control-lg text-start border-5" onKeyDown={(e) => { e.key == "Enter" ? newSearch(search) : null }} dir="auto" id="inner_search_v4"
+              className="form-control srchpill form-control-lg text-start border-5" onKeyDown={(e) => { e.key == "Enter" ? newSearch(search) : null }} dir="auto" id="inner_search_v4"
               name="query" type="text" tabIndex="1" autoCorrect="off" autofill="off" autoComplete="off" placeholder="Search for a movie or tv show "
               value={search}
               onChange={(e) => { setSearch(e.target.value) }} aria-describedby="basic-addon2" />
-            <button style={{ height: "80px" }} className="input-group-text btn btn-success fs-4" id="basic-addon2" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
+            <button style={{ height: "80px" }} className="btnpill input-group-text btn btn-success fs-4" id="basic-addon2" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
           </div>
         </div>
       </div>
