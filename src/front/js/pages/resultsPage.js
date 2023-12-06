@@ -66,16 +66,16 @@ export const Results = props => {
         <h1 className="text-white mb-5 display-1 fw-bold">Never Miss</h1>
       </div>
 
-      <div className="row py-2 text-center justify-content-center mt-5">
-        <div className="col-lg-8 mt-2 col-11">
-          <input style={{ borderColor: "rgba(37, 53, 37, 1)" }}
-            className="form-control form-control-lg text-start border-5" onKeyDown={(e) => { e.key == "Enter" ? newSearch(search) : null }} dir="auto" id="inner_search_v4"
-            name="query" type="text" tabIndex="1" autoCorrect="off" autofill="off" autoComplete="off" placeholder="Search for a movie or tv show "
-            value={search}
-            onChange={(e) => { setSearch(e.target.value) }} />
-        </div>
-        <div className="col-lg-2 my-2 col-md-6 d-grid gap-2">
-          <button className="btn btn-success fs-4" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
+      <div className="row py-lg-5 px-1 py-4 text-center justify-content-center mt-5 m-5 rounded" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}>
+      <div className="mx-md-5 my-5">
+          <div className="input-group">
+            <input style={{ borderColor: "rgba(37, 53, 37, 1)", height: "80px" }}
+              className="form-control form-control-lg text-start border-5" onKeyDown={(e) => { e.key == "Enter" ? newSearch(search) : null }} dir="auto" id="inner_search_v4"
+              name="query" type="text" tabIndex="1" autoCorrect="off" autofill="off" autoComplete="off" placeholder="Search for a movie or tv show "
+              value={search}
+              onChange={(e) => { setSearch(e.target.value) }} aria-describedby="basic-addon2" />
+            <button style={{ height: "80px" }} className="input-group-text btn btn-success fs-4" id="basic-addon2" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
+          </div>
         </div>
       </div>
 

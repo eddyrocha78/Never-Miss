@@ -83,6 +83,8 @@ class Comment(db.Model):
     targetId = db.Column(db.Integer,  nullable=False)
     targetType = db.Column(db.String(80), nullable=False)
     text = db.Column(db.String(250), nullable=False)
+    targetName = db.Column(db.String(80), nullable=True)
+    targetPoster = db.Column(db.String(250), nullable=True)
     user = db.relationship(User)
     def __repr__(self):
         return '<Comment %r>' % self.id
@@ -94,6 +96,8 @@ class Comment(db.Model):
             "userName": self.userName,
             "target_type": self.targetType,
             "target_id": self.targetId,
+            "targetName": self.targetName,
+            "targetPoster": self.targetPoster,
             "text": self.text
         }
 

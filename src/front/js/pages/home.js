@@ -56,7 +56,7 @@ export const Home = () => {
             headers: {
               accept: "application/json",
               Authorization:
-              "Bearer " + process.env.MOVIE_API_TOKEN,
+                "Bearer " + process.env.MOVIE_API_TOKEN,
             },
           }
         );
@@ -84,25 +84,25 @@ export const Home = () => {
 
   return (
     <div className="container-fluid">
-      <div className="row text-center mt-5">
+      <div className="row text-center my-5">
         <h1 className="text-white display-1 fw-bold">Never Miss</h1>
       </div>
-      <div className="row text-center mt-md-5">
-      <div className=" Filler col-12"></div>
+      <div className="row Filler text-center my-md-5">
+        <div className="my-md-3 col-12"></div>
       </div>
-      <div className="row py-lg-5 py-4 text-center justify-content-center mt-5 m-2 rounded" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}>
-      <h1 className="text-white mb-md-5 h1">
+      <div className="row py-lg-5 px-1 py-4 text-center justify-content-center mt-5 m-5 rounded" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}>
+        <h1 className="text-white mb-md-5 h1">
           Look up your favorite movie or series now!
         </h1>
-        <div className="col-lg-8 mt-2 col-11">
-          <input style={{ borderColor: "rgba(37, 53, 37, 1)" }}
-            className="py-4 form-control form-control-lg text-start border-5" onKeyDown={(e) => { e.key == "Enter" ? newSearch(search) : null }} dir="auto" id="inner_search_v4"
-            name="query" type="text" tabIndex="1" autoCorrect="off" autofill="off" autoComplete="off" placeholder="Search for a movie or tv show "
-            value={search}
-            onChange={(e) => { setSearch(e.target.value) }} />
-        </div>
-        <div className="col-lg-2 my-1 col-md-6 d-grid gap-2">
-          <button className="py-4 btn btn-success fs-4" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
+        <div className="mx-md-5 my-5">
+          <div className="input-group">
+            <input style={{ borderColor: "rgba(37, 53, 37, 1)", height: "80px" }}
+              className="form-control form-control-lg text-start border-5" onKeyDown={(e) => { e.key == "Enter" ? newSearch(search) : null }} dir="auto" id="inner_search_v4"
+              name="query" type="text" tabIndex="1" autoCorrect="off" autofill="off" autoComplete="off" placeholder="Search for a movie or tv show "
+              value={search}
+              onChange={(e) => { setSearch(e.target.value) }} aria-describedby="basic-addon2" />
+            <button style={{ height: "80px" }} className="input-group-text btn btn-success fs-4" id="basic-addon2" onClick={() => { newSearch(search) }} >Search <i className="fa-solid fa-magnifying-glass fa-rotate-90 fa-sm"></i></button>
+          </div>
         </div>
       </div>
       {store.token && store.token != "" && store.token != null ?
@@ -112,10 +112,10 @@ export const Home = () => {
           </h1>
         </div>
         :
-        <div className="row text-center my-5" onClick={() => {navigate("/login")}}>
+        <div className="row text-center my-5" onClick={() => { navigate("/login") }}>
           <p className="mb-0 display-5 text-light text-decoration-none"><a href="/signup" className="display-5" >Sign Up</a> to NEVER MISS a thing</p>
         </div>}
-        <div className="row justify-content-center">
+      <div className="row justify-content-center">
         <div className="col-12">
           <div
             style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}
