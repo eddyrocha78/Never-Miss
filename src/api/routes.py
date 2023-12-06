@@ -11,22 +11,30 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 from flask_cors import CORS
-from api.models import db, User , FavoriteMovie, FavoriteSeries, Comment
+from api.models import db, User , FavoriteMovie, FavoriteSeries, Comment, PasswordToken
 from api.utils import generate_sitemap, APIException
 
 import resend
-
+from datetime import timedelta
+import random
+import string
+import secrets
+import os
 
 
 
 
 api = Blueprint('api', __name__)
 
+app = Flask(__name__)
+
 # Allow CORS requests to this API
 CORS(api, supports_credentials=True)
 
-# Simple in-memory storage for user data (replace with a database in production)
+app.config["JWT_SECRET_KEY"] = "GoldRoad0503"
+
 users = []
+reset_tokens = {}
 
 @api.route('/user', methods=['GET'])
 @jwt_required()
@@ -217,18 +225,82 @@ def delete_userSeries(user_id, series_id):
 
 @api.route('/forgot/<user_email>')
 def index(user_email):
-    resend.api_key = "re_g1G8dwq6_M5ap2TPQ2tm4HLFxMiHekmbU"
+    resend.api_key = os.environ.get('RESEND_API_KEY')
     user = User.query.filter_by(email=user_email).one_or_none()
     if not user:
         return jsonify("Email Not Found"), 401
-    params = {
+    else:
+        alphabet = string.ascii_letters + string.digits
+        password = ''.join(secrets.choice(alphabet) for i in range(12))  # Generates a 12-character random password
+        user.password = password
+        user.confirmPassword = password
+        db.session.commit()
+        params = {
+            "from": "Never Miss <nevermiss@info.mridul.tech>",
+            "to": [user.email],
+            "subject": "Forgot Password ?",
+            "html": "<strong>hello " + user.firstName + " " + user.lastName + "</strong><p>Looks like you've forgotten your password</p>"+"<p>Here is your new Password! : "+ password +"</p>",
+        }
+        r = resend.Emails.send(params)
+        return jsonify(r)
+    
+@api.route("/forgot_password/<user_email>", methods=["GET"])
+def forgot_password(user_email):
+    resend.api_key = os.environ.get('RESEND_API_KEY')
+    user = User.query.filter_by(email=user_email).one_or_none()
+    if user:
+        # Generate a random reset token
+        reset_token = "".join(random.choices(string.ascii_letters + string.digits, k=32))
+        
+        # Store the reset token with the user email
+        # reset_tokens[user_email] = reset_token
+
+        passwordToken = PasswordToken()
+        passwordToken.userEmail = user_email
+        passwordToken.token = reset_token
+        db.session.add(passwordToken)
+        db.session.commit()
+
+        params = {
         "from": "Never Miss <nevermiss@info.mridul.tech>",
         "to": [user.email],
-        "subject": "Lost Password",
-        "html": "<strong>hello " + user.firstName + " " + user.lastName + "</strong><p>Here is your Password "+ user.password +"</p>",
-    }
-    r = resend.Emails.send(params)
-    return jsonify(r)
+        "subject": "Forgot Password ?",
+        "html": "<strong>hello " + user.firstName + " " + user.lastName + "</strong><p>Looks like you've forgotten your password</p>"+"<p>Here is your reset Link! : "+ os.environ.get('FRONTEND_URL') +"/forgot/"+ reset_token +"</p>",
+        }
+        resend.Emails.send(params)
+
+        return jsonify({"message": "Password reset link sent to your email"})
+    else:
+        return jsonify("Email Not Found"), 404
+
+
+@api.route("/reset_password/<token>", methods=["POST"])
+def reset_password(token):
+    user_data = request.get_json()
+    # Check if the token is valid
+    email = verify_reset_token(token)
+    
+    if email:
+        user = User.query.filter_by(email=email.userEmail).one_or_none()
+        user.password = user_data["password"]
+        user.confirmPassword = user_data["password"]
+        db.session.commit()
+        return jsonify({"message": "Password reset successful"})
+    else:
+        return jsonify({"error": "Invalid token"}), 400
+
+def verify_reset_token(token):
+    # Check if the token exists in the stored reset_tokens dictionary
+    email = PasswordToken.query.filter_by(token=token).one_or_none()
+
+    # If the token exists, remove it from the dictionary (one-time use)
+    if email:
+        db.session.delete(email)
+        db.session.commit()
+
+    return email
+
+
 
 @api.route('/comments', methods=['GET'])
 def handle_getCommets():

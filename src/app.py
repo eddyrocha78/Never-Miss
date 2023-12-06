@@ -5,7 +5,7 @@ import os
 from flask import Flask, request, jsonify, url_for, send_from_directory
 from flask_migrate import Migrate
 from flask_swagger import swagger
-from flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager, create_access_token, decode_token
 from api.utils import APIException, generate_sitemap
 from api.models import db, User , FavoriteMovie, FavoriteSeries
 from api.routes import api

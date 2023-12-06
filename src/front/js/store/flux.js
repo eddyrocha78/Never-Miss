@@ -110,15 +110,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				try {
 
-					const resp = await fetch(process.env.BACKEND_URL + "/api/forgot/" + userEmail)
-
-					const data = await resp.json();
-					console.log(data)
-
-					return true;
+					const resp = await fetch(process.env.BACKEND_URL + "/api/forgot_password/" + userEmail)
+					if(resp.ok){
+						alert("email sent successfully")
+						return true;
+					}else{
+						const data = await resp.json();
+						alert(data);
+						return false;
+					}
 				}
 				catch (error) {
-					console.error("Error detected" + error)
+					console.error("Error on Forgot Password :" + error)
+					alert(error);
+				}
+			},
+
+			resetPassword: async (password,token) => {
+
+				const options = {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						password: password
+					})
+				};
+
+				try {
+
+					const resp = await fetch(process.env.BACKEND_URL + "/api/reset_password/" + token, options)
+					if(resp.ok){
+						alert("Password reset successful")
+						return true;
+					}else{
+						alert("Token Invalid Or Expired");
+						return false;
+					}
+				}
+				catch (error) {
+					console.error("Error on Forgot Password :" + error)
+					alert(error);
 				}
 			},
 
