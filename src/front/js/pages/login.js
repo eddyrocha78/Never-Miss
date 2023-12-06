@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { ForgotPasswordModal } from "../component/modal";
 
@@ -13,9 +13,9 @@ export const Login = () => {
 
 	if (store.token) {
 		navigate("/userspace")
-		
+
 	}
-	
+
 	const handleClick = () => {
 		actions.login(email, password);
 
@@ -30,12 +30,14 @@ export const Login = () => {
 				</div>
 				<div className="mt-3">
 					{store.token && store.token !== null && store.token !== "" ? (
-						<>
-							<h5 className="text-center">User logged in with</h5>
-							<p className="text-justify">Token: {store.token}</p>
-						</>
+						<div className="row m-3">
+							<h5 className="text-center">You are logged in !</h5>
+							<Link className="text-start text-decoration-none text-light" to={"/"}>
+								<p className="h5">Go to the main page here</p>
+							</Link>
+						</div>
 					) : (
-						<>
+						<form  className="row m-3" onKeyDown={(e) => { e.key == "Enter" ? handleClick : null }}>
 							<div className="col-md-6 mx-auto">
 								<h1 className="text-center">Login</h1>
 								<div className="mb-3">
@@ -49,13 +51,13 @@ export const Login = () => {
 								</div>
 							</div>
 							<div className="my-3 text-center">
-								<p className="mb-0">No account? <a href="/signup" id="signuplink">Sign Up</a></p>
-								<a href="#" className="text-muted" data-bs-toggle="modal" data-bs-target="#forgot-password-modal">
+								<p className="mb-0 fs-4">No account? <a href="/signup" className="fs-4" id="signuplink">Sign Up</a></p>
+								<a href="#" className="fs-4" data-bs-toggle="modal" data-bs-target="#forgot-password-modal">
 									Forgot password?
 								</a>
 								<ForgotPasswordModal modalId="forgot-password-modal" />
 							</div>
-						</>
+						</form>
 					)}
 				</div>
 			</div>
