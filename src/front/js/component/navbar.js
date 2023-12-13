@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "../../img/NMlogo.png" 
 
 
 export const Navbar = () => {
@@ -21,7 +22,7 @@ export const Navbar = () => {
           <Link to="/">
             <img
               className="image-fluid align-center rounded-circle"
-              src="https://i.ibb.co/PTZ1JYW/Sem-Titulo-1-png-819420c8fbc3bcac3b5fb3276950c600.png"
+              src={logo}
               alt="Logo"
               width="50"
               height="50"
