@@ -14,5 +14,5 @@ Interaction and Status:
 After making an account, you can comment on any media you like as much as you want, which saves on your profile that keeps track of your time spent watching and the time you plan to spend! So you can manage your free time accordingly. 
 
 # Credits
-We would like to thank 4Geeks Academy, @enaguero and our teachers that made possible the creation of this project made by : @drbig30, @eddyrocha78, @ZionSpardas and @bennycarvalho13.
+We would like to thank 4Geeks Academy, [enaguero](https://github.com/enaguero). and our teachers that made possible the creation of this project made by : [drbig30](https://github.com/drbig30),[eddyrocha78](https://github.com/eddyrocha78), [ZionSpardas](https://github.com/ZionSpardas) and [bennycarvalho13](https://github.com/bennycarvalho13).
 
