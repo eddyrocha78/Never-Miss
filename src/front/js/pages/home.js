@@ -87,10 +87,10 @@ export const Home = () => {
       <div className="row text-center my-5">
         <h1 className="text-white display-1 fw-bold">Never Miss</h1>
       </div>
-      <div className="row my-5 mx-lg-5 text-center rounded rounded-pill py-lg-5 px-lg-1 py-lg-4 justify-content-center mt-lg-5 m-lg-5" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}>
-        <h1 className="text-white mb-5 h1">
+      <div className="row my-5 mx-lg-5 text-center rounded-4 py-lg-5 px-lg-1 py-lg-4 justify-content-center mt-lg-5 m-lg-5" style={{ backgroundColor: "rgba(37, 53, 37, 1)" }}>
+      <p className="text-white mb-5 h1">
           Look up your favorite movie or series now!
-        </h1>
+        </p>
         <div className="mx-md-5 mb-5">
           <div style={{ boxShadow: "0px 0px 50px 10px black" }} className="input-group rounded rounded-pill">
             <input style={{ borderColor: "rgba(37, 53, 37, 1)", height: "80px" }}
